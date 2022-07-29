@@ -16,11 +16,13 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
 
+
 // Security Middleware
 if (!isProduction) {
   // enable cors only in development
   app.use(cors());
 }
+
 
 // helmet helps set a variety of headers to better secure your app
 app.use(
@@ -28,6 +30,7 @@ app.use(
     policy: "cross-origin"
   })
 );
+
 
 // Set the _csrf token and create req.csrfToken method
 app.use(
@@ -40,15 +43,11 @@ app.use(
   })
 );
 
-// backend/app.js
-const routes = require('./routes');
 
-// ...
+const routes = require('./routes');
 
 app.use(routes); // Connect all the routes
 
-// backend/app.js
-// ...
 
 // Catch unhandled requests and forward to error handler.
 app.use((_req, _res, next) => {
@@ -59,9 +58,9 @@ app.use((_req, _res, next) => {
   next(err);
 });
 
+
 const { ValidationError } = require('sequelize');
 
-// ...
 
 // Process sequelize errors
 app.use((err, _req, _res, next) => {
@@ -73,8 +72,7 @@ app.use((err, _req, _res, next) => {
   next(err);
 });
 
-// backend/app.js
-// ...
+
 // Error formatter
 app.use((err, _req, res, _next) => {
   res.status(err.status || 500);

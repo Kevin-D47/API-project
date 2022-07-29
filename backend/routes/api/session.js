@@ -7,7 +7,6 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
-// backend/routes/api/session.js
 
 const validateLogin = [
   check('credential')
@@ -20,7 +19,6 @@ const validateLogin = [
   handleValidationErrors
 ];
 
-// Test
 
 // Log in
 router.post(

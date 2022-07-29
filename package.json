@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "pg": "^8.7.3"
+  },
+  "name": "airbnb-clone-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "install": "npm --prefix backend install backend",
+    "dev:backend": "npm install --prefix backend start",
+    "sequelize": "npm run --prefix backend sequelize",
+    "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "start": "npm start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kevin-D47/API-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kevin-D47/API-project/issues"
+  },
+  "homepage": "https://github.com/Kevin-D47/API-project#readme",
+  "description": ""
+}

@@ -40,11 +40,14 @@ module.exports = (sequelize, DataTypes) => {
     }
     static associate(models) {
       // define association here
-      User.hasMany(models.Spot, {foreignKey: 'ownerid'})
+      User.hasMany(models.Booking, {foreignKey: 'userid', onDelete: "CASCADE", hooks:true})
 
-      User.belongsToMany(models.Spot, {through: 'Booking'})
+      User.hasMany(models.Spot, {foreignKey: 'ownerid', onDelete: "CASCADE", hooks:true})
 
-      User.hasMany(models.Image, {foreignKey: 'userid'})
+      User.hasMany(models.Image, {foreignKey: 'userid', onDelete: "CASCADE", hooks:true})
+
+      User.hasMany(models.Review, {foreignKey: 'userid', onDelete: "CASCADE", hooks:true})
+
     }
   };
 

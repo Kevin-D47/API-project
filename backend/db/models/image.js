@@ -11,6 +11,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association heregit checkout
+      Image.belongsTo(
+        models.User,
+        {foreignKey: 'userid', onDelete: "CASCADE", hooks:true}
+      )
+      
+      Image.belongsTo(
+        models.Spot,
+        {foreignKey: 'spotid', onDelete: "CASCADE", hooks:true}
+      )
+
+      Image.belongsTo(
+        models.Review,
+        {foreignKey: 'reviewid', onDelete: "CASCADE", hooks:true}
+      )
     }
   }
   Image.init({

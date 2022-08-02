@@ -14,7 +14,8 @@ module.exports = {
         unique: true
       },
       previewImage: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       spotId: {
         type: Sequelize.INTEGER,

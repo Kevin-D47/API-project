@@ -5,10 +5,9 @@ const router = express.Router();
 
 // Get all Spots
 router.get('/', async (req, res) => {
-    const allSpots = await Spot.findAll({
-
-    })
+    const allSpots = await Spot.findAll({})
+    res.send("working")
     return res.json(allSpots)
 })
 
-modules.exports = router
+module.exports = router

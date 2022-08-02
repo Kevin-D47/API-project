@@ -34,22 +34,26 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     previewImage: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true
+      unique: true,
+      references: { model: 'Spots'}
     },
     reviewId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true
+      unique: true,
+      references: { model: 'Reviews'}
     },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true
+      unique: true,
+      references: { model: 'Users'}
     }
   }, {
     sequelize,

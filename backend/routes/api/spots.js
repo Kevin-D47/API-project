@@ -5,8 +5,20 @@ const router = express.Router();
 
 // Get all Spots
 router.get('/', async (req, res) => {
-    const allSpots = await Spot.findAll({})
-    res.send("working")
+    const allSpots = await Spot.findAll({
+        attributes: [
+            'ownerId',
+            'address',
+            'city',
+            'state',
+            'country',
+            'lat',
+            'lng',
+            'name',
+            'description',
+            'price'
+        ]
+    })
     return res.json(allSpots)
 })
 

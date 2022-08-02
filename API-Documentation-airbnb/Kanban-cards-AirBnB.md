@@ -67,7 +67,7 @@ Returns the information about the current user that is logged in.
   `email`, and `token`
 
 
-### Get all Spots (Feature 1)
+### Get all Spots
 
 Returns all the spots.
 
@@ -75,37 +75,10 @@ Returns all the spots.
 - [ ] Successful response includes each spot in the database.
 - [ ] Spot data returned includes the `id`, `ownerId`, `address`, `city`,
   `state`, `country`, `lat`, `lng`, `name`, `description`, `price`, `createdAt`,
-  `updatedAt`, and `previewImage`
+  `updatedAt`, `previewImage`, and `avgRating`
 
 
-### Get all Spots owned by the Current User (Feature 1)
-
-Returns all the spots owned (created) by the current user.
-
-- [ ] An authenticated user is required for a successful response
-- [ ] Successful response includes only spots created by the current user
-- [ ] Spot data returned includes the `id`, `ownerId`, `address`, `city`,
-  `state`, `country`, `lat`, `lng`, `name`, `description`, `price`, `createdAt`,
-  `updatedAt`, and `previewImage`
-
-
-### Get details for a Spot from an id (Feature 1)
-
-Returns the details of a spot specified by its id.
-
-- [ ] Successful response includes data only for the specified spot
-- [ ] Spot data returned includes the `id`, `ownerId`, `address`, `city`,
-  `state`, `country`, `lat`, `lng`, `name`, `description`, `price`, `createdAt`,
-  and `updatedAt`
-- [ ] Spot data returns aggregate data for `numReviews` and `avgStarRating`
-- [ ] Spot data returns associated data for `images`, an array of image urls
-- [ ] Spot data returns associated data for `Owner`, including the `id`,
-  `firstName`, and `lastName`
-- [ ] Error response with status 404 is given when a spot does not exist with
-  the provided `id`
-
-
-### Create a Spot (Feature 1)
+### Create a Spot
 
 Creates and returns a new spot.
 
@@ -118,7 +91,48 @@ Creates and returns a new spot.
   `address`, `city`, `state`, `country`, `lat`, `lng`, `name`, `description`, or `price` are violated
 
 
-### Edit a Spot (Feature 1)
+### Add an Image to a Spot based on the Spot's id
+
+Create and return a new image for a spot specified by id.
+
+- [ ] An authenticated user is required for a successful response
+- [ ] Only the owner of the spot is authorized to add an image
+- [ ] New image exists in the database after request
+- [ ] Image data returned includes the `id`, `imageableId`, and
+  `url`
+- [ ] Error response with status 404 is given when a spot does not exist with
+  the provided `id`
+
+
+### Get all Spots owned by the Current User
+
+Returns all the spots owned (created) by the current user.
+
+- [ ] An authenticated user is required for a successful response
+- [ ] Successful response includes only spots created by the current user
+- [ ] Spot data returned includes the `id`, `ownerId`, `address`, `city`,
+  `state`, `country`, `lat`, `lng`, `name`, `description`, `price`, `createdAt`,
+  `updatedAt`, `previewImage`, and `avgRating`
+
+
+### Get details for a Spot from an id
+
+Returns the details of a spot specified by its id.
+
+- [ ] Successful response includes data only for the specified spot
+- [ ] Spot data returned includes the `id`, `ownerId`, `address`, `city`,
+  `state`, `country`, `lat`, `lng`, `name`, `description`, `price`, `createdAt`,
+  and `updatedAt`
+- [ ] Spot data returns aggregate data for `numReviews` and `avgStarRating`
+- [ ] Spot data returns associated data for `Images`, an array of Images
+  including the `id`, `imageableId`, and `url`
+- [ ] Spot data returns associated data for `Owner`, including the `id`,
+  `firstName`, and `lastName`
+- [ ] Error response with status 404 is given when a spot does not exist with
+  the provided `id`
+
+
+### Edit a Spot
 
 Updates and returns an existing spot.
 
@@ -134,7 +148,7 @@ Updates and returns an existing spot.
   the provided `id`
 
 
-### Delete a Spot (Feature 1)
+### Delete a Spot
 
 Deletes an existing spot.
 
@@ -146,38 +160,7 @@ Deletes an existing spot.
   the provided `id`
 
 
-### Get all Reviews of the Current User (Feature 2)
-
-Returns all the reviews written by the current user.
-
-- [ ] An authenticated user is required for a successful response
-- [ ] Successful response includes only reviews created by the current user
-- [ ] Review data returned includes the `id`, `userId`, `spotId`, `review`,
-  `stars`, `createdAt`, and `updatedAt`
-- [ ] Review data returns associated data for `User`, including the `id`,
-  `firstName`, and `lastName`
-- [ ] Review data returns associated data for `Spot`, including the `id`,
-  `ownderId`, `address`, `city`, `state`, `country`, `lat`, `lng`, `name`, and
-  `price`
-- [ ] Review data returns associated data for `images`, an array of image urls
-
-
-### Get all Reviews by a Spot's id (Feature 2)
-
-Returns all the reviews that belong to a spot specified by id.
-
-- [ ] Seed data exists in the database for reviews to be returned.
-- [ ] Successful response includes only reviews for the specified spot
-- [ ] Review data returned includes the `id`, `userId`, `spotId`, `review`,
-  `stars`, `createdAt`, and `updatedAt`
-- [ ] Review data returns associated data for `User`, including the `id`,
-  `firstName`, and `lastName`
-- [ ] Review data returns associated data for `images`, an array of image urls
-- [ ] Error response with status 404 is given when a spot does not exist with
-  the provided `id`
-
-
-### Create a Review for a Spot based on the Spot's id (Feature 2)
+### Create a Review for a Spot based on the Spot's id
 
 Create and return a new review for a spot specified by id.
 
@@ -193,7 +176,55 @@ Create and return a new review for a spot specified by id.
   the spot from the current user
 
 
-### Edit a Review (Feature 2)
+### Add an Image to a Review based on the Review's id
+
+Create and return a new image for a review specified by id.
+
+- [ ] An authenticated user is required for a successful response
+- [ ] Only the owner of the review is authorized to add an image
+- [ ] New image exists in the database after request
+- [ ] Image data returned includes the `id`, `imageableId`, and
+  `url`
+- [ ] Error response with status 404 is given when a review does not exist with
+  the provided `id`
+- [ ] Error response with status 400 is given when the maximum number of images
+  have been added for the review
+
+
+### Get all Reviews of the Current User
+
+Returns all the reviews written by the current user.
+
+- [ ] An authenticated user is required for a successful response
+- [ ] Successful response includes only reviews created by the current user
+- [ ] Review data returned includes the `id`, `userId`, `spotId`, `review`,
+  `stars`, `createdAt`, and `updatedAt`
+- [ ] Review data returns associated data for `User`, including the `id`,
+  `firstName`, and `lastName`
+- [ ] Review data returns associated data for `Spot`, including the `id`,
+  `ownerId`, `address`, `city`, `state`, `country`, `lat`, `lng`, `name`, and
+  `price`
+- [ ] Review data returns associated data for `Images`, an array of Images
+  including the `id`, `imageableId`, and `url`
+
+
+### Get all Reviews by a Spot's id
+
+Returns all the reviews that belong to a spot specified by id.
+
+- [ ] Seed data exists in the database for reviews to be returned.
+- [ ] Successful response includes only reviews for the specified spot
+- [ ] Review data returned includes the `id`, `userId`, `spotId`, `review`,
+  `stars`, `createdAt`, and `updatedAt`
+- [ ] Review data returns associated data for `User`, including the `id`,
+  `firstName`, and `lastName`
+- [ ] Review data returns associated data for `Images`, an array of Images
+  including the `id`, `imageableId`, and `url`
+- [ ] Error response with status 404 is given when a spot does not exist with
+  the provided `id`
+
+
+### Edit a Review
 
 Update and return an existing review.
 
@@ -208,7 +239,7 @@ Update and return an existing review.
   the provided `id`
 
 
-### Delete a Review (Feature 2)
+### Delete a Review
 
 Delete an existing review.
 
@@ -220,7 +251,22 @@ Delete an existing review.
   the provided `id`
 
 
-### Get all of the Current User's Bookings (Feature 3)
+### Create a Booking from a Spot based on the Spot's id
+
+Create and return a new booking from a spot specified by id.
+
+- [ ] An authenticated user is required for a successful response
+- [ ] A user is only authorized to create a booking if they do NOT own the spot
+- [ ] New booking exists in the database after request
+- [ ] Booking data returned includes the `id`, `userId`, `spotId`, `startDate`,
+  `endDate`, `createdAt`, and `updatedAt`
+- [ ] Error response with status 404 is given when a spot does not exist with
+  the provided `id`
+- [ ] Error response with status 403 is given when a booking already exists for
+  the spot on the specified dates
+
+
+### Get all of the Current User's Bookings
 
 Return all the bookings that the current user has made.
 
@@ -233,7 +279,7 @@ Return all the bookings that the current user has made.
   `price` and `previewImage`
 
 
-### Get all Bookings for a Spot based on the Spot's id (Feature 3)
+### Get all Bookings for a Spot based on the Spot's id
 
 Return all the bookings for a spot specified by id.
 
@@ -251,22 +297,7 @@ Return all the bookings for a spot specified by id.
   the provided `id`
 
 
-### Create a Booking from a Spot based on the Spot's id (Feature 3)
-
-Create and return a new booking from a spot specified by id.
-
-- [ ] An authenticated user is required for a successful response
-- [ ] A user is only authorized to create a booking if they do NOT own the spot
-- [ ] New booking exists in the database after request
-- [ ] Booking data returned includes the `id`, `userId`, `spotId`, `startDate`,
-  `endDate`, `createdAt`, and `updatedAt`
-- [ ] Error response with status 404 is given when a spot does not exist with
-  the provided `id`
-- [ ] Error response with status 403 is given when a booking already exists for
-  the spot on the specified dates
-
-
-### Edit a Booking (Feature 3)
+### Edit a Booking
 
 Update and return an existing booking.
 
@@ -283,7 +314,7 @@ Update and return an existing booking.
   the spot on the specified dates
 
 
-### Delete a Booking (Feature 3)
+### Delete a Booking
 
 Delete an existing booking.
 
@@ -298,35 +329,7 @@ Delete an existing booking.
   `startDate` (no deleting of current or past bookings)
 
 
-### Add an Image to a Spot based on the Spot's id (Feature 4)
-
-Create and return a new image for a spot specified by id.
-
-- [ ] An authenticated user is required for a successful response
-- [ ] Only the owner of the spot is authorized to add an image
-- [ ] New image exists in the database after request
-- [ ] Image data returned includes the `id`, `imageableId`, `imageableType`, and
-  `url`
-- [ ] Error response with status 404 is given when a spot does not exist with
-  the provided `id`
-
-
-### Add an Image to a Review based on the Review's id (Feature 4)
-
-Create and return a new image for a review specified by id.
-
-- [ ] An authenticated user is required for a successful response
-- [ ] Only the owner of the review is authorized to add an image
-- [ ] New image exists in the database after request
-- [ ] Image data returned includes the `id`, `imageableId`, `imageableType`, and
-  `url`
-- [ ] Error response with status 404 is given when a review does not exist with
-  the provided `id`
-- [ ] Error response with status 400 is given when the maximum number of images
-  have been added for the review
-
-
-### Delete an Image (Feature 4)
+### Delete an Image
 
 Delete an existing image.
 
@@ -338,7 +341,7 @@ Delete an existing image.
   the provided `id`
 
 
-### Add Query Filters to Get All Spots (Feature 4)
+### Add Query Filters to Get All Spots
 
 Return spots filtered by query parameters.
 

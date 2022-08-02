@@ -16,7 +16,9 @@ router.get('/', async (req, res) => {
             'lng',
             'name',
             'description',
-            'price'
+            'price',
+            'createdAt',
+            'updatedAt',
         ]
     })
     res.status(200)

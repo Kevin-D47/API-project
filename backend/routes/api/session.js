@@ -56,7 +56,7 @@ router.delete(
 );
 
 
-// Restore session user
+// // Restore session user
 // router.get(
 //   '/',
 //   restoreUser,
@@ -70,6 +70,8 @@ router.delete(
 //   }
 // );
 
+
+// GET current user
 router.get('/', requireAuth, async (req, res) => {
   res.json(req.user)
 })

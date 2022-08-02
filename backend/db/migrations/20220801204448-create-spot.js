@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ownerid: {
+      ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true,

@@ -13,17 +13,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Review.belongsTo(
         models.User,
-        {foreignKey: 'userid', onDelete: "CASCADE", hooks:true}
+        {foreignKey: 'userId', onDelete: "CASCADE", hooks:true}
       )
 
       Review.belongsTo(
         models.Spot,
-        {foreignKey: 'spotid', onDelete: "CASCADE", hooks:true}
+        {foreignKey: 'spotId', onDelete: "CASCADE", hooks:true}
       )
 
       Review.hasMany(
         models.Image,
-        {foreignKey: 'reviewid', onDelete: "CASCADE", hooks:true}
+        {foreignKey: 'reviewId', onDelete: "CASCADE", hooks:true}
       )
     }
   }
@@ -39,12 +39,12 @@ module.exports = (sequelize, DataTypes) => {
         len: [1, 5]
       }
     },
-    userid: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true
     },
-    spotid: {
+    spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true

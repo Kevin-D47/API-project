@@ -16,17 +16,17 @@ module.exports = {
       previewImage: {
         type: Sequelize.STRING
       },
-      spotid: {
+      spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true
       },
-      reviewid: {
+      reviewId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true
       },
-      userid: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true

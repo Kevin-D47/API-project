@@ -16,12 +16,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      userid: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true
       },
-      spotid: {
+      spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         unique: true

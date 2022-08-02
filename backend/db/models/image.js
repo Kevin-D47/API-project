@@ -13,17 +13,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association heregit checkout
       Image.belongsTo(
         models.User,
-        {foreignKey: 'userid', onDelete: "CASCADE", hooks:true}
+        {foreignKey: 'userId', onDelete: "CASCADE", hooks:true}
       )
-      
+
       Image.belongsTo(
         models.Spot,
-        {foreignKey: 'spotid', onDelete: "CASCADE", hooks:true}
+        {foreignKey: 'spotId', onDelete: "CASCADE", hooks:true}
       )
 
       Image.belongsTo(
         models.Review,
-        {foreignKey: 'reviewid', onDelete: "CASCADE", hooks:true}
+        {foreignKey: 'reviewId', onDelete: "CASCADE", hooks:true}
       )
     }
   }
@@ -36,17 +36,17 @@ module.exports = (sequelize, DataTypes) => {
     previewImage: {
       type: DataTypes.STRING
     },
-    spotid: {
+    spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true
     },
-    reviewid: {
+    reviewId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true
     },
-    userid: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true

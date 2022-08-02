@@ -43,6 +43,8 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Spot, {foreignKey: 'ownerid'})
 
       User.belongsToMany(models.Spot, {through: 'Booking'})
+
+      User.hasMany(models.Image, {foreignKey: 'userid'})
     }
   };
 

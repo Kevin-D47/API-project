@@ -2,7 +2,7 @@ const express = require('express')
 const { Spot, User, Review, Image, sequelize } = require('../../db/models')
 const router = express.Router();
 
-// GET all Spots
+// Get all Spots
 router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll({
         include: [
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 })
 
 
-// GET all Spots owned by the Current User
+// Get all Spots owned by the Current User
 router.get('/current', async (req, res) => {
     let userId = req.user.dataValues.id
     const spots = await Spot.findAll({
@@ -29,11 +29,12 @@ router.get('/current', async (req, res) => {
             { model: User, where: { id: userId } }
         ]
     })
+    res.status(200)
     res.json({ spots })
 })
 
 
-// GET details of a Spot from an id
+// Get details of a Spot from an id
 router.get('/:spotId', async (req, res) => {
     let spotId = req.params.spotId
     const details = await Spot.findByPk(spotId, {
@@ -49,7 +50,17 @@ router.get('/:spotId', async (req, res) => {
         ]
 
     })
-    res.json({ details })
+    if (details) {
+        res.json({ details })
+    } else {
+        res.status(404)
+        res.json({
+            statusCode: 404,
+            message: "Spot couldn't be found"
+
+        })
+    }
+
 })
 
 
@@ -61,7 +72,27 @@ router.post('/', async (req, res) => {
     const newSpot = await Spot.create({
         ownerId: userId, address, city, state, country, lat, lng, name, description, price
     })
-    res.json(newSpot)
+    if (newSpot) {
+        res.json(newSpot)
+    } else {
+        res.status(400)
+        res.json({
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
+                address: "Street address is required",
+                city: "City is required",
+                state: "State is required",
+                country: "Country is required",
+                lat: "Latitude is not valid",
+                lng: "Longitude is not valid",
+                name: "Name must be less than 50 characters",
+                description: "Description is required",
+                price: "Price per day is required"
+            }
+        })
+    }
+
 })
 
 
@@ -77,12 +108,29 @@ router.put('/:spotId', async (req, res) => {
         await editSpot.save()
         res.json(editSpot)
     } else {
+        res.status(400)
         res.json({
-            statusCode: 404,
-            message: "Spot couldn't be found"
+            message: 'Validation Error',
+            statusCode: 400,
+            errors: {
+                address: "Street address is required",
+                city: "City is required",
+                state: "State is required",
+                country: "Country is required",
+                lat: "Latitude is not valid",
+                lng: "Longitude is not valid",
+                name: "Name must be less than 50 characters",
+                description: "Description is required",
+                price: "Price per day is required"
+            }
         })
     }
 })
+
+
+// Add an Image to a Spot based on the Spot's id
+router.post('/:spotId/images', async (req, res) => {})
+
 
 // // Delete a Spot
 // router.delete('/:spotId', async (req, res) => {

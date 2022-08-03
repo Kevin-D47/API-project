@@ -1,5 +1,5 @@
 const express = require('express')
-const { Spot, User, Review, Image, sequelize } = require('../../db/models')
+const { Spot, User, Review, Image, Booking, sequelize } = require('../../db/models')
 const router = express.Router();
 
 // Get all Spots

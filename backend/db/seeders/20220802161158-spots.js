@@ -39,11 +39,10 @@ module.exports = {
         description: "Small Apartments",
         price: 303
       },
-
     ], {});
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Spot', null, {});
+    await queryInterface.bulkDelete('Spots', null, {});
   }
 };

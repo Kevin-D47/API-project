@@ -1,5 +1,6 @@
 const express = require('express')
-const { Spot, User, Review, Image, Booking, sequelize } = require('../../db/models')
+const { Spot, User, Review, Image, Booking, sequelize } = require('../../db/models');
+const user = require('../../db/models/user');
 const router = express.Router();
 
 // Get all Spots
@@ -129,7 +130,7 @@ router.put('/:spotId', async (req, res) => {
 
 
 // Add an Image to a Spot based on the Spot's id
-router.post('/:spotId/images', async (req, res) => {})
+router.post('/:spotId/images', async (req, res) => { })
 
 
 // // Delete a Spot
@@ -153,6 +154,142 @@ router.post('/:spotId/images', async (req, res) => {})
 //         })
 //     }
 // })
+
+
+// Get all Reviews by a Spot's id
+router.get('/:spotId/reviews', async (req, res) => {
+    let spotId = req.params.spotId
+    // const findSpot = await Spot.findByPk(spotId)
+
+    const allReviews = await Review.findAll({
+        include: [
+            { model: Spot, where: { id: spotId } },
+            { model: User }
+        ]
+    })
+
+    // if (findSpot) {
+    //     res.json(allReviews)
+    // } else {
+    //     res.status(404)
+    //     res.json({
+    //         message: "Spot couldn't be found",
+    //         statusCode: 404,
+    //     })
+    // }
+    res.json({ allReviews })
+})
+
+
+// // Create a Review for a Spot based on the Spot's id
+// router.post('/:spotId/reviews', async (req, res) => {
+//     const { review, stars } = req.body
+
+//     const spotId = req.params.spotId
+//     const findSpot = await Spot.findByPk(spotId)
+
+//     const { user } = req
+//     const userId = user.dataValues.id
+
+//     if ((stars < 1 || stars > 5)) {
+//         res.status(400)
+//         res.json({
+//             message: "Validation error",
+//             statusCode: 400,
+//             errors: {
+//                 review: "Review text is required",
+//                 stars: "Stars must be an integer from 1 to 5",
+//             }
+//         })
+//     }
+
+//     if (findSpot) {
+//         const newReview = await Review.create({
+//             userId, spotId, review, stars
+//         })
+//         res.status(200)
+//         res.json(newReview)
+//     }
+
+//     // if () {
+//     //     res.status(403)
+//     //     res.json({
+//     //         message: "User already has a review for this spot",
+//     //         statusCode: 403
+//     //     })
+//     // }
+
+//     if (!findSpot) {
+//         res.status(404)
+//         res.json({
+//             message: "Spot couldn't be found",
+//             statusCode: 404
+//         })
+//     }
+
+
+// })
+
+//Create a Review for a Spot based on the Spot's id
+router.post('/:spotId/reviews', async (req, res) => {
+    const { review, stars } = req.body;
+
+    const spotId = req.params.spotId
+    const findSpot = await Spot.findByPk(spotId)
+
+    const { user } = req
+    const userId = user.dataValues.id // id of current logged in user
+
+    // find all reviews for a Spot
+    const allReviews = await Review.findAll({
+        include: [
+            { model: Spot, where: { id: spotId } }
+        ]
+    })
+
+    if (findSpot) {
+        //* Error response: Review from the current user already exists for the Spot
+        let reviewed;
+        for (let reviews of allReviews) {
+            if (reviews.userId === userId) {
+                reviewed = true
+            }
+        }
+        if (reviewed) {
+            res.status(403)
+            res.json({
+                message: "User already has a review for this spot",
+                statusCode: 403
+            })
+        } else if (stars < 1 || stars > 5) {  //* Error Response: Body validation errors
+            res.status(400)
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                    review: "Review text is required",
+                    stars: "Stars must be an integer from 1 to 5",
+                }
+            })
+        } else {
+            // Create Review
+            const spotReview = await Review.create({
+                userId, spotId, review, stars
+            })
+            res.json(spotReview)
+        }
+    } else {
+        //* Error response: Couldn't find a Spot with the specified id
+        res.status(404)
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+
+})
+
+
 
 
 module.exports = router

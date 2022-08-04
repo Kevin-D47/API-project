@@ -1,10 +1,11 @@
 const express = require('express')
 const { Review, Spot, User, Image, Booking, sequelize } = require('../../db/models')
+const { requireAuth } = require('../../utils/auth');
 const router = express.Router();
 
 
 // Get all Reviews of the Current User
-router.get('/current', async (req, res) => {
+router.get('/current', requireAuth,  async (req, res) => {
     let userId = req.user.dataValues.id
 
     const allReviews = await Review.findAll({
@@ -20,8 +21,15 @@ router.get('/current', async (req, res) => {
     }
 })
 
+
+
+// Add an Image to a Review based on the Review's id
+router.post('/:reviewId/images', requireAuth, async (req, res) => {})
+
+
+
 // Edit a Review
-router.put('/:reviewId', async (req, res) => {
+router.put('/:reviewId', requireAuth, async (req, res) => {
     const { reviewId } = req.params
     const { review, stars } = req.body
 
@@ -49,6 +57,12 @@ router.put('/:reviewId', async (req, res) => {
         )
     }
 })
+
+
+
+// Delete a Review
+router.delete('/:reviewId', requireAuth, async (req, res) => {})
+
 
 
 module.exports = router

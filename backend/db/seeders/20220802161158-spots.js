@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         ownerId: 3,
-        address: "Hello World Lane",
+        address: "789 Hello World Lane",
         city: "New York City",
         state: "New York",
         country: "United States of America",
@@ -38,7 +38,7 @@ module.exports = {
         name: "Big Apple Square",
         description: "Small Apartments",
         price: 303
-      },
+      }
     ], {});
   },
 

@@ -20,5 +20,8 @@ router.get('/current', async (req, res) => {
     }
 })
 
+router.put('/:reviewId', async (req, res) => {
+    
+})
 
 module.exports = router

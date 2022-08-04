@@ -294,62 +294,66 @@ router.get('/:spotId/bookings', async (req, res) => {
     }
 })
 
-// // Create a Booking from a Spot based on the Spot's id
-// router.post('/:spotId/bookings', async (req, res) => {
-//     const { startDate, endDate } = req.body
 
-//     const { spotId } = req.paramsconst
-//     const findSpot = await Spot.findByPk(spotId)
+// Create a Booking from a Spot based on the Spot's id
+router.post('/:spotId/bookings', async (req, res) => {
+    const { startDate, endDate } = req.body
 
-//     const { user } = req
-//     const userId = user.dataValues.id
+    const { spotId } = req.params
+    const findSpot = await Spot.findByPk(spotId)
 
-//     const allBoookings = await Booking.findAll({
-//         include: [
-//             { model: Spot, where: { id: spotId } }
-//         ]
-//     })
+    const { user } = req
+    const userId = user.dataValues.id
 
-//     if (findSpot) {
-//         //* Error response: Review from the current user already exists for the Spot
-//         let booked;
-//         for (let reviews of allReviews) {
-//             if (reviews.userId === userId) {
-//                 reviewed = true
-//             }
-//         }
-//         if (reviewed) {
-//             res.status(403)
-//             res.json({
-//                 message: "User already has a review for this spot",
-//                 statusCode: 403
-//             })
-//         } else if (stars < 1 || stars > 5) {  //* Error Response: Body validation errors
-//             res.status(400)
-//             res.json({
-//                 message: "Validation error",
-//                 statusCode: 400,
-//                 errors: {
-//                     review: "Review text is required",
-//                     stars: "Stars must be an integer from 1 to 5",
-//                 }
-//             })
-//         } else {
-//             // Create Review
-//             const spotReview = await Review.create({
-//                 userId, spotId, review, stars
-//             })
-//             res.json(spotReview)
-//         }
-//     } else {
-//         //* Error response: Couldn't find a Spot with the specified id
-//         res.status(404)
-//         res.json({
-//             message: "Spot couldn't be found",
-//             statusCode: 404
-//         })
-//     }
-// })
+    const allBoookings = await Booking.findAll({
+        include: [
+            { model: Spot, where: { id: spotId } }
+        ]
+    })
+
+    if (findSpot) {
+        //* Error response: Review from the current user already exists for the Spot
+        let booked;
+        for (let booking of allBoookings) {
+            if (booking.userId === userId) {
+                booked = true
+            }
+        }
+        if (booked) {
+            res.status(403)
+            res.json({
+                message: "Sorry, this spot is already booked for the specified dates",
+                statusCode: 403,
+                errors: {
+                  startDate: "Start date conflicts with an existing booking",
+                  endDate: "End date conflicts with an existing booking"
+                }
+              })
+        } else if (endDate < startDate) {  //* Error Response: Body validation errors
+            res.status(400)
+            res.json({
+                message: "Validation error",
+                statusCode: 400,
+                errors: {
+                  "endDate": "endDate cannot be on or before startDate"
+                }
+              })
+        } else {
+            // Create Review
+            const spotBooking = await Booking.create({
+                spotId, userId, startDate, endDate
+            })
+            res.json(spotBooking)
+        }
+    } else {
+        //* Error response: Couldn't find a Spot with the specified id
+        res.status(404)
+        res.json({
+            message: "Spot couldn't be found",
+            statusCode: 404
+        })
+    }
+})
 
 
 module.exports = router

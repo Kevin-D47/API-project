@@ -12,7 +12,7 @@ router.get('/current', requireAuth, async (req, res) => {
         where: { userId },
         include: [{model: Spot}]
     })
-
+    console.log(userId)
     res.status(200)
     res.json({ allBooking })
 })

@@ -85,6 +85,33 @@ router.post('/', async (req, res) => {
 })
 
 
+// // Add an Image to a Spot based on the Spot's id
+router.post('/:spotId/images', async (req, res) => {
+    const { url, previewImage } = req.body
+
+    const { spotId } = req.params
+    const findSpots = await Spot.findByPk(spotId)
+
+    let image = req.image.dataValues.url
+
+    const addImage = await Image.create({
+        url, previewImage, spotId
+    })
+
+    if (findSpots) {
+        res.status(200)
+        res.json(addImage)
+    } else {
+        res.status(404)
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+
+})
+
+
 // Edit a Spot
 router.put('/:spotId', async (req, res) => {
     const { spotId } = req.params
@@ -117,73 +144,71 @@ router.put('/:spotId', async (req, res) => {
 })
 
 
-// Add an Image to a Spot based on the Spot's id
-router.post('/:spotId/images', async (req, res, next) => {
-    const spotId = req.params.spotId;
+// // Add an Image to a Spot based on the Spot's id
+// router.post('/:spotId/images', async (req, res, next) => {
+//     const spotId = req.params.spotId;
 
-    const { url, previewImage } = req.body
+//     const { url, previewImage } = req.body
 
-    const dbImg = await Image.create(
-        {
-            url,
-            previewImage,
-            spotId
-        }
-    )
+//     const dbImg = await Image.create(
+//         {
+//             url,
+//             previewImage,
+//             spotId
+//         }
+//     )
 
-    //seeing if the spot Id exists (for the if statement)
-    const findSpots = await Spot.findByPk(spotId)
-
-
-    //finding all images once we create with function above
-    const newImg = await Image.findAll({
-        raw: true
-    })
-
-    let lastImg = newImg[newImg.length - 1]
-
-    //create an object to send the response
-    const object = {}
-    object.id = lastImg.id
-    object.imageableId = spotId
-    object.url = lastImg.url
-
-    if (findSpots) {
-        res.status(200)
-        res.json(object)
-    } else {
-        res.status(404)
-        res.json({
-            "message": "Spot couldn't be found",
-            "statusCode": 404
-        })
-    }
+//     //seeing if the spot Id exists (for the if statement)
+//     const findSpots = await Spot.findByPk(spotId)
 
 
-})
+//     //finding all images once we create with function above
+//     const newImg = await Image.findAll({
+//         raw: true
+//     })
 
+//     let lastImg = newImg[newImg.length - 1]
 
-// // Delete a Spot
-// router.delete('/:spotId', async (req, res) => {
-//     let spotId = req.user.dataValues.id
+//     //create an object to send the response
+//     const object = {}
+//     object.id = lastImg.id
+//     object.imageableId = spotId
+//     object.url = lastImg.url
 
-//     const deleteSpot = await Spot.findByPk(spotId)
-
-//     await deleteSpot.destroy()
-
-//     if (deleteSpot) {
-//         res.json({
-//             statusCode: 200,
-//             message: "Successfully deleted"
-//         })
+//     if (findSpots) {
+//         res.status(200)
+//         res.json(object)
 //     } else {
+//         res.status(404)
 //         res.json({
-//             statusCode: 404,
-//             message: "Spot couldn't be found"
-
+//             "message": "Spot couldn't be found",
+//             "statusCode": 404
 //         })
 //     }
 // })
+
+
+// Delete a Spot
+router.delete('/:spotId', async (req, res) => {
+    let spotId = req.user.dataValues.id
+
+    const deleteSpot = await Spot.findByPk(spotId)
+
+    await deleteSpot.destroy()
+
+    if (deleteSpot) {
+        res.json({
+            statusCode: 200,
+            message: "Successfully deleted"
+        })
+    } else {
+        res.json({
+            statusCode: 404,
+            message: "Spot couldn't be found"
+
+        })
+    }
+})
 
 
 // Get all Reviews by a Spot's id
@@ -275,6 +300,12 @@ router.get('/:spotId/bookings', async (req, res) => {
     let { spotId } = req.params
     const findSpot = await Spot.findByPk(spotId)
 
+    const owner = await Spot.findAll({
+        include: [
+            { model: User, where: { id: spotId }, attributes: [] }
+        ]
+    })
+
     const allBookings = await Booking.findAll({
         where: { spotId },
         include: [
@@ -312,7 +343,7 @@ router.post('/:spotId/bookings', async (req, res) => {
     })
 
     if (findSpot) {
-        //* Error response: Review from the current user already exists for the Spot
+        //* Error response: Booking already exists for the Spot
         let booked;
         for (let booking of allBoookings) {
             if (booking.userId === userId) {
@@ -325,21 +356,21 @@ router.post('/:spotId/bookings', async (req, res) => {
                 message: "Sorry, this spot is already booked for the specified dates",
                 statusCode: 403,
                 errors: {
-                  startDate: "Start date conflicts with an existing booking",
-                  endDate: "End date conflicts with an existing booking"
+                    startDate: "Start date conflicts with an existing booking",
+                    endDate: "End date conflicts with an existing booking"
                 }
-              })
-        } else if (endDate < startDate) {  //* Error Response: Body validation errors
+            })
+        } else if (endDate < startDate) {  //* Error Booking: Body validation errors
             res.status(400)
             res.json({
                 message: "Validation error",
                 statusCode: 400,
                 errors: {
-                  "endDate": "endDate cannot be on or before startDate"
+                    "endDate": "endDate cannot be on or before startDate"
                 }
-              })
+            })
         } else {
-            // Create Review
+            // Create Booking
             const spotBooking = await Booking.create({
                 spotId, userId, startDate, endDate
             })

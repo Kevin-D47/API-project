@@ -448,60 +448,60 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
 
 // NOT WORKING!!!
-// // Return spots filtered by query parameters.
-//  router.get('/', async (req, res) => {
-//     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
-//     let pagination = {filter: []}
-//     page = parseInt(page);
-//     size = parseInt(size);
+// Return spots filtered by query parameters.
+ router.get('/', async (req, res) => {
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    let pagination = {filter: []}
+    page = parseInt(page);
+    size = parseInt(size);
 
-//     if (Number.isNaN(page)) page = 1;
-//     if (Number.isNaN(size)) size = 20;
-//     pagination.limit = size
-//     pagination.offset = size * (page - 1)
+    if (Number.isNaN(page)) page = 1;
+    if (Number.isNaN(size)) size = 20;
+    pagination.limit = size
+    pagination.offset = size * (page - 1)
 
 
-//     if (minLat) pagination.filter.push({lat: {[Op.gte]: Number(minLat)}})
-//     if (maxLat) pagination.filter.push({lat: {[Op.lte]: Number(maxLat)}})
-//     if (minLng) pagination.filter.push({lng: {[Op.gte]: Number(minLng)}})
-//     if (maxLng) pagination.filter.push({lng: {[Op.lte]: Number(maxLng)}})
-//     if (minPrice) pagination.filter.push({price: {[Op.gte]: Number(minPrice)}})
-//     if (maxPrice) pagination.filter.push({price: {[Op.lte]: Number(maxPrice)}})
+    if (minLat) pagination.filter.push({lat: {[Op.gte]: Number(minLat)}})
+    if (maxLat) pagination.filter.push({lat: {[Op.lte]: Number(maxLat)}})
+    if (minLng) pagination.filter.push({lng: {[Op.gte]: Number(minLng)}})
+    if (maxLng) pagination.filter.push({lng: {[Op.lte]: Number(maxLng)}})
+    if (minPrice) pagination.filter.push({price: {[Op.gte]: Number(minPrice)}})
+    if (maxPrice) pagination.filter.push({price: {[Op.lte]: Number(maxPrice)}})
 
-//     const allSpots = await Spot.findAll({
-//         where: {
-//             [Op.and]: pagination.filter
-//         },
-//         limit: pagination.limit,
-//         offset: pagination.offset,
-//     })
-//     for (let spot of allSpots) {
-//         const spotReviewData = await spot.getReviews({
-//           attributes: [
-//             [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
-//           ],
-//         });
+    const allSpots = await Spot.findAll({
+        where: {
+            [Op.and]: pagination.filter
+        },
+        limit: pagination.limit,
+        offset: pagination.offset,
+    })
+    for (let spot of allSpots) {
+        const spotReviewData = await spot.getReviews({
+          attributes: [
+            [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
+          ],
+        });
 
-//         const avgRating = spotReviewData[0].dataValues.avgStarRating;
-//         spot.dataValues.avgRating = Number(avgRating).toFixed(1);
-//         const previewImage = await Image.findOne({
-//           where: {
-//             [Op.and]: {
-//               spotId: spot.id,
-//               previewImage: true,
-//             },
-//           },
-//         });
-//         if (previewImage) {
-//           spot.dataValues.previewImage = previewImage.dataValues.url;
-//         }
-//       }
-//     res.json({
-//         page: page,
-//         size: size,
-//         allSpots,
-//     })
-//   })
+        const avgRating = spotReviewData[0].dataValues.avgStarRating;
+        spot.dataValues.avgRating = Number(avgRating).toFixed(1);
+        const previewImage = await Image.findOne({
+          where: {
+            [Op.and]: {
+              spotId: spot.id,
+              previewImage: true,
+            },
+          },
+        });
+        if (previewImage) {
+          spot.dataValues.previewImage = previewImage.dataValues.url;
+        }
+      }
+    res.json({
+        page: page,
+        size: size,
+        allSpots,
+    })
+  })
 
 
 

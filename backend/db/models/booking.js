@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      // references: { model: 'Bookings'}
+      references: { model: 'Bookings'}
     },
     userId: {
       type: DataTypes.INTEGER,

@@ -1,6 +1,6 @@
 const express = require('express')
 const { Review, Spot, User, Image, Booking, sequelize } = require('../../db/models')
-const { requireAuth } = require('../../utils/auth');
+const { requireAuth, restoreUser } = require('../../utils/auth');
 const router = express.Router();
 
 
@@ -24,7 +24,41 @@ router.get('/current', requireAuth,  async (req, res) => {
 
 
 // Add an Image to a Review based on the Review's id
-router.post('/:reviewId/images', requireAuth, async (req, res) => {})
+router.post('/:reviewId/images', requireAuth, async (req, res) => {
+    // DECONSTRUCT REVIEW ID
+    const reviewId = req.params = req.params.reviewId;
+
+    //DECONSTRUCT USER, URL & PREVIEW IMAGE
+    const { user } = req
+    const { url, previewImage } = req.body
+
+    //IF USER DOESN'T EXIST - THROW ERROR
+    if (!user) return res.status(401).json({ message: "You need to be logged in to make any changes", "statusCode": 401 })
+
+    //CONFIRM IF REVIEW ID EXISTS
+    const review = await Spot.findByPk(reviewId)
+
+    //THROW ERROR IF REVIEW COULD NOT BE FOUND
+    if (!review) {
+        res.status(404)
+        return res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+
+    // CREATE IMAGE
+    const image = await Image.create({ url, previewImage, reviewId, userId: user.id })
+
+    //DEFINE AN OBJECT IN ORDER TO MAKE THE ASSOCIATION
+    const object = {}
+    object.id = image.id
+    object.imageableId = parseInt(reviewId)
+    object.url = image.url
+
+    res.status(200)
+    res.json(object)
+})
 
 
 

@@ -87,27 +87,6 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
 
-// // Get details of a Spot from an id
-// router.get('/:spotId', async (req, res) => {
-//     const { spotId } = req.params
-//     const details = await Spot.findByPk(spotId, {
-//         include: [
-//             { model: Image, attributes: ['id', 'url'] }, // Missing imageableId
-//             { model: User, attributes: ['id', 'firstName', 'lastName'] },
-//         ]
-//     })
-//     if (details) {
-//         res.json( details )
-//     } else {
-//         res.status(404)
-//         res.json({
-//             message: "Spot couldn't be found",
-//             statusCode: 404
-//         })
-//     }
-
-// })
-
 // //### GET DETAILS OF A SPOT FROM AN ID - DONE
 //Part 1
 router.get('/:spotId', async (req, res, next) => {
@@ -172,6 +151,7 @@ router.get('/:spotId', async (req, res, next) => {
 })
 
 
+
 // Create a Spot
 router.post('/', requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
@@ -204,38 +184,79 @@ router.post('/', requireAuth, async (req, res) => {
 })
 
 
+ // Add an Image to a Spot based on the Spot's id
+ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
-// Add an Image to a Spot based on the Spot's id
-router.post('/:spotId/images', async (req, res) => {
+    // DECONSTRUCT SPOT ID
+    const spotId = req.params = req.params.spotId;
+
+    //DECONSTRUCT USER, URL & PREVIEW IMAGE
+    const { user } = req
     const { url, previewImage } = req.body
 
-    const { spotId } = req.params
+
+    //IF USER DOESN'T EXIST - THROW ERROR
+    if (!user) return res.status(401).json({ "message": "You need to be logged in to make any changes", "statusCode": 401 })
+
+
+    //CONFIRM IF SPOT ID EXISTS
     const spot = await Spot.findByPk(spotId)
 
-    const image = await Image.create({
-        url,
-        spotId: spot.dataValues.id,
-        userId: req.user.id,
-        previewImage
-    })
 
-    const addImage = {
-        id: image.id,
-        imageableId: image.spotId,
-        url: image.url,
-        previewImage
+    //THROW ERROR IF SPOT COULD NOT BE FOUND
+    if (!spot) {
+      res.status(404)
+      return res.json({
+        "message": "Spot couldn't be found",
+        "statusCode": 404
+      })
     }
 
-    if (spot) {
-        res.status(200)
-        res.json(addImage)
-    } else {
-        res.json({
-            message: "Spot couldn't be found",
-            statusCode: 404
-        })
-    }
-})
+    // CREATE
+    const image = await Image.create({ url, previewImage, spotId, userId: user.id})
+
+    //DEFINE AN OBJECT IN ORDER TO MAKE THE ASSOCIATION
+    const object = {}
+    object.id = image.id
+    object.imageableId = parseInt(spotId)
+    object.url = image.url
+
+    res.status(200).json(object)
+
+  })
+
+
+// // Add an Image to a Spot based on the Spot's id
+// router.post('/:spotId/images', async (req, res) => {
+//     const { url, previewImage } = req.body
+
+//     const { spotId } = req.params
+//     const spot = await Spot.findByPk(spotId)
+
+//     const image = await Image.create({
+//         url,
+//         spotId: spot.dataValues.id,
+//         userId: req.user.id,
+//         previewImage
+//     })
+
+//     const addImage = {
+//         id: image.id,
+//         imageableId: image.spotId,
+//         url: image.url,
+//         previewImage
+//     }
+
+//     if (!spot) {
+//         res.json({
+//             message: "Spot couldn't be found",
+//             statusCode: 404
+//         })
+//     } else {
+//         res.status(200)
+//         res.json(addImage)
+//     }
+// })
 
 
 

@@ -212,13 +212,14 @@ router.post('/:spotId/images', async (req, res) => {
     const { spotId } = req.params
     const spot = await Spot.findByPk(spotId)
 
-    let image = await Image.create({
+    const image = await Image.create({
         url,
         spotId: spot.dataValues.id,
-        userId: req.user.id
+        userId: req.user.id,
+        previewImage
     })
 
-    let response = {
+    const addImage = {
         id: image.id,
         imageableId: image.spotId,
         url: image.url,
@@ -226,7 +227,8 @@ router.post('/:spotId/images', async (req, res) => {
     }
 
     if (spot) {
-        res.json(response)
+        res.status(200)
+        res.json(addImage)
     } else {
         res.json({
             message: "Spot couldn't be found",

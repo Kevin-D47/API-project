@@ -14,20 +14,19 @@ module.exports = {
         unique: true
       },
       previewImage: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.BOOLEAN,
       },
       spotId: {
         type: Sequelize.INTEGER,
-        references: {model: 'Spots'}
+        references: {model: 'Spots', onDelete: 'CASCADE'}
       },
       reviewId: {
         type: Sequelize.INTEGER,
-        references: {model: 'Reviews'}
+        references: {model: 'Reviews', onDelete: 'CASCADE'}
       },
       userId: {
         type: Sequelize.INTEGER,
-        references: {model: 'Users'}
+        references: {model: 'Users', onDelete: 'CASCADE'}
       },
       createdAt: {
         allowNull: false,

@@ -11,13 +11,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Spot.belongsTo(models.User, {foreignKey: 'ownerId', onDelete: "CASCADE", hooks:true})
+      Spot.belongsTo(models.User, { foreignKey: 'ownerId', as: 'Owner'})
 
-      Spot.hasMany(models.Booking, {foreignKey: 'spotid', onDelete: "CASCADE", hooks:true})
+      Spot.hasMany(models.Booking, { foreignKey: 'spotid', onDelete: "CASCADE", hooks: true })
 
-      Spot.hasMany(models.Review, {foreignKey: 'spotId', onDelete: "CASCADE", hooks:true})
+      Spot.hasMany(models.Review, { foreignKey: 'spotId', onDelete: "CASCADE", hooks: true })
 
-      Spot.hasMany(models.Image, {foreignKey: 'spotId', onDelete: "CASCADE", hooks:true})
+      Spot.hasMany(models.Image, { foreignKey: 'spotId', onDelete: "CASCADE", hooks: true })
     }
   }
   Spot.init({
@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
-      references: { model: 'Users'}
+      references: { model: 'Users' }
     },
     address: {
       type: DataTypes.STRING,
@@ -46,15 +46,32 @@ module.exports = (sequelize, DataTypes) => {
     },
     lat: {
       type: DataTypes.DECIMAL,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        validLat(value) {
+          if (value > 90 || value < -90) {
+            throw new Error("Invalid Data Entry")
+          }
+        }
+      }
     },
     lng: {
       type: DataTypes.DECIMAL,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        validLat(value) {
+          if (value > 180 || value < -180) {
+            throw new Error("Invalid Data Entry")
+          }
+        }
+      }
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate : {
+        len: [ 1, 49 ]
+      }
     },
     description: {
       type: DataTypes.STRING,

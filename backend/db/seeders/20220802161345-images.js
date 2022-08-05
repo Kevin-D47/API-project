@@ -12,7 +12,7 @@ module.exports = {
       },
       {
         url: 'wwww.house2.com',
-        previewImage: false,
+        previewImage: true,
         spotId: null,
         reviewId: 2,
         userId: 2

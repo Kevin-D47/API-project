@@ -11,12 +11,12 @@ module.exports = {
       spotId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {model: 'Bookings'}
+        references: {model: 'Spots', onDelete: 'CASCADE'}
       },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {model: 'Users'}
+        references: {model: 'Users', onDelete: 'CASCADE'}
       },
       startDate: {
         type: Sequelize.STRING,

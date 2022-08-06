@@ -55,6 +55,14 @@ router.get('/:spotId', async (req, res) => {
     const spotId = req.params.spotId
     const spot = await Spot.findByPk(spotId)
 
+    // Error response: Couldn't find a Spot with the specified id
+    if (!spot) {
+        res.json({
+            "message": "Spot couldn't be found",
+            "statusCode": 404
+        })
+    }
+
     const owner = await User.findByPk(spot.ownerId, {
         attributes: ['id', 'firstName', 'lastName']
     })
@@ -73,14 +81,6 @@ router.get('/:spotId', async (req, res) => {
         attributes: ['id', ['spotId', 'imageableId'], 'url'],
         where: { spotId: spotId }
     })
-
-    // Error response: Couldn't find a Spot with the specified id
-    if (!spot) {
-        res.json({
-            "message": "Spot couldn't be found",
-            "statusCode": 404
-        })
-    }
 
     const details = spot.toJSON()
 

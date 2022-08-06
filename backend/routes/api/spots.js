@@ -450,56 +450,39 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 // NOT WORKING!!!
 // Return spots filtered by query parameters.
  router.get('/', async (req, res) => {
-    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
-    let pagination = {filter: []}
-    page = parseInt(page);
-    size = parseInt(size);
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query
 
     if (Number.isNaN(page)) page = 1;
     if (Number.isNaN(size)) size = 20;
-    pagination.limit = size
-    pagination.offset = size * (page - 1)
 
-
-    if (minLat) pagination.filter.push({lat: {[Op.gte]: Number(minLat)}})
-    if (maxLat) pagination.filter.push({lat: {[Op.lte]: Number(maxLat)}})
-    if (minLng) pagination.filter.push({lng: {[Op.gte]: Number(minLng)}})
-    if (maxLng) pagination.filter.push({lng: {[Op.lte]: Number(maxLng)}})
-    if (minPrice) pagination.filter.push({price: {[Op.gte]: Number(minPrice)}})
-    if (maxPrice) pagination.filter.push({price: {[Op.lte]: Number(maxPrice)}})
+    page = parseInt(page);
+    size = parseInt(size);
 
     const allSpots = await Spot.findAll({
-        where: {
-            [Op.and]: pagination.filter
-        },
-        limit: pagination.limit,
-        offset: pagination.offset,
-    })
-    for (let spot of allSpots) {
-        const spotReviewData = await spot.getReviews({
-          attributes: [
-            [sequelize.fn("AVG", sequelize.col("stars")), "avgStarRating"],
-          ],
-        });
+      limit: size,
+      offset: size * (page - 1),
+    });
 
-        const avgRating = spotReviewData[0].dataValues.avgStarRating;
-        spot.dataValues.avgRating = Number(avgRating).toFixed(1);
-        const previewImage = await Image.findOne({
-          where: {
-            [Op.and]: {
-              spotId: spot.id,
-              previewImage: true,
-            },
-          },
-        });
-        if (previewImage) {
-          spot.dataValues.previewImage = previewImage.dataValues.url;
-        }
-      }
+    if ((page < 1 || page > 10) || (size < 1 || size > 20)) {
+        res.status(400)
+        res.json({
+            message: "Validation Error",
+            statusCode: 400,
+            errors: {
+              page: "Page must be greater than or equal to 0",
+              size: "Size must be greater than or equal to 0",
+              maxLat: "Maximum latitude is invalid",
+              minLat: "Minimum latitude is invalid",
+              minLng: "Maximum longitude is invalid",
+              maxLng: "Minimum longitude is invalid",
+              minPrice: "Maximum price must be greater than or equal to 0",
+              maxPrice: "Minimum price must be greater than or equal to 0"
+            }
+          })
+    }
     res.json({
-        page: page,
-        size: size,
         allSpots,
+        page
     })
   })
 

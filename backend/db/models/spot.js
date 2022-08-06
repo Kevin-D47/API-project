@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         validLat(value) {
           if (value > 90 || value < -90) {
-            throw new Error("Invalid Data Entry")
+            throw new Error("Latitude is not valid")
           }
         }
       }
@@ -61,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         validLat(value) {
           if (value > 180 || value < -180) {
-            throw new Error("Invalid Data Entry")
+            throw new Error("Longitude is not valid")
           }
         }
       }

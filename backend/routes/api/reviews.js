@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 // Get all Reviews of the Current User
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/current', requireAuth, restoreUser, async (req, res) => {
   let userId = req.user.dataValues.id
 
   const allReviews = await Review.findAll({
@@ -19,6 +19,7 @@ router.get('/current', requireAuth, async (req, res) => {
     ]
   })
 
+  // Successful Response
   if (allReviews) {
     res.status(200)
     res.json({ allReviews })
@@ -28,21 +29,15 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
 // Add an Image to a Review based on the Review's id
-router.post('/:reviewId/images', requireAuth, async (req, res) => {
-  // DECONSTRUCT REVIEW ID
+router.post('/:reviewId/images', requireAuth, restoreUser, async (req, res) => {
   const reviewId = req.params = req.params.reviewId;
 
-  //DECONSTRUCT USER, URL & PREVIEW IMAGE
   const { user } = req
   const { url, previewImage } = req.body
 
-  //IF USER DOESN'T EXIST - THROW ERROR
-  if (!user) return res.status(401).json({ message: "You need to be logged in to make any changes", "statusCode": 401 })
-
-  //CONFIRM IF REVIEW ID EXISTS
   const review = await Spot.findByPk(reviewId)
 
-  //THROW ERROR IF REVIEW COULD NOT BE FOUND
+  // Error response: Couldn't find a Review with the specified id
   if (!review) {
     res.status(404)
     return res.json({
@@ -51,15 +46,16 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     })
   }
 
-  // CREATE IMAGE
+  // Create image
   const image = await Image.create({ url, previewImage, reviewId, userId: user.id })
 
-  //DEFINE AN OBJECT IN ORDER TO MAKE THE ASSOCIATION
+  // Define an object to make association
   const object = {}
   object.id = image.id
   object.imageableId = parseInt(reviewId)
   object.url = image.url
 
+  // Successful Response
   res.status(200)
   res.json(object)
 })
@@ -67,17 +63,14 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 
 
 // Edit a Review
-router.put('/:reviewId', requireAuth, async (req, res) => {
+router.put('/:reviewId', requireAuth, restoreUser, async (req, res) => {
   const { reviewId } = req.params
   const { review, stars } = req.body
 
   const editReview = await Review.findByPk(reviewId)
 
-  if (editReview) {
-    editReview.set({ review, stars });
-    await editReview.save()
-    res.json(editReview)
-  } else if (stars < 1 || stars > 5) {
+  // Error Response: Body validation errors
+  if (stars < 1 || stars > 5) {
     res.status(400)
     res.json({
       message: "Validation error",
@@ -87,22 +80,36 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
         stars: "Stars must be an integer from 1 to 5",
       }
     })
-  } else {
+  }
+
+  // Error response: Couldn't find a Review with the specified id
+  if (!editReview){
+    res.status(404)
     res.json({
       message: "Review couldn't be found",
       statusCode: 404
-    }
-    )
+    })
+  }
+
+  // edit review
+  if (editReview) {
+    editReview.set({ review, stars });
+    await editReview.save()
+
+    // Successful Response
+    res.status(200)
+    res.json(editReview)
   }
 })
 
 
 
 // Delete a Review
-router.delete("/:reviewId", async (req, res) => {
+router.delete("/:reviewId", requireAuth, restoreUser, async (req, res) => {
   const { reviewId } = req.params;
   const findReview = await Review.findByPk(reviewId);
 
+  // Error response: Couldn't find a Review with the specified id
   if (!findReview) {
     res.status(404);
     return res.json({
@@ -111,14 +118,17 @@ router.delete("/:reviewId", async (req, res) => {
     });
   }
 
+  // Delete review
   await findReview.destroy();
+
+  // Successful Response
+  res.status(200)
   res.json({
     message: "Successfully deleted",
     statusCode: 200,
   });
 
 });
-
 
 
 module.exports = router

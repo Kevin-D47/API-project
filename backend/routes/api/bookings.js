@@ -5,44 +5,42 @@ const { Op } = require("sequelize");
 const router = express.Router();
 
 
+
 // Get all of the Current User's Bookings
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/current', requireAuth, restoreUser, async (req, res) => {
   let userId = req.user.dataValues.id
 
   const allBooking = await Booking.findAll({
     where: { userId },
-    include: [{ model: Spot }]
+    include: [{ model: Spot,  attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price", ] }]
   })
+
+  // Successful Response
   res.status(200)
   res.json({ allBooking })
 })
 
 
-// // Edit a Booking
-// router.put('/:bookingId', requireAuth, async (req, res) => {
-//     const { bookingId } = req.params
-//     const { startDate, endDate } = req.body
 
-//     const editBooking = await Booking.findByPk(bookingId)
-
-//     const allBookings = await Booking.findAll({
-//         attributes: ['startDate', 'endDate']
-//     })
-
-//     editBooking.set({ startDate, endDate });
-//     await editBooking.save()
-//     res.json(editBooking)
-// })
-
-
-// // Edit a Booking
-router.put('/:bookingId', requireAuth, async (req, res) => {
+// Edit a Booking
+router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
   const { startDate, endDate } = req.body
 
   const bookingId = req.params.bookingId
-  const newBooking = await Booking.findByPk(bookingId)
+  const editBooking = await Booking.findByPk(bookingId)
 
+  // Error response: Couldn't find a Booking with the specified id
+  if (!editBooking) {
+    res.status(404)
+    res.json({
+      message: "Booking couldn't be found",
+      statusCode: 404
+    })
+  }
+
+  // Error response: Body validation errors
   if (startDate > endDate) {
+    res.status(400)
     res.json({
       message: "Validation error",
       statusCode: 400,
@@ -52,24 +50,20 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     })
   }
 
-  if (!newBooking) {
-    res.json({
-      message: "Booking couldn't be found",
-      statusCode: 404
-    })
-  }
-
+  // Error response: Can't edit a booking that's past the end date
   let now = Date.now()
-  let bookingdate = new Date(newBooking.endDate)
+  let bookingDate = new Date(editBooking.endDate)
 
-  if (now > bookingdate) {
+  if (now > bookingDate) {
+    res.status(403)
     res.json({
       message: "Past bookings can't be modified",
       statusCode: 403
     })
   }
 
-  const spotId = newBooking.spotId
+  // Error response: Booking conflict
+  const spotId = editBooking.spotId
 
   const currentBookings = await Booking.findAll({
     where: {
@@ -82,6 +76,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
   });
 
   if (currentBookings.length) {
+    res.status(403)
     res.json({
       message: "Sorry, this spot is already booked for the specified dates",
       statusCode: 403,
@@ -92,40 +87,50 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     })
   }
 
-  if (newBooking.userId === req.user.id) {
-    newBooking.startDate = startDate,
-      newBooking.endDate = endDate,
+  // Return edit booking
+  if (editBooking.userId === req.user.id) {
+    editBooking.startDate = startDate,
+    editBooking.endDate = endDate,
 
-      await newBooking.save()
-    res.json(newBooking)
+    await editBooking.save()
+
+    // Successful Response
+    res.status(200)
+    res.json(editBooking)
   }
 })
 
 
 // Delete a Booking
-router.delete("/:bookingId", requireAuth, async (req, res) => {
+router.delete("/:bookingId", requireAuth, restoreUser, async (req, res) => {
   const { bookingId } = req.params;
   const findBooking = await Booking.findByPk(bookingId);
 
+  // Error response: Bookings that have been started can't be deleted
   let now = Date.now()
-  let bookingdate = new Date(bookingId.startDate)
+  let bookingDate = new Date(bookingId.startDate)
 
-  if (now > bookingdate) {
+  if (now > bookingDate) {
     res.json({
       message: "Bookings that have been started can't be deleted",
       statusCode: 403
     })
   }
 
+  // Error response: Couldn't find a Booking with the specified id
   if (!findBooking) {
     res.status(404);
-    return res.json({
+    res.json({
       message: "Booking couldn't be found",
       statusCode: 404,
     });
   }
 
+  // Delete booking
   await findBooking.destroy();
+
+  // Successful Response
+  res.status(200)
   res.json({
     message: "Successfully deleted",
     statusCode: 200,

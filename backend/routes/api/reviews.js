@@ -30,11 +30,11 @@ router.get('/current', requireAuth, restoreUser, async (req, res) => {
 
 // Add an Image to a Review based on the Review's id
 router.post('/:reviewId/images', requireAuth, restoreUser, async (req, res) => {
-  const reviewId = req.params = req.params.reviewId;
-
-  const { user } = req
   const { url, previewImage } = req.body
 
+  const { user } = req
+
+  const reviewId = req.params = req.params.reviewId;
   const review = await Spot.findByPk(reviewId)
 
   // Error response: Couldn't find a Review with the specified id

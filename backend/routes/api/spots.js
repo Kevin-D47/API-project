@@ -279,8 +279,8 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     if (findSpot) {
         // check if a review for a spot has already been made by userId
         let reviewed;
-        for (let reviews of allReviews) {
-            if (reviews.userId === userId) {
+        for (let review of allReviews) {
+            if (review.userId === userId) {
                 reviewed = true
             }
         }
@@ -486,6 +486,7 @@ router.get('/', async (req, res) => {
         const allSpots = await Spot.findAll({
             where: { ...where },
 
+            // pagination
             limit: size,
             offset: size * (page - 1),
 
@@ -530,7 +531,8 @@ router.get('/', async (req, res) => {
             ],
 
             group: ['Spot.id'],   // needed in order to return all spots
-            raw: true   //method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
+            raw: true   // method to convert out from findByPk && findOne into raw data aka JS object... otherise data will resemble console.log(req)
+
         })
 
         // Associate previewImage with Spots

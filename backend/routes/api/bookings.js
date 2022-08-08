@@ -12,7 +12,7 @@ router.get('/current', requireAuth, restoreUser, async (req, res) => {
 
   const allBooking = await Booking.findAll({
     where: { userId },
-    include: [{ model: Spot,  attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price", ] }]
+    include: [{ model: Spot,  attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"] }]
   })
 
   // Successful Response

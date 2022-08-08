@@ -4,6 +4,7 @@ const { requireAuth, restoreUser } = require('../../utils/auth');
 const router = express.Router();
 
 
+
 // Get all Reviews of the Current User
 router.get('/current', requireAuth, restoreUser, async (req, res) => {
   let userId = req.user.dataValues.id

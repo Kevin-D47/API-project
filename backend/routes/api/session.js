@@ -56,25 +56,26 @@ router.delete(
 );
 
 
-// // Restore session user
-// router.get(
-//   '/',
-//   restoreUser,
-//   (req, res) => {
-//     const { user } = req;
-//     if (user) {
-//       return res.json({
-//         user: user.toSafeObject()
-//       });
-//     } else return res.json({});
-//   }
-// );
+// needed to put back Restore session user and take out GET current user for authMe frontend to work
 
+// Restore session user
+router.get(
+  '/',
+  restoreUser,
+  (req, res) => {
+    const { user } = req;
+    if (user) {
+      return res.json({
+        user: user.toSafeObject()
+      });
+    } else return res.json({});
+  }
+);
 
-// GET current user
-router.get('/', requireAuth, async (req, res) => {
-  res.json(req.user)
-})
+// // GET current user
+// router.get('/', requireAuth, async (req, res) => {
+//   res.json(req.user)
+// })
 
 
 module.exports = router;

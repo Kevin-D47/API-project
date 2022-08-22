@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import './LoginForm.css';
 
 function LoginForm() {
@@ -11,10 +10,6 @@ function LoginForm() {
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
-
-//   if (sessionUser) return (
-//     <Redirect to="/" />
-//   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,29 +22,39 @@ function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
-      <label>
-        Username or Email
-        <input
-          type="text"
-          value={credential}
-          onChange={(e) => setCredential(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Log In</button>
+    <form className='login-form-container' onSubmit={handleSubmit}>
+      <div className="login-title-container">
+        <h3 id="login-title">Log in</h3>
+      </div>
+      <div className='welcome-title-container'>
+        <h4 id='welcome-title'>Welcome to Airbnb</h4>
+      </div>
+      <input
+        type="text"
+        className='login-input'
+        placeholder={'email'}
+        value={credential}
+        onChange={(e) => setCredential(e.target.value)}
+        required
+      />
+      <input
+        type="password"
+        className='login-input'
+        placeholder={'password'}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <div className='login-errors-container'>
+        {errors.length > 0 && (
+          <ul className="errors-list">
+            {errors.map((error, idx) => (
+              <li key={idx}>{error}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <button type="submit">Continue</button>
     </form>
   );
 }

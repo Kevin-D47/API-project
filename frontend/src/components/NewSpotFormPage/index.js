@@ -1,4 +1,5 @@
-import { useEffect, useState, Redirect } from "react";
+import { useEffect, useState } from "react";
+import { Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { thunkCreateSpot } from "../../store/spots";
 import "./NewSpotFormPage.css"
@@ -38,7 +39,7 @@ const NewSpotFormPage = () => {
 
         return setErrors(errors);
 
-    }, [name, price, address, city, state, country, lat, lng, description])
+    }, [name, address, city, state, country, lat, lng,price, description])
 
 
     if (user === null) {
@@ -84,15 +85,6 @@ const NewSpotFormPage = () => {
                 />
             </div>
             <div>
-                <label htmlFor="price">Price:</label>
-                <input
-                    id="price"
-                    type="text"
-                    onChange={(e) => setPrice(e.target.value)}
-                    value={price}
-                />
-            </div>
-            <div>
                 <label htmlFor="address">Address:</label>
                 <input
                     id="address"
@@ -129,7 +121,7 @@ const NewSpotFormPage = () => {
                 />
             </div>
             <div>
-                <label htmlFor="lat">Lat:</label>
+                <label htmlFor="lat">Latitude:</label>
                 <input
                     id="lat"
                     type="text"
@@ -138,12 +130,21 @@ const NewSpotFormPage = () => {
                 />
             </div>
             <div>
-                <label htmlFor="lng">Lng:</label>
+                <label htmlFor="lng">Longitude:</label>
                 <input
                     id="lng"
                     type="text"
                     onChange={(e) => setLng(e.target.value)}
                     value={lng}
+                />
+            </div>
+            <div>
+                <label htmlFor="price">Price:</label>
+                <input
+                    id="price"
+                    type="text"
+                    onChange={(e) => setPrice(e.target.value)}
+                    value={price}
                 />
             </div>
             <div>

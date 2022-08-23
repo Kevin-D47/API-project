@@ -8,11 +8,10 @@ const GetAllSpots = () => {
 
     const [isLoaded, setIsLoaded] = useState(false)
 
-    const dispatch = useDispatch();
-
     const allSpots = useSelector(state => state.spots)
-
     const allSpotsArr = Object.values(allSpots)
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(thunkGetAllSpots()).then(setIsLoaded(true));

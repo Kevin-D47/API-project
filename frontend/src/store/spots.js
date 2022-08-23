@@ -2,8 +2,8 @@ import { csrfFetch } from "./csrf";
 
 
 // types
-const GET_ALL_SPOTS = '/spots/getAllSpots'
-const GET_SPOT_DETAILS = '/spots/getSpotDetails'
+const GET_ALL_SPOTS = '/spots/allSpots'
+const GET_SPOT_DETAILS = '/spots/spotDetails'
 // const GET_CURR_SPOTS = '/spots/getCurrSpot'
 // const CREATE_SPOT = '/spots/createSpot'
 // const EDIT_SPOT = '/spots/editSpot'
@@ -59,8 +59,8 @@ export const thunkGetAllSpots = () => async dispatch => {
     return response
 }
 
-export const thunkGetSpotDetails = (id) => async dispatch => {
-    const response = await csrfFetch('/api/spots');
+export const thunkGetSingleSpot = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${id}`);
 
     if (response.ok) {
         const spot = await response.json();

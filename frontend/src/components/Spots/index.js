@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { thunkGetAllSpots } from '../../store/spots'
+import { thunkGetAllSpots, thunkGetSpotDetails } from '../../store/spots'
+import './Spots.css'
 
 
 const GetAllSpots = () => {
@@ -24,13 +25,11 @@ const GetAllSpots = () => {
     return (
         isLoaded && (
             <>
-            <div>All Spots</div>
+                <div>All Spots</div>
                 <div>
-                    <ul>
-                        {allSpotsArr.map((spot) => (
-                            <li key={spot.id}>{spot.name}</li>
-                        ))}
-                    </ul>
+                    {allSpotsArr.map((spot) => (
+                        <li key={spot.id}>{spot.name}</li>
+                    ))}
                 </div>
             </>
         )

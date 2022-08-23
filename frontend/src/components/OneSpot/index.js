@@ -10,7 +10,7 @@ const GetSingleSpot = () => {
 
     const { spotId } = useParams()
     // console.log('spotId', spotId)
-    const currSpot = useSelector(state => state.spots.selectedSpot?.[spotId])
+    const currSpot = useSelector(state => state.spots[spotId])
     // console.log('currSpot', currSpot)
 
     const dispatch = useDispatch()

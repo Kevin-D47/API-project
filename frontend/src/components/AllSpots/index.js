@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { thunkGetAllSpots, thunkGetSpotDetails } from '../../store/spots'
-import './Spots.css'
+import './AllSpots.css'
 
 
 const GetAllSpots = () => {

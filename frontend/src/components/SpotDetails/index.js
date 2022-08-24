@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from "react-router-dom"
-import { thunkGetSpotById } from '../../store/spots'
+import { useParams, useHistory } from "react-router-dom"
+import { thunkEditSpot, thunkGetSpotById } from '../../store/spots'
 import UpdateSpotForm from '../UpdateSpotFormPage'
+import { Modal } from '../../context/Modal'
 import './SpotDetails.css'
 
 
 const GetSpotDetails = () => {
-    const [showUpdate, setShowUpdate] = useState(false);
-    const [hasUdpated, setHasUpdate] = useState(false);
+    const history = useHistory
 
     const [isLoaded, setIsLoaded] = useState(false)
+    const [showUpdate, setShowUpdate] = useState(false);
 
     const { spotId } = useParams()
-    // console.log('spotId', spotId)
+    const user = useSelector(state => state.session.user)
     const currSpot = useSelector(state => state.spots[spotId])
-    // console.log('currSpot', currSpot)
 
     const dispatch = useDispatch()
 
@@ -23,19 +23,42 @@ const GetSpotDetails = () => {
         dispatch(thunkGetSpotById(spotId)).then(() => setIsLoaded(true))
     }, [dispatch])
 
+    const rating = currSpot?.avgStarRating == 0 ? "New" : currSpot?.avgStarRating
+
     return (
         isLoaded && (
             <>
-                <div>Current Spot:</div>
                 <div>
-                    <li>{currSpot.address}</li>
+                    <h2>{currSpot.name}</h2>
                 </div>
-                <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
+                <div>
+                    <p>Rating: {rating}</p>
+                    <p>{currSpot.city}, {currSpot.state} {currSpot.country}</p>
+                </div>
+                <div>
+                    {currSpot.ownerId === user?.id && (
+                        <div>
+                            <button
+                                onClick={() => setShowUpdate(true)}>Edit Spot</button>
+                            {showUpdate && (
+                                <Modal onClose={() => setShowUpdate(false)}>
+                                    <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
+                                </Modal>
+                            )}
+                        </div>
+                    )}
+                </div>
+                <div>
+                    {currSpot && (
+                        <div>
+                            {/* <img src={`${currSpot.previewImage}`} /> */}
+                        </div>
+                    )}
+                </div >
             </>
         )
     )
 
 }
-
 
 export default GetSpotDetails

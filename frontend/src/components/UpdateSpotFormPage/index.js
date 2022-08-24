@@ -19,7 +19,7 @@ function UpdateSpotForm({ setShowUpdate }) {
   const [lng, setLng] = useState('')
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
-  // const [previewImage, setPreviewImage] = useState('')
+  const [previewImage, setPreviewImage] = useState('')
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
@@ -36,11 +36,12 @@ function UpdateSpotForm({ setShowUpdate }) {
     if (!lat) errors.push("Please provide a lat")
     if (!lng) errors.push("Please provide a lng")
     if (price <= 0) errors.push("Please set a valid price");
+    if (!previewImage) errors.push("Please provide a image");
     if (!description) errors.push("Please provide a description")
 
     return setErrors(errors)
 
-  }, [name, address, city, state, country, lat, lng, price, description])
+  }, [name, address, city, state, country, lat, lng, price, previewImage, description])
 
   if (user === null) {
     alert("must be logged in to edit a spot")
@@ -54,10 +55,10 @@ function UpdateSpotForm({ setShowUpdate }) {
     if (errors.length > 0) return alert('cant submit')
 
     const updatedSpot = {
-      id: spotId, name, address, city, state, country, lat, lng, price, description
+      id: spotId, name, address, city, state, country, lat, lng, price, previewImage, description
     }
 
-    const response = await dispatch(thunkEditSpot(updatedSpot))
+    await dispatch(thunkEditSpot(updatedSpot))
     await dispatch(thunkGetSpotById(spotId))
     setShowUpdate(false)
     history.push(`/spots/${spotId}`)
@@ -144,6 +145,15 @@ function UpdateSpotForm({ setShowUpdate }) {
           step="0.01"
           placeholder="Price"
           onChange={(e) => setPrice(e.target.value)}
+          required
+        />
+          <input
+          type="url"
+          name="preview-image"
+          className="form-input none update"
+          placeholder="Image URL"
+          value={previewImage}
+          onChange={(e) => setPreviewImage(e.target.value)}
           required
         />
         <textarea

@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     ownerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      // unique: true,
+      // unique: true,  // took out for create a new Spot to work in frontend
       references: { model: 'Users' }
     },
     address: {

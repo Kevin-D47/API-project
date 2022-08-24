@@ -11,7 +11,7 @@ module.exports = {
       ownerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        // unique: true,
+        // unique: true,  // took out for create a new Spot to work in frontend
         reference: {model: 'Users', onDelete: 'CASCADE'}
       },
       address: {

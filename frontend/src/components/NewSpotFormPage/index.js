@@ -6,7 +6,9 @@ import "./NewSpotFormPage.css"
 
 
 const NewSpotFormPage = () => {
+
     const user = useSelector(state => state.session.user)
+    
     const [name, setName] = useState('')
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
@@ -80,8 +82,8 @@ const NewSpotFormPage = () => {
                 <input
                     id="name"
                     type="text"
-                    onChange={(e) => setName(e.target.value)}
                     value={name}
+                    onChange={(e) => setName(e.target.value)}
                 />
             </div>
             <div>
@@ -89,8 +91,9 @@ const NewSpotFormPage = () => {
                 <input
                     id="address"
                     type="text"
-                    onChange={(e) => setAddress(e.target.value)}
                     value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+
                 />
             </div>
             <div>
@@ -98,8 +101,8 @@ const NewSpotFormPage = () => {
                 <input
                     id="city"
                     type="text"
-                    onChange={(e) => setCity(e.target.value)}
                     value={city}
+                    onChange={(e) => setCity(e.target.value)}
                 />
             </div>
             <div>
@@ -107,8 +110,8 @@ const NewSpotFormPage = () => {
                 <input
                     id="state"
                     type="text"
-                    onChange={(e) => setState(e.target.value)}
                     value={state}
+                    onChange={(e) => setState(e.target.value)}
                 />
             </div>
             <div>
@@ -116,8 +119,8 @@ const NewSpotFormPage = () => {
                 <input
                     id="country"
                     type="text"
-                    onChange={(e) => setCountry(e.target.value)}
                     value={country}
+                    onChange={(e) => setCountry(e.target.value)}
                 />
             </div>
             <div>
@@ -125,8 +128,8 @@ const NewSpotFormPage = () => {
                 <input
                     id="lat"
                     type="text"
-                    onChange={(e) => setLat(e.target.value)}
                     value={lat}
+                    onChange={(e) => setLat(e.target.value)}
                 />
             </div>
             <div>
@@ -134,8 +137,8 @@ const NewSpotFormPage = () => {
                 <input
                     id="lng"
                     type="text"
-                    onChange={(e) => setLng(e.target.value)}
                     value={lng}
+                    onChange={(e) => setLng(e.target.value)}
                 />
             </div>
             <div>
@@ -143,8 +146,8 @@ const NewSpotFormPage = () => {
                 <input
                     id="price"
                     type="text"
-                    onChange={(e) => setPrice(e.target.value)}
                     value={price}
+                    onChange={(e) => setPrice(e.target.value)}
                 />
             </div>
             <div>
@@ -152,8 +155,8 @@ const NewSpotFormPage = () => {
                 <input
                     id="description"
                     type="text"
-                    onChange={(e) => setDescription(e.target.value)}
                     value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                 />
             </div>
             <button>Submit</button>

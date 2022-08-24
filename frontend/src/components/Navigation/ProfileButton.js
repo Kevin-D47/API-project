@@ -1,16 +1,20 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
+import { NavLink, useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 
 function ProfileButton({ user }) {
+  
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+
 
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
   };
+
 
   useEffect(() => {
     if (!showMenu) return;
@@ -24,6 +28,7 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
+
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
@@ -31,6 +36,9 @@ function ProfileButton({ user }) {
 
   return (
     <>
+      <div>
+        <NavLink to="/spots/create">Become a Host</NavLink>
+      </div>
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
@@ -45,6 +53,8 @@ function ProfileButton({ user }) {
       )}
     </>
   );
+
+
 }
 
 export default ProfileButton;

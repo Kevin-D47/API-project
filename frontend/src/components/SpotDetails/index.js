@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, useHistory } from "react-router-dom"
+import { useParams, useHistory, Redirect } from "react-router-dom"
 import { thunkEditSpot, thunkGetSpotById } from '../../store/spots'
 import UpdateSpotForm from '../UpdateSpotFormPage'
+import SpotDelete from '../DeleteSpot'
 import { Modal } from '../../context/Modal'
 import './SpotDetails.css'
 
 
 const GetSpotDetails = () => {
-    const history = useHistory
+    const history = useHistory()
 
     const [isLoaded, setIsLoaded] = useState(false)
     const [showUpdate, setShowUpdate] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     const { spotId } = useParams()
     const user = useSelector(state => state.session.user)
@@ -38,11 +40,16 @@ const GetSpotDetails = () => {
                 <div>
                     {currSpot.ownerId === user?.id && (
                         <div>
-                            <button
-                                onClick={() => setShowUpdate(true)}>Edit Spot</button>
+                            <button onClick={() => setShowUpdate(true)}>Edit Spot</button>
+                            <button onClick={() => setShowDelete(true)}>Delete Spot</button>
                             {showUpdate && (
                                 <Modal onClose={() => setShowUpdate(false)}>
                                     <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
+                                </Modal>
+                            )}
+                            {showDelete && (
+                                <Modal onClose={() => setShowDelete(false)} >
+                                    <SpotDelete spotId={spotId} setShowDelete={setShowDelete} />
                                 </Modal>
                             )}
                         </div>

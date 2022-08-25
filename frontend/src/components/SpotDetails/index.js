@@ -4,6 +4,7 @@ import { useParams, useHistory, Redirect } from "react-router-dom"
 import { thunkEditSpot, thunkGetSpotById } from '../../store/spots'
 import UpdateSpotForm from '../UpdateSpotFormPage'
 import SpotDelete from '../DeleteSpot'
+import GetSpotReviews from '../AllReviews'
 import { Modal } from '../../context/Modal'
 import './SpotDetails.css'
 
@@ -13,6 +14,7 @@ const GetSpotDetails = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [showUpdate, setShowUpdate] = useState(false);
     const [showDelete, setShowDelete] = useState(false);
+    const [showReview, setShowReview] = useState(false);
 
     const { spotId } = useParams()
     const user = useSelector(state => state.session.user)
@@ -53,6 +55,7 @@ const GetSpotDetails = () => {
                             )}
                         </div>
                     )}
+                    <GetSpotReviews spotId={spotId} setShowReview={setShowReview}/>
                 </div>
                 <div>
                     {currSpot && (
@@ -61,6 +64,9 @@ const GetSpotDetails = () => {
                         </div>
                     )}
                 </div >
+                <div>
+
+                </div>
             </>
         )
     )

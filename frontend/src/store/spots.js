@@ -109,6 +109,7 @@ export const thunkDeleteSpot = (id) => async dispatch => {
         dispatch(deleteSpot(id))
         return message
     }
+    return response
 }
 
 

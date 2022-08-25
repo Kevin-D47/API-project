@@ -6,7 +6,7 @@ const GET_ALL_SPOTS = '/spots/allSpots'
 const GET_SPOT_DETAILS = '/spots/spotDetails'
 const CREATE_SPOT = '/spots/createSpot'
 const UPDATE_SPOT = '/spots/updateSpot'
-const DELETE_Spot = '/spots/deleteSpot'
+const DELETE_SPOT = '/spots/deleteSpot'
 
 
 // actions
@@ -40,7 +40,7 @@ function editSpot(spot) {
 
 function deleteSpot(id) {
     return {
-        type: DELETE_Spot,
+        type: DELETE_SPOT,
         id
     }
 }
@@ -102,9 +102,6 @@ export const thunkEditSpot = (spot) => async dispatch => {
 export const thunkDeleteSpot = (id) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${id}`, {
         method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
     });
 
     if (response.ok) {
@@ -142,7 +139,7 @@ const spotsReducer = (state = initialState, action) => {
             newState[action.spot.id] = action.spot
             return newState
 
-        case DELETE_Spot:
+        case DELETE_SPOT:
             newState = { ...state }
             delete newState[action.id]
             return newState

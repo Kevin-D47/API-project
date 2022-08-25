@@ -22,15 +22,18 @@ const GetAllSpots = () => {
         return null
     }
 
+
     return (
         isLoaded && (
             <>
-                <div>All Spots</div>
+                <h2>All Spots</h2>
                 <div>
                     {allSpotsArr.map((spot) => (
                         <li key={spot.id}>
                             <NavLink to={`/spots/${spot.id}`}>
-                                {spot.name}
+                                <p>{spot.name}</p>
+                                <p>{spot.city}, {spot.state}</p>
+                                <p>${spot.price} night</p>
                             </NavLink>
                         </li>
                     ))}

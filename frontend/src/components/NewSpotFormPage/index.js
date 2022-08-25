@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
-import { thunkCreateSpot } from "../../store/spots";
+import { thunkCreateSpot, thunkGetAllSpots } from "../../store/spots";
 import "./NewSpotFormPage.css"
 
 
 const NewSpotFormPage = () => {
 
-    const user = useSelector(state => state.session.user)
-    
+    const history = useHistory()
+
     const [name, setName] = useState('')
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
@@ -18,13 +18,11 @@ const NewSpotFormPage = () => {
     const [lng, setLng] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
-    // const [previewImage, setPreviewImage] = useState('')
+    const [previewImage, setPreviewImage] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [errors, setErrors] = useState([])
 
-
     const dispatch = useDispatch();
-
 
     useEffect(() => {
         const errors = [];
@@ -37,30 +35,37 @@ const NewSpotFormPage = () => {
         if (!lat) errors.push("Please provide a lat")
         if (!lng) errors.push("Please provide a lng")
         if (price <= 0) errors.push("Please set a valid price");
+        if (!previewImage) errors.push("Please provide a image");
         if (!description) errors.push("Please provide a description")
 
         return setErrors(errors);
 
-    }, [name, address, city, state, country, lat, lng,price, description])
+    }, [name, address, city, state, country, lat, lng, price, previewImage, description])
 
 
-    if (user === null) {
-        alert("Need to be logged in to make a spot")
-        return <Redirect to="/" />
-    }
+    useEffect(() => {
+        dispatch(thunkGetAllSpots())
+    }, [dispatch])
 
 
     async function onSubmit(e) {
         e.preventDefault();
 
         setHasSubmitted(true);
-        if (errors.length) return alert('cant submit')
+
+        if (errors.length) return alert("No inputs, cannot submit")
+
+        if (errors.length > 0) {
+            history.push('/spots/create');
+            return
+        }
 
         const payload = {
-            name, address, city, state, country, lng, lat, price, description
+            name, address, city, state, country, lng, lat, price, previewImage, description
         }
 
         await dispatch(thunkCreateSpot(payload))
+        history.push('/')
     }
 
 
@@ -148,6 +153,15 @@ const NewSpotFormPage = () => {
                     type="text"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
+                />
+            </div>
+            <div>
+                <label htmlFor="previewImage">Image:</label>
+                <input
+                    id="previewImage"
+                    type="url"
+                    value={previewImage}
+                    onChange={(e) => setPreviewImage(e.target.value)}
                 />
             </div>
             <div>

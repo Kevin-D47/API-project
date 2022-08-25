@@ -9,7 +9,6 @@ import './SpotDetails.css'
 
 
 const GetSpotDetails = () => {
-    const history = useHistory()
 
     const [isLoaded, setIsLoaded] = useState(false)
     const [showUpdate, setShowUpdate] = useState(false);

@@ -1,6 +1,6 @@
-import { useParams, useHistory } from "react-router-dom"
+import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useParams } from "react-router-dom"
 import { thunkGetAllReviews } from "../../store/reviews";
 
 
@@ -10,9 +10,9 @@ const GetSpotReviews = () => {
 
     const allReviews = useSelector(state => state.reviews)
     const getAllReviewArr = Object.values(allReviews).map((review) => {
-        return review.id === spot.id ? (
+        return (
             <div key={review.id}>{review.review}</div>
-        ) : null
+        ) 
     })
 
     const dispatch = useDispatch();

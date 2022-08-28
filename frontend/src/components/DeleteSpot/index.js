@@ -5,7 +5,7 @@ import { thunkDeleteSpot } from "../../store/spots";
 import './DeleteSpot.css'
 
 
-const SpotDelete = ({spotId, setShowDelete}) => {
+const SpotDelete = ({spotId, setShowDeleteSpot}) => {
 
   const dispatch = useDispatch()
   const history = useHistory()
@@ -13,7 +13,7 @@ const SpotDelete = ({spotId, setShowDelete}) => {
   const handleDelete = async (e) => {
     history.push("/")
     await dispatch(thunkDeleteSpot(spotId))
-    setShowDelete(false)
+    setShowDeleteSpot(false)
   }
 
   return (
@@ -21,7 +21,7 @@ const SpotDelete = ({spotId, setShowDelete}) => {
       <div className='delete-container'>
       <p>This spot will be deleted. Are you sure you want to proceed? </p>
       <button className="delete-button" onClick={() => handleDelete()}>YES</button>
-      <button className="delete-button" onClick={() => setShowDelete(false)}>NO</button>
+      <button className="delete-button" onClick={() => setShowDeleteSpot(false)}>NO</button>
       </div>
     </>
   )

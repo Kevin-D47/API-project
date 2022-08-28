@@ -6,13 +6,15 @@ import { thunkGetAllReviews } from "../../store/reviews";
 
 const GetSpotReviews = () => {
     const { spotId } = useParams();
-    const spot = useSelector(state => (state.spots[+spotId]))
-
+    // const spot = useSelector(state => (state.spots[+spotId]))
     const allReviews = useSelector(state => state.reviews)
+
     const getAllReviewArr = Object.values(allReviews).map((review) => {
-        return (
-            <div key={review.id}>{review.review}</div>
-        ) 
+       return (
+            <div key={review.id}>
+                {review.review}
+            </div>
+        )
     })
 
     const dispatch = useDispatch();
@@ -26,7 +28,6 @@ const GetSpotReviews = () => {
             <h2>Reviews: </h2>
             {getAllReviewArr}
         </div>
-
     )
 }
 

@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom"
 import UpdateSpotForm from '../UpdateSpotFormPage'
 import SpotDelete from '../DeleteSpot'
 import GetSpotReviews from '../AllReviews'
+import ReviewDelete from '../DeleteReview'
+
 import { thunkGetSpotById } from '../../store/spots'
 import { Modal } from '../../context/Modal'
 
@@ -15,12 +17,15 @@ const GetSpotDetails = () => {
 
     const [isLoaded, setIsLoaded] = useState(false)
     const [showUpdate, setShowUpdate] = useState(false);
-    const [showDelete, setShowDelete] = useState(false);
+    const [showDeleteSpot, setShowDeleteSpot] = useState(false);
     const [showReview, setShowReview] = useState(false);
+    const [showDeleteReview, setShowDeleteReview] = useState(false);
 
-    const { spotId } = useParams()
+
+    const { spotId, reviewId } = useParams()
     const user = useSelector(state => state.session.user)
     const currSpot = useSelector(state => state.spots[spotId])
+
 
     const dispatch = useDispatch()
 
@@ -44,20 +49,26 @@ const GetSpotDetails = () => {
                     {currSpot.ownerId === user?.id && (
                         <div>
                             <button onClick={() => setShowUpdate(true)}>Edit Spot</button>
-                            <button onClick={() => setShowDelete(true)}>Delete Spot</button>
+                            <button onClick={() => setShowDeleteSpot(true)}>Delete Spot</button>
+                            <button onClick={() => setShowDeleteReview(true)}>Delete Review</button>
                             {showUpdate && (
                                 <Modal onClose={() => setShowUpdate(false)}>
                                     <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
                                 </Modal>
                             )}
-                            {showDelete && (
-                                <Modal onClose={() => setShowDelete(false)} >
-                                    <SpotDelete spotId={spotId} setShowDelete={setShowDelete} />
+                            {showDeleteSpot && (
+                                <Modal onClose={() => setShowDeleteSpot(false)} >
+                                    <SpotDelete spotId={spotId} setShowDeleteSpot={setShowDeleteSpot} />
+                                </Modal>
+                            )}
+                            {showDeleteReview && (
+                                <Modal onClose={() => setShowDeleteReview(false)} >
+                                    <ReviewDelete reviewId={reviewId} setShowDeleteReview={setShowDeleteReview} />
                                 </Modal>
                             )}
                         </div>
                     )}
-                    <GetSpotReviews spotId={spotId} setShowReview={setShowReview}/>
+                    <GetSpotReviews spotId={spotId} setShowReview={setShowReview} />
                 </div>
                 <div>
                     {currSpot && (
@@ -66,9 +77,6 @@ const GetSpotDetails = () => {
                         </div>
                     )}
                 </div >
-                <div>
-
-                </div>
             </>
         )
     )

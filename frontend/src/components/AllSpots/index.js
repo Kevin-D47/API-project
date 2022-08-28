@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { thunkGetAllSpots, thunkGetSpotDetails } from '../../store/spots'
 import './AllSpots.css'
 
@@ -22,22 +22,21 @@ const GetAllSpots = () => {
         return null
     }
 
-
     return (
         isLoaded && (
             <>
                 <h2>All Spots</h2>
                 <div>
                     {allSpotsArr.map((spot) => (
-                        <li key={spot.id}>
-                            <NavLink to={`/spots/${spot.id}`}>
-                                <p>{spot.name}</p>
-                                <p>{spot.city}, {spot.state}</p>
-                                <p>${spot.price} night</p>
-                            </NavLink>
-                        </li>
+                        <ul key={spot.id}>
+                            <Link to={`/spots/${spot.id}`}>
+                            <div><img src={spot.previewImage} /></div>
+                            <div>{spot.name}</div>
+                            <div>{spot.city}, {spot.state}</div>
+                            <div>${spot.price} night</div>
+                            </Link>
+                        </ul>
                     ))}
-
                 </div>
             </>
         )

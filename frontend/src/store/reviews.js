@@ -22,10 +22,9 @@ const createReview = (review) => ({
 
 })
 
-const deleteReview = (review) => ({
-
+const deleteReview = (id) => ({
     type: DELETE_REVIEW,
-    review
+    id
 
 })
 
@@ -36,8 +35,8 @@ export const thunkGetAllReviews = (spotId) => async dispatch => {
 
     if (response.ok) {
         const reviews = await response.json()
+        console.log('HERE', reviews)
         dispatch(getAllReviews(reviews.allReviews))
-        return response
     }
     return response
 }
@@ -57,15 +56,15 @@ export const thunkCreateReview = (review) => async dispatch => {
     return response
 }
 
-export const thunkDeleteReview = (id) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${id}`, {
+export const thunkDeleteReview = (reviewId) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE',
     });
 
     if (response.ok) {
-        const message = await response.json();
-        dispatch(deleteReview(id))
-        return message
+        const data = await response.json();
+        dispatch(deleteReview(reviewId))
+        return data
     }
     return response
 }
@@ -79,7 +78,6 @@ const reviewsReducer = (state = {}, action) => {
         case GET_ALL_REVIEWS:
             newState = { ...state }
             action.reviews.forEach(review => newState[review.id] = review)
-            console.log("newState", newState)
             return newState
 
         case CREATE_REVIEW:
@@ -89,7 +87,7 @@ const reviewsReducer = (state = {}, action) => {
 
         case DELETE_REVIEW:
             newState = { ...state }
-            delete newState[action.id]
+            delete newState[action.review.id]
             return newState
 
         default:

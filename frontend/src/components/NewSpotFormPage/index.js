@@ -68,114 +68,119 @@ const NewSpotFormPage = () => {
         history.push('/')
     }
 
-
     return (
-        <form
-            onSubmit={onSubmit}>
-            {hasSubmitted && errors.length > 0 && (
-                <div>
-                    The following errors were found:
-                    <ul>
-                        {errors.map((error) => (
-                            <li key={error}>{error}</li>
-                        ))}
-                    </ul>
+        <div className="host-page-container">
+            <div className="host-page-left-conatiner">
+                <h1 className="welcome-message">Welcome back!</h1>
+            </div>
+            <div className="host-page-right-container">
+                <div className="create-errors-container">
+                    {hasSubmitted && errors.length > 0 && (
+                        <ul className="errors-list">
+                            {errors.map(error => (
+                                <li key={error}>{error}</li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
-            )}
-            <div>
-                <label htmlFor="name">Name:</label>
-                <input
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="address">Address:</label>
-                <input
-                    id="address"
-                    type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
+                <form
+                    onSubmit={onSubmit}
+                    className="new-spot-form"
+                >
+                    <div className="create-spot-title-container">
+                        <h3 className="create-spot-title">Host your Spot!</h3>
+                    </div>
 
-                />
+                    <div className="create-spot-input-wrapper">
+                        <input
+                            className="form-input first create"
+                            type="text"
+                            placeholder="Name of Spot"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                        <input
+                            className="form-input middle create"
+                            type="text"
+                            placeholder="Address"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            required
+                        />
+                        <input
+                            className="form-input middle create"
+                            type="text"
+                            placeholder="City"
+                            value={city}
+                            onChange={(e) => setCity(e.target.value)}
+                            required
+                        />
+                        <input
+                            className="form-input middle create"
+                            type="text"
+                            placeholder="State"
+                            value={state}
+                            onChange={(e) => setState(e.target.value)}
+                            required
+                        />
+                        <input
+                            className="form-input middle create"
+                            type="text"
+                            placeholder="Country"
+                            value={country}
+                            onChange={(e) => setCountry(e.target.value)}
+                            required
+                        />
+                        <input
+                            className="form-input middle create"
+                            type="number"
+                            placeholder="Latitude"
+                            step='0.01'
+                            value={lat}
+                            onChange={(e) => setLat(e.target.value)}
+                            required
+                        />
+                        <input
+                            className="form-input middle create"
+                            type="number"
+                            placeholder="Logitude"
+                            step='0.01'
+                            value={lng}
+                            onChange={(e) => setLng(e.target.value)}
+                            required
+                        />
+                        <input
+                            className="form-input middle create"
+                            type="number"
+                            placeholder="Price"
+                            step='0.01'
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            required
+                        />
+                        <input
+                            className="form-input middle create"
+                            type="url"
+                            name="preview-image"
+                            placeholder="Image URL"
+                            value={previewImage}
+                            onChange={(e) => setPreviewImage(e.target.value)}
+                            required
+                        />
+                        <textarea
+                            className="form-input last desc create"
+                            type="text"
+                            placeholder="Description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button className="create submit-button" type="submit">Create Spot</button>
+                </form>
             </div>
-            <div>
-                <label htmlFor="city">City:</label>
-                <input
-                    id="city"
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="state">State:</label>
-                <input
-                    id="state"
-                    type="text"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="country">Country:</label>
-                <input
-                    id="country"
-                    type="text"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="lat">Latitude:</label>
-                <input
-                    id="lat"
-                    type="text"
-                    value={lat}
-                    onChange={(e) => setLat(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="lng">Longitude:</label>
-                <input
-                    id="lng"
-                    type="text"
-                    value={lng}
-                    onChange={(e) => setLng(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="price">Price:</label>
-                <input
-                    id="price"
-                    type="text"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="previewImage">Image:</label>
-                <input
-                    id="previewImage"
-                    type="url"
-                    value={previewImage}
-                    onChange={(e) => setPreviewImage(e.target.value)}
-                />
-            </div>
-            <div>
-                <label htmlFor="description">Description:</label>
-                <input
-                    id="description"
-                    type="text"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-            </div>
-            <button>Submit</button>
-
-        </form>
+        </div>
     )
 }
 

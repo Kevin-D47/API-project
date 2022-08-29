@@ -7,7 +7,7 @@ import './SignupForm.css';
 
 function SignupFormPage() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+  // const sessionUser = useSelector((state) => state.session.user);
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  // if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,66 +31,134 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+  // return (
+  //   <form onSubmit={handleSubmit}>
+  //     <ul>
+  //       {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+  //     </ul>
+  //     <label>
+  //       First Name
+  //       <input
+  //         type="text"
+  //         value={firstName}
+  //         onChange={(e) => setFirstName(e.target.value)}
+  //         required
+  //       />
+  //     </label>
+  //     <label>
+  //       Last Name
+  //       <input
+  //         type="text"
+  //         value={lastName}
+  //         onChange={(e) => setLastName(e.target.value)}
+  //         required
+  //       />
+  //     </label>
+  //     <label>
+  //       Email
+  //       <input
+  //         type="text"
+  //         value={email}
+  //         onChange={(e) => setEmail(e.target.value)}
+  //         required
+  //       />
+  //     </label>
+  //     <label>
+  //       Username
+  //       <input
+  //         type="text"
+  //         value={username}
+  //         onChange={(e) => setUsername(e.target.value)}
+  //         required
+  //       />
+  //     </label>
+  //     <label>
+  //       Password
+  //       <input
+  //         type="password"
+  //         value={password}
+  //         onChange={(e) => setPassword(e.target.value)}
+  //         required
+  //       />
+  //     </label>
+  //     <label>
+  //       Confirm Password
+  //       <input
+  //         type="password"
+  //         value={confirmPassword}
+  //         onChange={(e) => setConfirmPassword(e.target.value)}
+  //         required
+  //       />
+  //     </label>
+  //   </form>
+  // );
+
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
-      <label>
-        First Name
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Last Name
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Email
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Username
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Confirm Password
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-      </label>
-      <button type="submit">Sign Up</button>
+    <form className="signup-form-container" onSubmit={handleSubmit}>
+      <div className="signup-form-wrapper">
+        <div className="signup-title-container">
+          <h4 id="signup-title">Sign up</h4>
+        </div>
+        <div className="welcome-container">
+          <h3 className="welcome-title">Welcome to Staybnb</h3>
+        </div>
+        <div className="signup-input-wrapper">
+          <input
+            className='form-input first'
+            type="text"
+            placeholder='First Name'
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <input
+            className='form-input middle'
+            type="text"
+            placeholder='Last Name'
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+          <input
+            className='form-input middle'
+            type="text"
+            placeholder='Email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            className='form-input middle'
+            type="text"
+            placeholder='Username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            className='form-input middle'
+            type="password"
+            placeholder='Password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <input
+            className='form-input last'
+            type="password"
+            placeholder='Confirmed Password'
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <div className="signup-form-errors">
+            <ul className="errors-list">
+              {errors.length > 0 && errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <button className="submit-button" type="submit">Continue</button>
     </form>
   );
 }

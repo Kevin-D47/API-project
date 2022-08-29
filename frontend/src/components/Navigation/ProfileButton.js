@@ -5,9 +5,10 @@ import { NavLink, useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 
 function ProfileButton({ user }) {
-  
+
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
 
 
   const openMenu = () => {

@@ -6,7 +6,6 @@ import './LoginForm.css';
 
 function LoginForm() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector(state => state.session.user);
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
@@ -27,7 +26,7 @@ function LoginForm() {
         <h3 id="login-title">Log in</h3>
       </div>
       <div className='welcome-title-container'>
-        <h4 id='welcome-title'>Welcome to Airbnb</h4>
+        <h4 id='welcome-title'>Welcome to Staybnb</h4>
       </div>
       <input
         className='login-input'

@@ -13,8 +13,8 @@ module.exports = {
       {
         url: 'https://blog-www.pods.com/wp-content/uploads/2020/11/resized_FI_SkyHouse-South-Midtown-Atlanta_fb.jpg',
         previewImage: true,
-        spotId: null,
-        reviewId: 2,
+        spotId: 2,
+        reviewId: null,
         userId: 2
       },
       {

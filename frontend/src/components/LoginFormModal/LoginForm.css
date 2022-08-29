@@ -10,6 +10,12 @@
     align-items: center;
 }
 
+.form-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .login-form-container {
     display: flex;
     flex-direction: column;
@@ -63,11 +69,7 @@ input:focus {
     box-shadow: 0 0 5px #719ECE;
 }
 
-.form-input-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+
 
 #login-email-input {
     border-radius: .5em .5em 0px 0px;

@@ -5,8 +5,8 @@ import { thunkGetAllReviews } from "../../store/reviews";
 
 
 const GetSpotReviews = () => {
+
     const { spotId } = useParams();
-    // const spot = useSelector(state => (state.spots[+spotId]))
     const allReviews = useSelector(state => state.reviews)
 
     const getAllReviewArr = Object.values(allReviews).map((review) => {

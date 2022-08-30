@@ -35,7 +35,6 @@ export const thunkGetAllReviews = (spotId) => async dispatch => {
 
     if (response.ok) {
         const reviews = await response.json()
-        console.log('HERE', reviews)
         dispatch(getAllReviews(reviews.allReviews))
     }
     return response
@@ -64,7 +63,7 @@ export const thunkDeleteReview = (reviewId) => async dispatch => {
     if (response.ok) {
         const data = await response.json();
         dispatch(deleteReview(reviewId))
-        return data
+        return 'Review Deleted'
     }
     return response
 }
@@ -87,7 +86,7 @@ const reviewsReducer = (state = {}, action) => {
 
         case DELETE_REVIEW:
             newState = { ...state }
-            delete newState[action.review.id]
+            delete newState[action.id]
             return newState
 
         default:

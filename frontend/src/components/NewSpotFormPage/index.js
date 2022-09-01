@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { thunkCreateSpot, thunkGetAllSpots } from "../../store/spots";
 import "./NewSpotFormPage.css"
@@ -7,7 +7,7 @@ import "./NewSpotFormPage.css"
 
 const NewSpotFormPage = () => {
 
-    const history = useHistory()
+    const user = useSelector(state => state.session.user)
 
     const [name, setName] = useState('')
     const [address, setAddress] = useState('')
@@ -23,6 +23,7 @@ const NewSpotFormPage = () => {
     const [errors, setErrors] = useState([])
 
     const dispatch = useDispatch();
+    const history = useHistory()
 
     useEffect(() => {
         const errors = [];
@@ -48,16 +49,21 @@ const NewSpotFormPage = () => {
     }, [dispatch])
 
 
+    if (user === null) {
+        alert("You must be logged in to Become a Host")
+        return <Redirect to='/' />
+    }
+
+
     async function onSubmit(e) {
         e.preventDefault();
-
         setHasSubmitted(true);
 
-        if (errors.length) return alert("No inputs, cannot submit")
+        // if (errors.length) return alert("No inputs, cannot submit")
 
         if (errors.length > 0) {
-            history.push('/spots/create');
-            return
+             return alert("invalid submission")
+        
         }
 
         const payload = {

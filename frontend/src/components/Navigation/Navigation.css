@@ -1,13 +1,13 @@
 nav.main-navbar {
     position: sticky;
-    background-color: #ffffff;
-    top: 0%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgb(234, 229, 229);
+    top: 0%;
     margin-bottom: 2em;
     height: 4em;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgb(234, 229, 229);
 }
 
 .img {

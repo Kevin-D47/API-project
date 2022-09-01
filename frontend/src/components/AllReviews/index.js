@@ -1,4 +1,4 @@
-import { useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from "react-router-dom"
 import { thunkDeleteReview, thunkGetAllReviews } from "../../store/reviews";
@@ -40,7 +40,7 @@ export default function GetSpotReviews() {
     const spotIdParsed = parseInt(spotId)
     const spot = useSelector(state => (state.spots[spotIdParsed]))
 
-    
+
     const allReviews = useSelector(state => state.reviews)
     const getAllReviewArr = Object.values(allReviews)
 
@@ -77,11 +77,10 @@ export default function GetSpotReviews() {
                     {getAllReviewArr.map(review => {
                         return (
                             <div key={review.id}>
-                                <span>
-                                    {review.review}
-                                    {sessionUser.id === review.userId && <button onClick={(e)=>deleteReview(e, review.id)}>Delete Review</button> }
-                                </span>
-
+                                {review.review}
+                                {sessionUser.id === review.userId && <button onClick={(e) => deleteReview(e, review.id)}>
+                                    Delete Review
+                                </button>}
                             </div>
                         )
                     })}

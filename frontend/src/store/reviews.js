@@ -68,9 +68,10 @@ export const thunkDeleteReview = (reviewId) => async dispatch => {
     return response
 }
 
+const intialState = {}
 
 // reducer
-const reviewsReducer = (state = {}, action) => {
+const reviewsReducer = (state = intialState, action) => {
     let newState
     switch (action.type) {
 

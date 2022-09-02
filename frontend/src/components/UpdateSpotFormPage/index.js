@@ -64,110 +64,109 @@ function UpdateSpotForm({ setShowUpdate }) {
     history.push(`/spots/${spotId}`)
   }
   return (
-    <form
-      onSubmit={onSubmit}
-    >
-      <div>
-        <h3>Update Spot Form</h3>
-      </div>
-      {hasSubmitted && errors.length > 0 && (
-        <ul>
-          {errors.map(error => (
-            <li key={error}>{error}</li>
-          ))}
-        </ul>
-      )}
-      <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          id='name'
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label htmlFor="address">Adress:</label>
-        <input
-          id="address"
-          type="text"
-          placeholder="Address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <label htmlFor="city">City:</label>
-        <input
-          id='city'
-          type="text"
-          placeholder="City"
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-        <label htmlFor="state">State:</label>
-        <input
-          type="text"
-          placeholder="State"
-          value={state}
-          onChange={(e) => setState(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Country"
-          value={country}
-          onChange={(e) => setCountry(e.target.value)}
-        />
-        <input
-          type="number"
-          className="form-input none update"
-          value={lat}
-          min='-90'
-          max='90'
-          step="0.01"
-          placeholder="Latitude"
-          onChange={(e) => setLat(e.target.value)}
-        />
-        <input
-          type="number"
-          className="form-input none update"
-          value={lng}
-          min='-180'
-          max='180'
-          step="0.01"
-          placeholder="Longitude"
-          onChange={(e) => setLng(e.target.value)}
-          required
-        />
-        <input
-          type="number"
-          className="form-input none update"
-          value={price}
-          pattern="^\d+(?:\.\d{1,2})?$"
-          min="0.00"
-          step="0.01"
-          placeholder="Price"
-          onChange={(e) => setPrice(e.target.value)}
-          required
-        />
+    <form className="edit-form-container" onSubmit={onSubmit} >
+      <div className="edit-form-wrapper">
+        <div className="edit-title-container">
+          <h3 id='edit-title'>Update My Spot</h3>
+        </div>
+        <div className="edit-form-input">
           <input
-          type="url"
-          name="preview-image"
-          className="form-input none update"
-          placeholder="Image URL"
-          value={previewImage}
-          onChange={(e) => setPreviewImage(e.target.value)}
-          required
-        />
-        <textarea
-          type="text"
-          value={description}
-          className="form-input last desc update"
-          placeholder="Description"
-          maxLength='50'
-          minLength='5'
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
+            className="form-input first update"
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            className="form-input middle update"
+            type="text"
+            placeholder="Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+          <input
+            className="form-input middle update"
+            type="text"
+            placeholder="City"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <input
+            className="form-input middle update"
+            type="text"
+            placeholder="State"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+          />
+          <input
+            className="form-input middle update"
+            type="text"
+            placeholder="Country"
+            value={country}
+            onChange={(e) => setCountry(e.target.value)}
+          />
+          <input
+            className="form-input middle update"
+            type="number"
+            placeholder="Latitude"
+            min='-90'
+            max='90'
+            step="0.01"
+            value={lat}
+            onChange={(e) => setLat(e.target.value)}
+          />
+          <input
+            className="form-input middle update"
+            type="number"
+            placeholder="Longitude"
+            min='-180'
+            max='180'
+            step="0.01"
+            value={lng}
+            onChange={(e) => setLng(e.target.value)}
+            required
+          />
+          <input
+            className="form-input middle update"
+            type="number"
+            placeholder="Price"
+            min="0.00"
+            step="0.01"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+          <input
+            className="form-input middle update"
+            name="preview-image"
+            type="url"
+            placeholder="Image URL"
+            value={previewImage}
+            onChange={(e) => setPreviewImage(e.target.value)}
+            required
+          />
+          <input
+            className="form-input last desc update"
+            type="text"
+            placeholder="Description"
+            maxLength='50'
+            minLength='5'
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+          <div className="edit-form-errors">
+            {hasSubmitted && errors.length > 0 && (
+              <ul>
+                {errors.map(error => (
+                  <li key={error}>{error}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
       </div>
-      <button type="submit">Update Spot</button>
+      <button className="submit-button" type="submit">Update Spot</button>
     </form>
   )
 }

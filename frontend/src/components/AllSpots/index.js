@@ -29,12 +29,12 @@ const GetAllSpots = () => {
                 <div>
                     {allSpotsArr.map((spot) => (
                         <ul key={spot.id}>
-                            <Link to={`/spots/${spot.id}`}>
-                            <div><img src={spot.previewImage} /></div>
+                            <a href={`/spots/${spot.id}`}>
+                                <img src={spot.previewImage} alt='true'></img>
+                            </a>
                             <div>{spot.name}</div>
                             <div>{spot.city}, {spot.state}</div>
                             <div>${spot.price} night</div>
-                            </Link>
                         </ul>
                     ))}
                 </div>

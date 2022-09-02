@@ -24,10 +24,10 @@ function getSpotById(spot) {
     }
 }
 
-function createSpot(spot) {
+function createSpot(payload) {
     return {
         type: CREATE_SPOT,
-        spot
+        payload
     }
 }
 
@@ -69,19 +69,30 @@ export const thunkGetSpotById = (id) => async dispatch => {
     return response
 }
 
-export const thunkCreateSpot = (spot) => async dispatch => {
+export const thunkCreateSpot = (payload) => async dispatch => {
     const response = await csrfFetch('/api/spots', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(spot)
+        body: JSON.stringify(payload)
     });
 
     if (response.ok) {
-        const newSpot = await response.json();
-        dispatch(createSpot(newSpot))
-        return newSpot
+        const data = await response.json();
+        const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                url: payload.url,
+                previewImage: payload.previewImage,
+            }),
+        })
+        if (imageResponse.ok) {
+            const imageData = await imageResponse.json()
+            data.previewImage = imageData.url
+            dispatch(thunkCreateSpot(data))
+        }
+
     }
-    return response
 }
 
 export const thunkEditSpot = (spot) => async dispatch => {

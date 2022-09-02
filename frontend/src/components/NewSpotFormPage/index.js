@@ -18,7 +18,8 @@ const NewSpotFormPage = () => {
     const [lng, setLng] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
+    // const [previewImage, setPreviewImage] = useState('')
+    const [url, setUrl] = useState('')
     const [hasSubmitted, setHasSubmitted] = useState(false)
     const [errors, setErrors] = useState([])
 
@@ -36,12 +37,13 @@ const NewSpotFormPage = () => {
         if (!lat) errors.push("Please provide a lat")
         if (!lng) errors.push("Please provide a lng")
         if (price <= 0) errors.push("Please set a valid price");
-        if (!previewImage) errors.push("Please provide a image");
+        // if (!previewImage) errors.push("Please provide a image");
+        if (!url) errors.push("Please provide a image");
         if (!description) errors.push("Please provide a description")
 
         return setErrors(errors);
 
-    }, [name, address, city, state, country, lat, lng, price, previewImage, description])
+    }, [name, address, city, state, country, lat, lng, price, url, description])
 
 
     useEffect(() => {
@@ -62,16 +64,21 @@ const NewSpotFormPage = () => {
         // if (errors.length) return alert("No inputs, cannot submit")
 
         if (errors.length > 0) {
-             return alert("invalid submission")
-        
+            return alert("invalid submission")
         }
 
         const payload = {
-            name, address, city, state, country, lng, lat, price, previewImage, description
+            name, address, city, state, country, lng, lat, price, previewImage: true, url, description
         }
 
-        await dispatch(thunkCreateSpot(payload))
-        history.push('/')
+        function isImg(url) {
+            return url;
+        }
+        if (isImg(url)) {
+            dispatch(thunkCreateSpot(payload)).then(() => dispatch(thunkGetAllSpots()))
+            history.push('/')
+        }
+
     }
 
     return (
@@ -170,8 +177,8 @@ const NewSpotFormPage = () => {
                             type="url"
                             name="preview-image"
                             placeholder="Image URL"
-                            value={previewImage}
-                            onChange={(e) => setPreviewImage(e.target.value)}
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
                             required
                         />
                         <textarea

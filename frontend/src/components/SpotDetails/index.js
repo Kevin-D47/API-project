@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from "react-router-dom"
+import { useParams, Redirect, useHistory } from "react-router-dom"
 
 import UpdateSpotForm from '../UpdateSpotFormPage'
 import SpotDelete from '../DeleteSpot'
@@ -8,12 +8,15 @@ import GetSpotReviews from '../AllReviews'
 import ReviewDelete from '../DeleteReview'
 
 import { thunkGetSpotById } from '../../store/spots'
+import { thunkGetAllReviews, thunkDeleteReview } from '../../store/reviews'
 import { Modal } from '../../context/Modal'
 
 import './SpotDetails.css'
 
 
 const GetSpotDetails = () => {
+
+    const history = useHistory()
 
     const [isLoaded, setIsLoaded] = useState(false)
     const [showUpdate, setShowUpdate] = useState(false);
@@ -23,15 +26,28 @@ const GetSpotDetails = () => {
 
 
     const { spotId, reviewId } = useParams()
-    const user = useSelector(state => state.session.user)
+    const sessionUser = useSelector(state => state.session.user)
     const currSpot = useSelector(state => state.spots[spotId])
 
+    const allReviews = useSelector(state => state.reviews)
 
-    const dispatch = useDispatch()
+    const getAllReviewsArr = Object.values(allReviews)
+    const [userIds, setUserIds] = useState(false)
+
+    const addReview = (e, spotId) => {
+        e.preventDefault();
+        history.push(`/spots/${spotId}/create`)
+    }
 
     useEffect(() => {
+        setUserIds(getAllReviewsArr.map(review => review.userId))
+    }, [allReviews])
+
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(thunkGetAllReviews(spotId))
         dispatch(thunkGetSpotById(spotId)).then(() => setIsLoaded(true))
-    }, [dispatch])
+    }, [dispatch, spotId])
 
     const rating = currSpot?.avgStarRating == 0 ? "New" : currSpot?.avgStarRating
 
@@ -42,15 +58,18 @@ const GetSpotDetails = () => {
                     <h2>{currSpot.name}</h2>
                 </div>
                 <div>
+                    <img src={currSpot.Images[0].url} />
                     <p>Rating: {rating}</p>
                     <p>{currSpot.city}, {currSpot.state} {currSpot.country}</p>
                 </div>
                 <div>
-                    {currSpot.ownerId === user?.id && (
+
+                    {currSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) && <button onClick={(e) => addReview(e, currSpot.id)}>Review Spot</button>}
+
+                    {currSpot.ownerId === sessionUser?.id && (
                         <div>
                             <button onClick={() => setShowUpdate(true)}>Edit Spot</button>
                             <button onClick={() => setShowDeleteSpot(true)}>Delete Spot</button>
-                            <button onClick={() => setShowDeleteReview(true)}>Delete Review</button>
                             {showUpdate && (
                                 <Modal onClose={() => setShowUpdate(false)}>
                                     <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
@@ -61,14 +80,9 @@ const GetSpotDetails = () => {
                                     <SpotDelete spotId={spotId} setShowDeleteSpot={setShowDeleteSpot} />
                                 </Modal>
                             )}
-                            {showDeleteReview && (
-                                <Modal onClose={() => setShowDeleteReview(false)} >
-                                    <ReviewDelete reviewId={reviewId} setShowDeleteReview={setShowDeleteReview} />
-                                </Modal>
-                            )}
                         </div>
                     )}
-                    <GetSpotReviews spotId={spotId} setShowReview={setShowReview} />
+                    <GetSpotReviews spotId={spotId} sessionUser={sessionUser} setShowReview={setShowReview}  />
                 </div>
                 <div>
                     {currSpot && (

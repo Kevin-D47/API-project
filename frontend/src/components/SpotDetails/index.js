@@ -59,7 +59,7 @@ const GetSpotDetails = () => {
                 </div>
                 <div>
                     <img src={currSpot.Images[0].url} />
-                    <p>Rating: {rating}</p>
+                    <p>Rating: {Number(rating).toFixed(2)}</p>
                     <p>{currSpot.city}, {currSpot.state} {currSpot.country}</p>
                 </div>
                 <div>

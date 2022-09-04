@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams, Redirect, useHistory } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 
 import UpdateSpotForm from '../UpdateSpotFormPage'
 import SpotDelete from '../DeleteSpot'
 import GetSpotReviews from '../AllReviews'
-import ReviewDelete from '../DeleteReview'
 
 import { thunkGetSpotById } from '../../store/spots'
-import { thunkGetAllReviews, thunkDeleteReview } from '../../store/reviews'
+import { thunkGetAllReviews} from '../../store/reviews'
 import { Modal } from '../../context/Modal'
 
 import './SpotDetails.css'
@@ -22,10 +21,8 @@ const GetSpotDetails = () => {
     const [showUpdate, setShowUpdate] = useState(false);
     const [showDeleteSpot, setShowDeleteSpot] = useState(false);
     const [showReview, setShowReview] = useState(false);
-    const [showDeleteReview, setShowDeleteReview] = useState(false);
 
-
-    const { spotId, reviewId } = useParams()
+    const { spotId } = useParams()
     const sessionUser = useSelector(state => state.session.user)
     const currSpot = useSelector(state => state.spots[spotId])
 
@@ -84,13 +81,6 @@ const GetSpotDetails = () => {
                     )}
                     <GetSpotReviews spotId={spotId} sessionUser={sessionUser} setShowReview={setShowReview}  />
                 </div>
-                <div>
-                    {currSpot && (
-                        <div>
-                            {/* <img src={`${currSpot.previewImage}`} /> */}
-                        </div>
-                    )}
-                </div >
             </>
         )
     )

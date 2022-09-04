@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { thunkGetAllSpots, thunkGetSpotDetails } from '../../store/spots'
+import starIcon from './icons/starIcon.png'
 import './AllSpots.css'
 
 
@@ -25,23 +26,38 @@ const GetAllSpots = () => {
     return (
         isLoaded && (
             <>
-                <h2>All Spots</h2>
-                <div>
-                    {allSpotsArr.map((spot) => (
-                        <ul key={spot.id}>
-                            <a href={`/spots/${spot.id}`}>
-                                <img src={spot.previewImage} alt='true'></img>
-                            </a>
-                            <div>{spot.name}</div>
-                            <div>{spot.city}, {spot.state}</div>
-                            <div>
-                                <span className="star-rating-container">
-                                    Rating: <img className="star-icon" src={'https://i.pinimg.com/736x/1e/26/44/1e26444b739863fdf4b0ad49d163ff95.jpg'} alt=""/>{Number(spot.avgRating).toFixed(2)}
-                                </span>
+                <div className="spots-container">
+                    <div className="spots-cards-container">
+                        {allSpotsArr.map((spot) => (
+                            <div key={spot.id}>
+                                <a href={`/spots/${spot.id}`}>
+                                    <img className="spot-img" src={spot.previewImage} alt='true'></img>
+                                </a>
+                                <div className="spot-info-container">
+                                    <div className="spot-info-left">
+                                        <div style={{ fontSize: '18px', fontWeight: 'bold' }}>
+                                            {spot.name}
+                                        </div>
+                                        <div style={{ fontSize: '16px' }}>
+                                            {spot.city}, {spot.state}
+                                        </div>
+                                        <div className='price-container'>
+                                            <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
+                                                ${spot.price}
+                                            </div>
+                                            &nbsp;night
+                                        </div>
+                                    </div>
+                                    <div className="spot-info-right">
+                                        <div style={{ fontSize: '16px' }}>
+                                            <img className="star-icon" src={starIcon} alt="" />
+                                                {Number(spot.avgRating).toFixed(2)}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div>${spot.price} night</div>
-                        </ul>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </>
         )

@@ -84,7 +84,6 @@ const GetSpotDetails = () => {
             </>
         )
     )
-
 }
 
 export default GetSpotDetails

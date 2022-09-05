@@ -72,11 +72,14 @@ export default function GetSpotReviews() {
     return (
         isLoaded && (
             <div>
-                <h2>Review: </h2>
                 <ul>
+
                     {getAllReviewArr.map(review => {
                         return (
                             <div key={review.id}>
+                                <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
+                                    {review.User.firstName} {review.User.lastName}:
+                                </div>
                                 {review.review}
                                 {sessionUser.id === review.userId && <button onClick={(e) => deleteReview(e, review.id)}>
                                     Delete Review

@@ -3,6 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import ProfileButton from './ProfileButton';
+import staybnbLogo from './Images/staybnbLogo.png'
+import staybnbText from './Images/staybnbText.png'
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -11,8 +13,8 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav className='main-navbar'>
-      <div>
-        <NavLink exact to="/"> <img className='img' src={"https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png"} /></NavLink>
+      <div className='home-button-container'>
+        <NavLink exact to="/"> <img className='logo' src={staybnbLogo}/></NavLink> <NavLink exact to="/"> <img className='text' src={staybnbText}/> </NavLink>
       </div>
       {isLoaded && (
         <div className='right-profile-container'>

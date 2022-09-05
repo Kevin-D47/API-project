@@ -7,7 +7,7 @@ import SpotDelete from '../DeleteSpot'
 import GetSpotReviews from '../AllReviews'
 
 import { thunkGetSpotById } from '../../store/spots'
-import { thunkGetAllReviews} from '../../store/reviews'
+import { thunkGetAllReviews } from '../../store/reviews'
 import { Modal } from '../../context/Modal'
 
 import starIcon from './icons/starIcon.png'
@@ -56,18 +56,17 @@ const GetSpotDetails = () => {
                     <h2>{currSpot.name}</h2>
                 </div>
                 <div>
+
+                    <p>{currSpot.city}, {currSpot.state}, {currSpot.country}</p>
+                    <p>Price: ${currSpot.price}</p>
                     <img src={currSpot.Images[0].url} />
-                    <p>Rating: <img className="star-icon" src={starIcon} alt=""/>{Number(rating).toFixed(2)}</p>
-                    <p>{currSpot.city}, {currSpot.state} {currSpot.country}</p>
                 </div>
+                <div>Spot hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}</div>
                 <div>
-
-                    {currSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) && <button onClick={(e) => addReview(e, currSpot.id)}>Review Spot</button>}
-
                     {currSpot.ownerId === sessionUser?.id && (
                         <div>
-                            <button onClick={() => setShowUpdate(true)}>Edit Spot</button>
-                            <button onClick={() => setShowDeleteSpot(true)}>Delete Spot</button>
+                            <button onClick={() => setShowUpdate(true)}>Edit My Spot</button>
+                            <button onClick={() => setShowDeleteSpot(true)}>Delete My Spot</button>
                             {showUpdate && (
                                 <Modal onClose={() => setShowUpdate(false)}>
                                     <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
@@ -80,7 +79,14 @@ const GetSpotDetails = () => {
                             )}
                         </div>
                     )}
-                    <GetSpotReviews spotId={spotId} sessionUser={sessionUser} setShowReview={setShowReview}  />
+                    <p>Rating: <img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</p>
+                    <p>{currSpot.numReviews} reviews</p>
+
+                    <h2> Reviews: </h2>
+                    {currSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) && <button onClick={(e) => addReview(e, currSpot.id)}>Review This Spot</button>}
+                    <div>
+                        <GetSpotReviews spotId={spotId} sessionUser={sessionUser} setShowReview={setShowReview} />
+                    </div>
                 </div>
             </>
         )

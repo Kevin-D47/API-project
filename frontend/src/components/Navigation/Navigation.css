@@ -6,11 +6,24 @@ nav.main-navbar {
     top: 0%;
     margin-bottom: 2em;
     height: 4em;
+    width: 100%;
     background-color: #ffffff;
     border-bottom: 1px solid rgb(234, 229, 229);
 }
 
-.img {
-    max-height: 100px;
-    max-width: 100px;
+.home-button-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    max-height: 40px;
+    max-width: 40px;
+    margin-left: 43px;
+}
+
+.text {
+    max-height: 90px;
+    max-width: 90px;
+    margin-left: 3.5px;
 }

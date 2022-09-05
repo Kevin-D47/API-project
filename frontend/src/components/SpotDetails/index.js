@@ -10,6 +10,7 @@ import { thunkGetSpotById } from '../../store/spots'
 import { thunkGetAllReviews} from '../../store/reviews'
 import { Modal } from '../../context/Modal'
 
+import starIcon from './icons/starIcon.png'
 import './SpotDetails.css'
 
 
@@ -56,7 +57,7 @@ const GetSpotDetails = () => {
                 </div>
                 <div>
                     <img src={currSpot.Images[0].url} />
-                    <p>Rating: <img className="star-icon" src={'https://i.pinimg.com/736x/1e/26/44/1e26444b739863fdf4b0ad49d163ff95.jpg'} alt=""/>{Number(rating).toFixed(2)}</p>
+                    <p>Rating: <img className="star-icon" src={starIcon} alt=""/>{Number(rating).toFixed(2)}</p>
                     <p>{currSpot.city}, {currSpot.state} {currSpot.country}</p>
                 </div>
                 <div>

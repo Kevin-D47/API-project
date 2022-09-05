@@ -5,8 +5,6 @@ import { NavLink, useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import LoginFormModal from '../LoginFormModal/index'
 import SignUpFormModal from '../SignupFormPage/SignupFormModal'
-import { logInAsDemo } from "../../store/session";
-import { logoutSpotsAction } from "../../store/spots";
 import icon from './Images/icon.svg'
 import hamburger from './Images/hamburgerIcon.svg'
 import './ProfileButton.css'
@@ -17,7 +15,6 @@ function ProfileButton({ user, isLoaded }) {
   const history = useHistory();
 
   const [showMenu, setShowMenu] = useState(false);
-  const [showSignUpModal, setShowSignUpModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
 
@@ -25,15 +22,6 @@ function ProfileButton({ user, isLoaded }) {
     if (showMenu) return;
     setShowMenu(true);
   };
-
-  // const handleDemo = () => {
-  //   const user = { credential: 'demo@user.io', password: 'password' }
-  //   dispatch(login(user))
-  //     .then(() => {
-  //       setShowLoginModal(false)
-  //       history.push('/')
-  //     })
-  // };
 
   useEffect(() => {
     if (!showMenu) return;

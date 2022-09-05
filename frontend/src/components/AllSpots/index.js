@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { thunkGetAllSpots, thunkGetSpotDetails } from '../../store/spots'
+import { thunkGetAllSpots } from '../../store/spots'
 import starIcon from './icons/starIcon.png'
 import './AllSpots.css'
 
@@ -26,15 +25,15 @@ const GetAllSpots = () => {
     return (
         isLoaded && (
             <>
-                <div className="spots-container">
-                    <div className="spots-cards-container">
+                <div className='spots-container'>
+                    <div className='spots-cards-container'>
                         {allSpotsArr.map((spot) => (
                             <div key={spot.id}>
                                 <a href={`/spots/${spot.id}`}>
-                                    <img className="spot-img" src={spot.previewImage} alt='true'></img>
+                                    <img className='spot-img' src={spot.previewImage} alt='true'></img>
                                 </a>
-                                <div className="spot-info-container">
-                                    <div className="spot-info-left">
+                                <div className='spot-info-container'>
+                                    <div className='spot-info-left'>
                                         <div style={{ fontSize: '18px', fontWeight: 'bold' }}>
                                             {spot.name}
                                         </div>
@@ -48,10 +47,10 @@ const GetAllSpots = () => {
                                             &nbsp;night
                                         </div>
                                     </div>
-                                    <div className="spot-info-right">
+                                    <div className='spot-info-right'>
                                         <div style={{ fontSize: '16px' }}>
-                                            <img className="star-icon" src={starIcon} alt="" />
-                                                {Number(spot.avgRating).toFixed(2)}
+                                            <img className='star-icon' src={starIcon} alt='true' />
+                                            {Number(spot.avgRating).toFixed(2)}
                                         </div>
                                     </div>
                                 </div>

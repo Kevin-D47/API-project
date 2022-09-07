@@ -61,8 +61,6 @@ const NewSpotFormPage = () => {
         e.preventDefault();
         setHasSubmitted(true);
 
-        // if (errors.length) return alert("No inputs, cannot submit")
-
         if (errors.length > 0) {
             return alert("invalid submission")
         }
@@ -84,7 +82,7 @@ const NewSpotFormPage = () => {
     return (
         <div className="host-page-container">
             <div className="host-page-left-conatiner">
-                <h1 className="welcome-message">Welcome back!</h1>
+                <h1 className="welcome-message">What kind of place will you host?</h1>
             </div>
             <div className="host-page-right-container">
                 <div className="create-errors-container">
@@ -96,19 +94,17 @@ const NewSpotFormPage = () => {
                         </ul>
                     )}
                 </div>
-                <form
-                    onSubmit={onSubmit}
-                    className="new-spot-form"
-                >
+                <form className="new-spot-form" onSubmit={onSubmit}>
                     <div className="create-spot-title-container">
                         <h3 className="create-spot-title">Host your Spot!</h3>
                     </div>
-
                     <div className="create-spot-input-wrapper">
                         <input
                             className="form-input first create"
                             type="text"
                             placeholder="Name of Spot"
+                            minLength="1"
+                            maxLength="50"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
@@ -117,6 +113,8 @@ const NewSpotFormPage = () => {
                             className="form-input middle create"
                             type="text"
                             placeholder="Address"
+                            minLength="1"
+                            maxLength="50"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             required
@@ -125,6 +123,8 @@ const NewSpotFormPage = () => {
                             className="form-input middle create"
                             type="text"
                             placeholder="City"
+                            minLength="1"
+                            maxLength="30"
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
                             required
@@ -133,6 +133,8 @@ const NewSpotFormPage = () => {
                             className="form-input middle create"
                             type="text"
                             placeholder="State"
+                            minLength="1"
+                            maxLength="30"
                             value={state}
                             onChange={(e) => setState(e.target.value)}
                             required
@@ -141,6 +143,8 @@ const NewSpotFormPage = () => {
                             className="form-input middle create"
                             type="text"
                             placeholder="Country"
+                            minLength="1"
+                            maxLength="30"
                             value={country}
                             onChange={(e) => setCountry(e.target.value)}
                             required
@@ -149,7 +153,9 @@ const NewSpotFormPage = () => {
                             className="form-input middle create"
                             type="number"
                             placeholder="Latitude"
-                            step='0.01'
+                            min="-90"
+                            max="90"
+                            step="0.01"
                             value={lat}
                             onChange={(e) => setLat(e.target.value)}
                             required
@@ -158,7 +164,9 @@ const NewSpotFormPage = () => {
                             className="form-input middle create"
                             type="number"
                             placeholder="Logitude"
-                            step='0.01'
+                            min="-180"
+                            max="180"
+                            step="0.01"
                             value={lng}
                             onChange={(e) => setLng(e.target.value)}
                             required
@@ -167,7 +175,8 @@ const NewSpotFormPage = () => {
                             className="form-input middle create"
                             type="number"
                             placeholder="Price"
-                            step='0.01'
+                            min="0.01"
+                            step="0.01"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
                             required
@@ -181,10 +190,12 @@ const NewSpotFormPage = () => {
                             onChange={(e) => setUrl(e.target.value)}
                             required
                         />
-                        <textarea
+                        <input
                             className="form-input last desc create"
                             type="text"
                             placeholder="Description"
+                            minLength="1"
+                            maxLength="50"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             required

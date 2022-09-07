@@ -64,7 +64,7 @@ function UpdateSpotForm({ setShowUpdate }) {
     history.push(`/spots/${spotId}`)
   }
   return (
-    <form className="edit-form-container" onSubmit={onSubmit} >
+    <form className="edit-form-container" onSubmit={onSubmit}>
       <div className="edit-form-wrapper">
         <div className="edit-title-container">
           <h3 id='edit-title'>Update My Spot</h3>
@@ -74,6 +74,8 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input first update"
             type="text"
             placeholder="Name"
+            minLength="1"
+            maxLength="50"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -81,6 +83,8 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="text"
             placeholder="Address"
+            minLength="1"
+            maxLength="50"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
@@ -88,6 +92,8 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="text"
             placeholder="City"
+            minLength="1"
+            maxLength="30"
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
@@ -95,6 +101,8 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="text"
             placeholder="State"
+            minLength="1"
+            maxLength="30"
             value={state}
             onChange={(e) => setState(e.target.value)}
           />
@@ -102,6 +110,8 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="text"
             placeholder="Country"
+            minLength="1"
+            maxLength="30"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
           />
@@ -109,8 +119,8 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="number"
             placeholder="Latitude"
-            min='-90'
-            max='90'
+            min="-90"
+            max="90"
             step="0.01"
             value={lat}
             onChange={(e) => setLat(e.target.value)}
@@ -119,8 +129,8 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="number"
             placeholder="Longitude"
-            min='-180'
-            max='180'
+            min="-180"
+            max="180"
             step="0.01"
             value={lng}
             onChange={(e) => setLng(e.target.value)}
@@ -130,7 +140,7 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="number"
             placeholder="Price"
-            min="0.00"
+            min="0.01"
             step="0.01"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
@@ -138,8 +148,8 @@ function UpdateSpotForm({ setShowUpdate }) {
           />
           <input
             className="form-input middle update"
-            name="preview-image"
             type="url"
+            name="preview-image"
             placeholder="Image URL"
             value={previewImage}
             onChange={(e) => setPreviewImage(e.target.value)}
@@ -149,8 +159,8 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input last desc update"
             type="text"
             placeholder="Description"
-            maxLength='50'
-            minLength='5'
+            minLength="1"
+            maxLength="50"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required

@@ -1,4 +1,4 @@
-form.new-spot-form {
+.new-spot-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,38 +6,38 @@ form.new-spot-form {
   padding: 2em;
 }
 
-.host-page-container{
+.host-page-container {
   display: flex;
   position: fixed;
-  left: 0;
-  top: 7.3%;
   min-width: 100vw;
   min-height: 100vh;
+  left: 0;
+  top: 4.5em;
 }
 
-.host-page-left-conatiner{
+.host-page-left-conatiner {
+  display: flex;
+  align-items: center;
   min-width: 50%;
   min-height: 100%;
   background: linear-gradient(0.5turn, #CE277A, #451DA0);
-  display: flex;
-  align-items: center;
 }
 
 .welcome-message {
   position: relative;
-  bottom: 7%;
-  padding-left: 1.4em;
+  margin-left: 1.5em;
+  margin-bottom: 3em;
+  font-size: 50px;
   color: white;
-  font-size: 3rem;
 }
 
 .host-page-right-container {
-  min-width: 50%;
-  min-height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  min-width: 50%;
+  min-height: 100%;
   margin-bottom: 10em;
 }
 

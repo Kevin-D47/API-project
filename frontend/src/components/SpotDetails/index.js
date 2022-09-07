@@ -56,7 +56,6 @@ const GetSpotDetails = () => {
                     <h2>{currSpot.name}</h2>
                 </div>
                 <div>
-
                     <p>{currSpot.city}, {currSpot.state}, {currSpot.country}</p>
                     <p>Price: ${currSpot.price}</p>
                     <img src={currSpot.Images[0].url} />

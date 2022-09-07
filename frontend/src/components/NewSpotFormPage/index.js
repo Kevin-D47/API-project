@@ -34,8 +34,8 @@ const NewSpotFormPage = () => {
         if (!city.length) errors.push("Please provide a city");
         if (!state.length) errors.push("Please provide a state")
         if (!country.length) errors.push("Please provide a country")
-        if (!lat) errors.push("Please provide a lat")
-        if (!lng) errors.push("Please provide a lng")
+        if (lat < -90 || lat > 90) errors.push("Please provide a valid latitude between -90 to 90")
+        if (lng < -180 || lng > 180) errors.push("Please provide a valid longitude between -180 to 180")
         if (price <= 0) errors.push("Please set a valid price");
         // if (!previewImage) errors.push("Please provide a image");
         if (!url) errors.push("Please provide a image");
@@ -59,6 +59,7 @@ const NewSpotFormPage = () => {
 
     async function onSubmit(e) {
         e.preventDefault();
+
         setHasSubmitted(true);
 
         if (errors.length > 0) {
@@ -85,7 +86,11 @@ const NewSpotFormPage = () => {
                 <h1 className="welcome-message">What kind of place will you host?</h1>
             </div>
             <div className="host-page-right-container">
-                <div className="create-errors-container">
+                <form className="new-spot-form" onSubmit={onSubmit}>
+                    <div className="create-spot-title-container">
+                        <h3 className="create-spot-title">Host your Spot!</h3>
+                    </div>
+                    <div className="create-errors-container">
                     {hasSubmitted && errors.length > 0 && (
                         <ul className="errors-list">
                             {errors.map(error => (
@@ -94,10 +99,6 @@ const NewSpotFormPage = () => {
                         </ul>
                     )}
                 </div>
-                <form className="new-spot-form" onSubmit={onSubmit}>
-                    <div className="create-spot-title-container">
-                        <h3 className="create-spot-title">Host your Spot!</h3>
-                    </div>
                     <div className="create-spot-input-wrapper">
                         <input
                             className="form-input first create"

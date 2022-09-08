@@ -103,11 +103,21 @@ export const thunkEditSpot = (spot) => async dispatch => {
     });
 
     if (response.ok) {
-        const spot = await response.json();
-        dispatch(editSpot(spot))
-        return spot
+        const data = await response.json();
+        const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                url: spot.url,
+                previewImage: spot.previewImage,
+            }),
+        })
+        if (imageResponse.ok) {
+            const imageData = await imageResponse.json()
+            data.previewImage = imageData.url
+            dispatch(thunkEditSpot(data))
+        }
     }
-    return response
 }
 
 export const thunkDeleteSpot = (id) => async dispatch => {

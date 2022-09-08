@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('Spots', [
       {
         ownerId: 1,
-        address: "123 Hollywood Lane",
+        address: "1234 Hollywood Lane",
         city: "Los Angeles",
         state: "California",
         country: "United States of America",
@@ -17,7 +17,7 @@ module.exports = {
       },
       {
         ownerId: 2,
-        address: "456 Brave Street",
+        address: "4567 Brave Street",
         city: "Atlanta",
         state: "Georgia",
         country: "United States of America",
@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         ownerId: 3,
-        address: "789 Apple Square",
+        address: "8910 Apple Square",
         city: "New York City",
         state: "New York",
         country: "United States of America",
@@ -41,19 +41,19 @@ module.exports = {
       },
       {
         ownerId: 4,
-        address: "360 Lake View",
+        address: "3600 Lake View",
         city: "Boulder",
         state: "Colorado",
         country: "United States of America",
         lat: 20.7645358,
         lng: -120.4730327,
-        name: "Relaxing Lake House",
+        name: "Peaceful Lake House",
         description: "Cozy Lake Front",
         price: 350
       },
       {
         ownerId: 5,
-        address: "180 Sandy Circle",
+        address: "1111 Sandy Circle",
         city: "Miami",
         state: "Florida",
         country: "United States of America",
@@ -77,7 +77,7 @@ module.exports = {
       },
       {
         ownerId: 7,
-        address: "777 Desert Corner",
+        address: "7772 Desert Corner",
         city: "Las Vegas",
         state: "Nevada",
         country: "United States of America",
@@ -98,6 +98,54 @@ module.exports = {
         name: "Massive Mansion",
         description: "Extravagant Stay",
         price: 1200
+      },
+      {
+        ownerId: 9,
+        address: "3030 Long Horn Ranch",
+        city: "Houston",
+        state: "Texas",
+        country: "United States of America",
+        lat: 40.7645358,
+        lng: -150.4730327,
+        name: "Big Ranch House",
+        description: "Big Open Ranch",
+        price: 660
+      },
+      {
+        ownerId: 10,
+        address: "9260 Calm Street",
+        city: "Myrtle Beach",
+        state: "South Carolina",
+        country: "United States of America",
+        lat: 20.7645358,
+        lng: -120.4730327,
+        name: "Beautiful Condos",
+        description: "Beautiful Relaxing Stay",
+        price: 520
+      },
+      {
+        ownerId: 11,
+        address: "8602 Country Road",
+        city: "Nashville",
+        state: "Tennessee",
+        country: "United States of America",
+        lat: 85.7645358,
+        lng: -90.4730327,
+        name: "Charming Modest Home",
+        description: "Comfy Modest Stay",
+        price: 290
+      },
+      {
+        ownerId: 12,
+        address: "4500 Hill Street",
+        city: "San Francisco",
+        state: "California",
+        country: "United States of America",
+        lat: 46.7645358,
+        lng: -110.4730327,
+        name: "Stylish Modern Home ",
+        description: "Modern City Stay",
+        price: 610
       },
     ], {});
   },

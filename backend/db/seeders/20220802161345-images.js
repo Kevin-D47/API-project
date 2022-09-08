@@ -11,7 +11,7 @@ module.exports = {
         userId: 1
       },
       {
-        url: 'https://blog-www.pods.com/wp-content/uploads/2020/11/resized_FI_SkyHouse-South-Midtown-Atlanta_fb.jpg',
+        url: 'https://images.unsplash.com/photo-1573958463969-876edfe174df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80',
         previewImage: true,
         spotId: 2,
         reviewId: null,
@@ -58,6 +58,34 @@ module.exports = {
         spotId: 8,
         reviewId: null,
         userId: 8
+      },
+      {
+        url: 'https://farmerpaynearchitects.com/wp-content/uploads/2022/04/texas-ranch-image-02.jpg',
+        previewImage: true,
+        spotId: 9,
+        reviewId: null,
+        userId: 9
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1580041065738-e72023775cdc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+        previewImage: true,
+        spotId: 10,
+        reviewId: null,
+        userId: 10
+      },
+      {
+        url: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
+        previewImage: true,
+        spotId: 11,
+        reviewId: null,
+        userId: 11
+      },
+      {
+        url: 'https://s.wsj.net/public/resources/images/B3-CC754_russia_M_20181022105812.jpg',
+        previewImage: true,
+        spotId: 12,
+        reviewId: null,
+        userId: 12
       },
     ], {});
 

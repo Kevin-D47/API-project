@@ -42,7 +42,7 @@ module.exports = {
       {
         userId: 7,
         spotId: 6,
-        review: "This was an pretty ok spot!",
+        review: "This was an pretty okay spot!",
         stars: 3,
       },
       {
@@ -50,6 +50,30 @@ module.exports = {
         spotId: 7,
         review: "This was an hot spot!",
         stars: 3,
+      },
+      {
+        userId: 9,
+        spotId: 12,
+        review: "This was an neat spot!",
+        stars: 4,
+      },
+      {
+        userId: 10,
+        spotId: 11,
+        review: "This was an fair spot!",
+        stars: 4,
+      },
+      {
+        userId: 11,
+        spotId: 10,
+        review: "This was an decent spot!",
+        stars: 3,
+      },
+      {
+        userId: 12,
+        spotId: 9,
+        review: "This was an bad spot!",
+        stars: 2,
       },
     ], {});
   },

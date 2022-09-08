@@ -19,7 +19,8 @@ function UpdateSpotForm({ setShowUpdate }) {
   const [lng, setLng] = useState('')
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
-  const [previewImage, setPreviewImage] = useState('')
+  // const [previewImage, setPreviewImage] = useState('')
+  const [url, setUrl] = useState('')
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
@@ -36,12 +37,13 @@ function UpdateSpotForm({ setShowUpdate }) {
     if (!lat) errors.push("Please provide a lat")
     if (!lng) errors.push("Please provide a lng")
     if (price <= 0) errors.push("Please set a valid price");
-    if (!previewImage) errors.push("Please provide a image");
+    // if (!previewImage) errors.push("Please provide a image");
+    if (!url) errors.push("Please provide a image");
     if (!description) errors.push("Please provide a description")
 
     return setErrors(errors)
 
-  }, [name, address, city, state, country, lat, lng, price, previewImage, description])
+  }, [name, address, city, state, country, lat, lng, price, url, description])
 
   if (user === null) {
     alert("must be logged in to edit a spot")
@@ -52,14 +54,23 @@ function UpdateSpotForm({ setShowUpdate }) {
     e.preventDefault()
 
     setHasSubmitted(true)
-    if (errors.length > 0) return alert('cant submit')
+    if (errors.length > 0) return alert('invalid submission')
 
     const updatedSpot = {
-      id: spotId, name, address, city, state, country, lat, lng, price, previewImage, description
+      id: spotId, name, address, city, state, country, lat, lng, price, url, description
     }
 
-    await dispatch(thunkEditSpot(updatedSpot))
-    await dispatch(thunkGetSpotById(spotId))
+    function isImg(url) {
+      return url;
+    }
+
+    if (isImg(url)) {
+      dispatch(thunkEditSpot(updatedSpot)).then(() => dispatch(thunkGetSpotById()))
+      history.push(`/`)
+    }
+
+    dispatch(thunkEditSpot(updatedSpot))
+    dispatch(thunkGetSpotById(spotId))
     setShowUpdate(false)
     history.push(`/spots/${spotId}`)
   }
@@ -151,8 +162,8 @@ function UpdateSpotForm({ setShowUpdate }) {
             type="url"
             name="preview-image"
             placeholder="Image URL"
-            value={previewImage}
-            onChange={(e) => setPreviewImage(e.target.value)}
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
             required
           />
           <input

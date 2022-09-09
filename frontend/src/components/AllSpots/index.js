@@ -34,7 +34,7 @@ const GetAllSpots = () => {
                                 </a>
                                 <div className='spot-info-container'>
                                     <div className='spot-info-left'>
-                                        <div style={{ fontSize: '18px', fontWeight: 'bold' }}>
+                                        <div style={{ fontSize: '18px', fontWeight: '600' }}>
                                             {spot.name}
                                         </div>
                                         <div style={{ fontSize: '16px' }}>

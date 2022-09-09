@@ -1,0 +1,162 @@
+.spot-details-container {
+    display: flex;
+    justify-content: center;
+    min-width: 100vw;
+    margin-top: -2em;
+    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
+    sans-serif;
+}
+
+.spot-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.spot-details-img {
+    display: flex;
+    border-radius: 5em;
+    height: 620px;
+    width: 1068px;
+    border-radius: .7em;
+}
+
+.spot-details-top-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: -0.5em;
+}
+
+.spot-title {
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+.spot-details-bottom-container {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    margin-bottom: 1.5em;
+}
+
+.spot-rating {
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.spot-num-reviews {
+    margin-right: 20px;
+    text-decoration: underline;
+}
+
+.spot-location {
+    margin-right: 20px;
+    text-decoration: underline;
+}
+
+.spot-price {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: 20px;
+}
+
+.spot-host-profile-pic {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.spot-host-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    justify-content: space-between;
+    margin-top: 1.5em;
+    margin-bottom: 35px;
+}
+
+.host-profile-container {
+    display: flex;
+    align-items: center;
+}
+
+.spot-host-options-container {
+    border: 3px solid rgb(213, 213, 213);
+    border-radius: .5em;
+    background-color: white;
+    box-shadow: 0px 0px 4px rgb(195, 195, 195);
+    padding: 10px;
+    margin-right: 3px;
+
+}
+
+.spot-host-title {
+    margin-left: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.spot-owner-options-title {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.edit-button {
+    margin-right: 8px;
+}
+
+.button {
+    background: linear-gradient(0.25turn, #E61E4D, #D70666);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.button:active {
+    transform: scale(.97);
+}
+
+.review-details-container {
+    border-top: 1px solid rgb(235, 228, 228);
+    border-bottom: 1px solid rgb(235, 228, 228);
+    padding-top: 10px;
+    margin-bottom: 60px;
+}
+
+.rating-review-container {
+    display: flex;
+    justify-content: left;
+    margin-top: 26px;
+    margin-bottom: 50px;
+    font-size: 20px;
+}
+
+.rating {
+    margin-right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.num-reviews {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.add-review-button {
+    margin-left: 58.5em;
+    background: linear-gradient(0.25turn, #E61E4D, #D70666);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+}

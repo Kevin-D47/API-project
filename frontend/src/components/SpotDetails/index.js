@@ -11,6 +11,7 @@ import { thunkGetAllReviews } from '../../store/reviews'
 import { Modal } from '../../context/Modal'
 
 import starIcon from './icons/starIcon.png'
+import icon from './icons/icon.svg'
 import './SpotDetails.css'
 
 
@@ -47,47 +48,74 @@ const GetSpotDetails = () => {
         dispatch(thunkGetSpotById(spotId)).then(() => setIsLoaded(true))
     }, [dispatch, spotId])
 
-    const rating = currSpot?.avgStarRating == 0 ? "New" : currSpot?.avgStarRating
+    const rating = currSpot?.avgStarRating
 
     return (
         isLoaded && (
-            <>
-                <div>
-                    <h2>{currSpot.name}</h2>
-                </div>
-                <div>
-                    <p>{currSpot.city}, {currSpot.state}, {currSpot.country}</p>
-                    <p>Price: ${currSpot.price}</p>
-                    <img src={currSpot.Images[0].url} />
-                </div>
-                <div>Spot hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}</div>
-                <div>
-                    {currSpot.ownerId === sessionUser?.id && (
-                        <div>
-                            <button onClick={() => setShowUpdate(true)}>Edit My Spot</button>
-                            <button onClick={() => setShowDeleteSpot(true)}>Delete My Spot</button>
-                            {showUpdate && (
-                                <Modal onClose={() => setShowUpdate(false)}>
-                                    <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
-                                </Modal>
-                            )}
-                            {showDeleteSpot && (
-                                <Modal onClose={() => setShowDeleteSpot(false)} >
-                                    <SpotDelete spotId={spotId} setShowDeleteSpot={setShowDeleteSpot} />
-                                </Modal>
-                            )}
+            <div className='spot-details-container'>
+                <div className='spot-details-wrapper'>
+                    <div className='spot-details-top-container'>
+                        <div className='spot-title'>
+                            <h2>{currSpot.name}</h2>
                         </div>
-                    )}
-                    <p>Rating: <img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</p>
-                    <p>{currSpot.numReviews} reviews</p>
 
-                    <h2> Reviews: </h2>
-                    {currSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) && <button onClick={(e) => addReview(e, currSpot.id)}>Review This Spot</button>}
+                    </div>
+                    <div className='spot-details-bottom-container'>
+                        <div className='spot-rating'><img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</div>
+                        <div className='spot-num-reviews'>{currSpot.numReviews} reviews</div>
+                        <div className='spot-location'>{currSpot.city}, {currSpot.state}, {currSpot.country}</div>
+
+                    </div>
                     <div>
-                        <GetSpotReviews spotId={spotId} sessionUser={sessionUser} setShowReview={setShowReview} />
+                        <img className='spot-details-img' src={currSpot.Images[0].url} />
+                    </div>
+                    <div className='spot-host-container'>
+                        <div className='spot-host-title'>
+                            <div className='host-profile-container'>
+                                <img className='spot-host-profile-pic' src={icon} />
+                                Spot hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}
+                            </div>
+                            <div className='spot-price'>
+                                <div style={{ fontSize: '22px', fontWeight: 'bold' }}>
+                                    ${currSpot.price}
+                                </div>
+                                &nbsp;night
+                            </div>
+                        </div>
+                        {currSpot.ownerId === sessionUser?.id && (
+                            <div className='spot-host-options-container'>
+                                <div>
+                                    <div className='spot-owner-options-title'>Host Options: </div>
+                                    <button className='button edit-button' onClick={() => setShowUpdate(true)}>Edit My Spot</button>
+                                    <button className='button' onClick={() => setShowDeleteSpot(true)}>Delete My Spot</button>
+                                    {showUpdate && (
+                                        <Modal onClose={() => setShowUpdate(false)}>
+                                            <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
+                                        </Modal>
+                                    )}
+                                    {showDeleteSpot && (
+                                        <Modal onClose={() => setShowDeleteSpot(false)} >
+                                            <SpotDelete spotId={spotId} setShowDeleteSpot={setShowDeleteSpot} />
+                                        </Modal>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    <div className='review-details-container'>
+                        <div className='rating-review-container'>
+                            <div className='rating'><img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</div>
+                            <div className='num-reviews'>{currSpot.numReviews} reviews</div>
+                            {currSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) && <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)}>Review This Spot</button>}
+                        </div>
+
+                        <div>
+                            <GetSpotReviews spotId={spotId} sessionUser={sessionUser} setShowReview={setShowReview} />
+                        </div>
                     </div>
                 </div>
-            </>
+
+            </div>
         )
     )
 }

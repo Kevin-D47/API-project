@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from "react-router-dom"
 import { thunkDeleteReview, thunkGetAllReviews } from "../../store/reviews";
+import icon from './icons/icon.svg'
+import './AllReview.css'
 
 
 const GetSpotReviews = () => {
@@ -18,14 +20,23 @@ const GetSpotReviews = () => {
 
     const getAllReviewArr = Object.values(allReviews).map((review) => {
         return (
-            <div key={review.id}>
-                <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
-                    {review.User.firstName} {review.User.lastName}:
+            <div className='review-container' key={review.id}>
+                <div className='user-container' style={{ fontSize: '16px', fontWeight: 'bold' }}>
+                    <div className='box'>
+                        <img className='profile-img' src={icon} />
+                        <div className='user-name'>
+                            {review.User.firstName} {review.User.lastName}:
+
+                            {sessionUser.id === review.userId && <button className='delete-review-button' onClick={(e) => deleteReview(e, review.id)}>
+                                Delete Review
+                            </button>}
+                        </div>
+                    </div>
                 </div>
-                {review.review}
-                {sessionUser.id === review.userId && <button onClick={(e) => deleteReview(e, review.id)}>
-                    Delete Review
-                </button>}
+                <div className='review'>
+                    {review.review}
+                </div>
+
             </div>
         )
     })

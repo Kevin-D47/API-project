@@ -4,6 +4,7 @@
     align-items: center;
     max-width: 35em;
     min-height: 40em;
+    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
 .edit-form-wrapper {

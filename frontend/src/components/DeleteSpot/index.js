@@ -5,7 +5,7 @@ import { thunkDeleteSpot } from "../../store/spots";
 import './DeleteSpot.css'
 
 
-const SpotDelete = ({spotId, setShowDeleteSpot}) => {
+const SpotDelete = ({ spotId, setShowDeleteSpot }) => {
 
   const dispatch = useDispatch()
   const history = useHistory()
@@ -19,9 +19,11 @@ const SpotDelete = ({spotId, setShowDeleteSpot}) => {
   return (
     <>
       <div className='delete-container'>
-      <p>This spot will be deleted. Are you sure you want to proceed? </p>
-      <button className="delete-button" onClick={() => handleDelete()}>YES</button>
-      <button className="delete-button" onClick={() => setShowDeleteSpot(false)}>NO</button>
+        <p>This spot will be deleted. Are you sure you want to proceed? </p>
+        <div className="delete-buttons-container">
+          <button className="delete-button yes-button" onClick={() => handleDelete()}>YES</button>
+          <button className="delete-button" onClick={() => setShowDeleteSpot(false)}>NO</button>
+        </div>
       </div>
     </>
   )

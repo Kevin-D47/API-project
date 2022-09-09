@@ -2,6 +2,7 @@
   color: black;
   text-decoration: none;
   font-size: .9rem;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
 .host-hover-border {
@@ -47,6 +48,7 @@ ul.profile-list {
 .profile-list-item {
   color: black;
   text-decoration: none;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
 div.profile-dropdown {

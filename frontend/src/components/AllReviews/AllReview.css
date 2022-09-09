@@ -1,1 +1,39 @@
+.profile-img {
+    width: 45px;
+    height: 45px;
+}
 
+.review-container {
+    margin-bottom: 20px;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.user-name {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 10px;
+    font-size: 18px;
+}
+
+.review {
+    margin-left: 20px;
+    margin-bottom: 40px;
+    font-size: 20px;
+}
+
+.delete-review-button {
+    margin-top: 3px;
+    background: linear-gradient(0.25turn, #E61E4D, #D70666);
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}

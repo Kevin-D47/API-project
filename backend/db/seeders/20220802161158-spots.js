@@ -23,7 +23,7 @@ module.exports = {
         country: "United States of America",
         lat: 40.7645358,
         lng: -100.4730327,
-        name: "Fancy Peach Condos",
+        name: "Fancy Condo",
         description: "High End Living",
         price: 560
       },
@@ -119,7 +119,7 @@ module.exports = {
         country: "United States of America",
         lat: 20.7645358,
         lng: -120.4730327,
-        name: "Beautiful Condos",
+        name: "Beautiful Condo",
         description: "Beautiful Relaxing Stay",
         price: 520
       },

@@ -1,35 +1,37 @@
 /* components/DeleteSpot/Delete.css */
 
-.delete-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5em;
-    min-height: 6em;
-  }
+.delete-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5em;
+  min-height: 6em;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
+}
 
-  strong {
-    font-weight: 700;
-  }
 
-  .delete-button {
-    background: linear-gradient(0.25turn, #E61E4D, #D70666);
-    color: white;
-    border: none;
-    height: 2.6em;
-    border-radius: .5em;
-    min-width: 9em;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    margin-right: 2em;
-    margin-left: 2em;
-  }
+.delete-button {
+  background: linear-gradient(0.25turn, #E61E4D, #D70666);
+  color: white;
+  border: none;
+  height: 2.6em;
+  border-radius: .5em;
+  min-width: 9em;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-right: 2em;
+  margin-left: 2em;
+}
 
-  .delete-button:active {
-    transform: scale(.97);
-  }
+.delete-buttons-container {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 
-  .delete-buttons {
-    margin-top: 1.5em;
-    display: flex;
-  }
+.yes-button {
+  margin-right: -2px;
+}
+
+.delete-button:active {
+  transform: scale(.97);
+}

@@ -18,7 +18,7 @@ module.exports = {
         userId: 2
       },
       {
-        url: 'https://images.unsplash.com/photo-1618990908950-fd1a23294d11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80',
+        url: 'https://assets3.thrillist.com/v1/image/3081755/1200x630/flatten;crop_down;webp=auto;jpeg_quality=70',
         previewImage: true,
         spotId: 3,
         reviewId: null,
@@ -39,7 +39,7 @@ module.exports = {
         userId: 5
       },
       {
-        url: 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
+        url: 'https://www.jetsetter.com//uploads/sites/7/2018/04/NQhHXy4n-1380x1035.jpeg',
         previewImage: true,
         spotId: 6,
         reviewId: null,

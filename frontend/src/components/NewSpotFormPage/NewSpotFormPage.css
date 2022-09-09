@@ -1,11 +1,3 @@
-.new-spot-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 60%;
-  padding: 2em;
-}
-
 .host-page-container {
   display: flex;
   position: fixed;
@@ -13,6 +5,7 @@
   min-height: 100vh;
   left: 0;
   top: 4.5em;
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
 .host-page-left-conatiner {
@@ -23,14 +16,6 @@
   background: linear-gradient(0.5turn, #CE277A, #451DA0);
 }
 
-.welcome-message {
-  position: relative;
-  margin-left: 1.5em;
-  margin-bottom: 3em;
-  font-size: 50px;
-  color: white;
-}
-
 .host-page-right-container {
   display: flex;
   justify-content: center;
@@ -39,6 +24,22 @@
   min-width: 50%;
   min-height: 100%;
   margin-bottom: 10em;
+}
+
+.welcome-message {
+  position: relative;
+  margin-left: 1.5em;
+  margin-bottom: 3em;
+  font-size: 50px;
+  color: white;
+}
+
+.new-spot-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  padding: 2em;
 }
 
 .create.submit-button {

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import { thunkGetSpotById, thunkEditSpot } from "../../store/spots";
 import './UpdateSpotFormPage.css'
+import GetSpotDetails from "../SpotDetails";
 
 function UpdateSpotForm({ setShowUpdate }) {
 

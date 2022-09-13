@@ -26,8 +26,8 @@ const GetSpotReviews = () => {
                         <img className='profile-img' src={icon} />
                         <div className='user-name'>
                             {review.User.firstName} {review.User.lastName}:
-
-                            {sessionUser.id === review.userId && <button className='delete-review-button' onClick={(e) => deleteReview(e, review.id)}>
+                            {!sessionUser ? null : sessionUser.id === review.userId &&
+                            <button className='delete-review-button' onClick={(e) => deleteReview(e, review.id)}>
                                 Delete Review
                             </button>}
                         </div>

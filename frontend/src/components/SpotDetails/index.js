@@ -106,7 +106,11 @@ const GetSpotDetails = () => {
                         <div className='rating-review-container'>
                             <div className='rating'><img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</div>
                             <div className='num-reviews'>{currSpot.numReviews} reviews</div>
-                            {currSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) && <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)}>Review This Spot</button>}
+                            {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) &&
+                                <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)}>
+                                    Review This Spot
+                                </button>
+                            }
                         </div>
 
                         <div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from "react-router-dom"
+import { Modal } from '../../context/Modal'
 
 import UpdateSpotForm from '../UpdateSpotFormPage'
 import SpotDelete from '../DeleteSpot'
@@ -8,10 +9,10 @@ import GetSpotReviews from '../AllReviews'
 
 import { thunkGetSpotById } from '../../store/spots'
 import { thunkGetAllReviews } from '../../store/reviews'
-import { Modal } from '../../context/Modal'
 
 import starIcon from './icons/starIcon.png'
 import icon from './icons/icon.svg'
+
 import './SpotDetails.css'
 
 
@@ -23,6 +24,7 @@ const GetSpotDetails = () => {
     const [showUpdate, setShowUpdate] = useState(false);
     const [showDeleteSpot, setShowDeleteSpot] = useState(false);
     const [showReview, setShowReview] = useState(false);
+    const [disableCreateReview, setDisableCreateReview] =useState(true);
 
     const { spotId } = useParams()
     const sessionUser = useSelector(state => state.session.user)
@@ -38,15 +40,21 @@ const GetSpotDetails = () => {
         history.push(`/spots/${spotId}/create`)
     }
 
+    const sessionUserReview = !sessionUser ? null : getAllReviewsArr.find((review) => review.userId === sessionUser.id)
+
     useEffect(() => {
-        setUserIds(getAllReviewsArr.map(review => review.userId))
-    }, [allReviews])
+        setDisableCreateReview(!!sessionUserReview)
+    })
+
+    // useEffect(() => {
+    //     setUserIds(getAllReviewsArr.map(review => review.userId))
+    // }, [allReviews])
 
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(thunkGetAllReviews(spotId))
         dispatch(thunkGetSpotById(spotId)).then(() => setIsLoaded(true))
-    }, [dispatch, spotId])
+    }, [dispatch])
 
     const rating = currSpot?.avgStarRating
 
@@ -106,8 +114,13 @@ const GetSpotDetails = () => {
                         <div className='rating-review-container'>
                             <div className='rating'><img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</div>
                             <div className='num-reviews'>{currSpot.numReviews} reviews</div>
-                            {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) &&
+                            {/* {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) &&
                                 <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)}>
+                                    Review This Spot
+                                </button>
+                            } */}
+                            {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id &&
+                                <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)} disabled={disableCreateReview}>
                                     Review This Spot
                                 </button>
                             }

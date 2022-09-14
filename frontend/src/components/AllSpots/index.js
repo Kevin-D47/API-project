@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { thunkGetAllSpots } from '../../store/spots'
+import { NavLink } from 'react-router-dom'
 import starIcon from './icons/starIcon.png'
 import './AllSpots.css'
 
@@ -29,9 +30,9 @@ const GetAllSpots = () => {
                     <div className='spots-cards-container'>
                         {allSpotsArr.map((spot) => (
                             <div key={spot.id}>
-                                <a href={`/spots/${spot.id}`}>
+                                <NavLink to={`/spots/${spot.id}`}>
                                     <img className='spot-img' src={spot.previewImage} alt='true'></img>
-                                </a>
+                                </NavLink>
                                 <div className='spot-info-container'>
                                     <div className='spot-info-left'>
                                         <div style={{ fontSize: '18px', fontWeight: '600' }}>

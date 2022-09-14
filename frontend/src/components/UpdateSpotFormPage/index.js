@@ -11,17 +11,20 @@ function UpdateSpotForm({ setShowUpdate }) {
 
   const { spotId } = useParams()
 
-  const [name, setName] = useState('')
-  const [address, setAddress] = useState('')
-  const [city, setCity] = useState('')
-  const [state, setState] = useState('')
-  const [country, setCountry] = useState('')
-  const [lat, setLat] = useState('')
-  const [lng, setLng] = useState('')
-  const [price, setPrice] = useState('')
-  const [description, setDescription] = useState('')
+  const formInfo = useSelector(state => state.spots[spotId])
+  console.log("data: ", formInfo)
+
+  const [name, setName] = useState(formInfo.name)
+  const [address, setAddress] = useState(formInfo.address)
+  const [city, setCity] = useState(formInfo.city)
+  const [state, setState] = useState(formInfo.state)
+  const [country, setCountry] = useState(formInfo.country)
+  const [lat, setLat] = useState(formInfo.lat)
+  const [lng, setLng] = useState(formInfo.lng)
+  const [price, setPrice] = useState(formInfo.price)
+  const [description, setDescription] = useState(formInfo.description)
   // const [previewImage, setPreviewImage] = useState('')
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState(formInfo.Images[0].url)
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
@@ -46,10 +49,6 @@ function UpdateSpotForm({ setShowUpdate }) {
 
   }, [name, address, city, state, country, lat, lng, price, url, description])
 
-  if (user === null) {
-    alert("must be logged in to edit a spot")
-    return <Redirect to="/" />
-  }
 
   async function onSubmit(e) {
     e.preventDefault()
@@ -75,6 +74,12 @@ function UpdateSpotForm({ setShowUpdate }) {
     setShowUpdate(false)
     history.push(`/spots/${spotId}`)
   }
+
+  if (user === null) {
+    alert("must be logged in to edit a spot")
+    return <Redirect to="/" />
+  }
+
   return (
     <form className="edit-form-container" onSubmit={onSubmit}>
       <div className="edit-form-wrapper">
@@ -85,7 +90,7 @@ function UpdateSpotForm({ setShowUpdate }) {
           <input
             className="form-input first update"
             type="text"
-            placeholder="Name"
+            placeholder='Name'
             minLength="1"
             maxLength="50"
             value={name}

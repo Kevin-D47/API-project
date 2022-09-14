@@ -76,7 +76,7 @@ const reviewsReducer = (state = intialState, action) => {
     switch (action.type) {
 
         case GET_ALL_REVIEWS:
-            newState = { ...state }
+            newState = {}
             action.reviews.forEach(review => newState[review.id] = review)
             return newState
 

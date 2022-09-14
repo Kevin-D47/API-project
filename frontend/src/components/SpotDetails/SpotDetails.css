@@ -4,7 +4,7 @@
     min-width: 100vw;
     margin-top: -2em;
     font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
-    sans-serif;
+        sans-serif;
 }
 
 .spot-details-wrapper {
@@ -16,8 +16,8 @@
 .spot-details-img {
     display: flex;
     border-radius: 5em;
-    height: 620px;
-    width: 1068px;
+    width: 1000px;
+    height: 600px;
     border-radius: .7em;
 }
 
@@ -47,12 +47,12 @@
 
 .spot-num-reviews {
     margin-right: 20px;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 .spot-location {
     margin-right: 20px;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 .spot-price {
@@ -150,7 +150,7 @@
 }
 
 .add-review-button {
-    margin-left: 58.5em;
+    margin-left: 50.5em;
     background: linear-gradient(0.25turn, #E61E4D, #D70666);
     color: white;
     border: none;

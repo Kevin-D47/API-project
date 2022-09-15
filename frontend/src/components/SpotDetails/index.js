@@ -31,9 +31,8 @@ const GetSpotDetails = () => {
     const currSpot = useSelector(state => state.spots[spotId])
 
     const allReviews = useSelector(state => state.reviews)
-
     const getAllReviewsArr = Object.values(allReviews)
-    const [userIds, setUserIds] = useState(false)
+
 
     const addReview = (e, spotId) => {
         e.preventDefault();
@@ -46,15 +45,18 @@ const GetSpotDetails = () => {
         setDisableCreateReview(!!sessionUserReview)
     })
 
-    // useEffect(() => {
-    //     setUserIds(getAllReviewsArr.map(review => review.userId))
-    // }, [allReviews])
 
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(thunkGetAllReviews(spotId))
         dispatch(thunkGetSpotById(spotId)).then(() => setIsLoaded(true))
     }, [dispatch])
+
+
+    if (isLoaded && currSpot.Owner === undefined) {
+        dispatch(thunkGetSpotById(spotId))
+        return (<div>Loading...</div>)
+    }
 
     const rating = currSpot?.avgStarRating
 
@@ -66,7 +68,6 @@ const GetSpotDetails = () => {
                         <div className='spot-title'>
                             <h2>{currSpot.name}</h2>
                         </div>
-
                     </div>
                     <div className='spot-details-bottom-container'>
                         <div className='spot-rating'><img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</div>
@@ -114,18 +115,12 @@ const GetSpotDetails = () => {
                         <div className='rating-review-container'>
                             <div className='rating'><img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</div>
                             <div className='num-reviews'>{currSpot.numReviews} reviews</div>
-                            {/* {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id && !userIds.includes(sessionUser?.id) &&
-                                <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)}>
-                                    Review This Spot
-                                </button>
-                            } */}
                             {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id &&
                                 <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)} disabled={disableCreateReview}>
                                     Review This Spot
                                 </button>
                             }
                         </div>
-
                         <div>
                             <GetSpotReviews spotId={spotId} sessionUser={sessionUser} setShowReview={setShowReview} />
                         </div>

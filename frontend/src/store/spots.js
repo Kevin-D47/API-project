@@ -1,11 +1,11 @@
 import { csrfFetch } from "./csrf";
 
-
 // types
 const GET_ALL_SPOTS = '/spots/allSpots'
 const GET_SPOT_DETAILS = '/spots/spotDetails'
 const CREATE_SPOT = '/spots/createSpot'
 const UPDATE_SPOT = '/spots/updateSpot'
+const UPDATE_IMAGE = 'image/updateImage'
 const DELETE_SPOT = '/spots/deleteSpot'
 
 
@@ -24,12 +24,12 @@ function getSpotById(spot) {
     }
 }
 
-function createSpot(spot) {
-    return {
-        type: CREATE_SPOT,
-        spot
-    }
-}
+// function createSpot(spot) {
+//     return {
+//         type: CREATE_SPOT,
+//         spot
+//     }
+// }
 
 function editSpot(spot) {
     return {
@@ -44,6 +44,14 @@ function deleteSpot(id) {
         id
     }
 }
+
+// function updateImage(image, spotId) {
+//     return {
+//         type: UPDATE_IMAGE,
+//         image,
+//         spotId
+//     }
+// }
 
 
 // thunks
@@ -95,27 +103,36 @@ export const thunkCreateSpot = (spot) => async dispatch => {
     }
 }
 
-export const thunkEditSpot = (spot) => async dispatch => {
-    const response = await csrfFetch(`/api/spots/${spot.id}`, {
+export const thunkEditSpot = (payload) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${payload.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(spot)
+        body: JSON.stringify(payload)
     });
-
+    let spot;
     if (response.ok) {
-        const data = await response.json();
-        const imageResponse = await csrfFetch(`/api/spots/${data.id}/images`, {
-            method: 'PUT',
+        spot = await response.json();
+        const deleteRes = await csrfFetch(`/api/images/${payload.imageId}`, {
+            method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                url: spot.url,
-                previewImage: spot.previewImage,
-            }),
         })
-        if (imageResponse.ok) {
-            const imageData = await imageResponse.json()
-            data.previewImage = imageData.url
-            dispatch(thunkEditSpot(data))
+        let imageResponse;
+        if (deleteRes.ok) {
+            imageResponse = await csrfFetch(`/api/spots/${payload.id}/images`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    url: payload.url,
+                    previewImage: true,
+                }),
+            })
+        }
+        let updateDetails;
+        if(imageResponse.ok) {
+            updateDetails = await imageResponse.json();
+            payload.previewImage = updateDetails
+            spot.Images = [updateDetails]
+            dispatch(editSpot(spot))
         }
     }
 }
@@ -160,6 +177,13 @@ const spotsReducer = (state = initialState, action) => {
             newState = { ...state }
             newState[action.spot.id] = action.spot
             return newState
+
+
+        case UPDATE_IMAGE: {
+            newState = { ...state };
+            newState[action.spotId].Images = [action.image]
+            return newState
+        }
 
         case DELETE_SPOT:
             newState = { ...state }

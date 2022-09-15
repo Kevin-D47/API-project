@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import { thunkGetSpotById, thunkEditSpot } from "../../store/spots";
+import { thunkEditSpot } from "../../store/spots";
 import './UpdateSpotFormPage.css'
-import GetSpotDetails from "../SpotDetails";
 
 function UpdateSpotForm({ setShowUpdate }) {
 
@@ -12,7 +11,6 @@ function UpdateSpotForm({ setShowUpdate }) {
   const { spotId } = useParams()
 
   const formInfo = useSelector(state => state.spots[spotId])
-  console.log("data: ", formInfo)
 
   const [name, setName] = useState(formInfo.name)
   const [address, setAddress] = useState(formInfo.address)
@@ -28,9 +26,8 @@ function UpdateSpotForm({ setShowUpdate }) {
   const [errors, setErrors] = useState([])
   const [hasSubmitted, setHasSubmitted] = useState(false)
 
-  const history = useHistory()
-
   const dispatch = useDispatch()
+
   useEffect(() => {
     const errors = []
     if (name.length < 1 || name.length > 49) errors.push("Name length must be between 1 and 49 characters")
@@ -57,28 +54,33 @@ function UpdateSpotForm({ setShowUpdate }) {
     if (errors.length > 0) return alert('invalid submission')
 
     const updatedSpot = {
-      id: spotId, name, address, city, state, country, lat, lng, price, url, description
+      id: spotId,
+      name,
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      price,
+      url,
+      imageId: formInfo.Images[0].id,
+      description
     }
 
-    function isImg(url) {
-      return url;
-    }
+    const isImg = (url) => url;
 
     if (isImg(url)) {
-      dispatch(thunkEditSpot(updatedSpot)).then(() => dispatch(thunkGetSpotById()))
-      history.push(`/`)
+      dispatch(thunkEditSpot(updatedSpot)).then(() => setShowUpdate(false))
     }
-
-    dispatch(thunkEditSpot(updatedSpot))
-    dispatch(thunkGetSpotById(spotId))
-    setShowUpdate(false)
-    history.push(`/spots/${spotId}`)
   }
+
 
   if (user === null) {
     alert("must be logged in to edit a spot")
     return <Redirect to="/" />
   }
+
 
   return (
     <form className="edit-form-container" onSubmit={onSubmit}>

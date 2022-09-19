@@ -23,8 +23,8 @@ const GetSpotDetails = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [showUpdate, setShowUpdate] = useState(false);
     const [showDeleteSpot, setShowDeleteSpot] = useState(false);
-    const [showReview, setShowReview] = useState(false);
-    const [disableCreateReview, setDisableCreateReview] =useState(true);
+    const [, setShowReview] = useState(false);
+    const [disableCreateReview, setDisableCreateReview] = useState(true);
 
     const { spotId } = useParams()
     const sessionUser = useSelector(state => state.session.user)
@@ -45,17 +45,23 @@ const GetSpotDetails = () => {
         setDisableCreateReview(!!sessionUserReview)
     })
 
-
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(thunkGetAllReviews(spotId))
         dispatch(thunkGetSpotById(spotId)).then(() => setIsLoaded(true))
-    }, [dispatch])
+    }, [dispatch, spotId])
 
+    if (!isLoaded) {
+        return (<div></div>)
+    }
+
+    if (currSpot === undefined) {
+        return history.push("/")
+    }
 
     if (isLoaded && currSpot.Owner === undefined) {
         dispatch(thunkGetSpotById(spotId))
-        return (<div>Loading...</div>)
+        return (<div></div>)
     }
 
     const rating = currSpot?.avgStarRating
@@ -73,15 +79,14 @@ const GetSpotDetails = () => {
                         <div className='spot-rating'><img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</div>
                         <div className='spot-num-reviews'>{currSpot.numReviews} reviews</div>
                         <div className='spot-location'>{currSpot.city}, {currSpot.state}, {currSpot.country}</div>
-
                     </div>
                     <div>
-                        <img className='spot-details-img' src={currSpot.Images[0].url} />
+                        <img className='spot-details-img' src={currSpot.Images[0].url} alt=''/>
                     </div>
                     <div className='spot-host-container'>
                         <div className='spot-host-title'>
                             <div className='host-profile-container'>
-                                <img className='spot-host-profile-pic' src={icon} />
+                                <img className='spot-host-profile-pic' src={icon} alt=''/>
                                 Spot hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}
                             </div>
                             <div className='spot-price'>

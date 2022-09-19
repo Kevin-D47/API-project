@@ -24,12 +24,12 @@ function getSpotById(spot) {
     }
 }
 
-// function createSpot(spot) {
-//     return {
-//         type: CREATE_SPOT,
-//         spot
-//     }
-// }
+function createSpot(spot) {
+    return {
+        type: CREATE_SPOT,
+        spot
+    }
+}
 
 function editSpot(spot) {
     return {
@@ -97,7 +97,7 @@ export const thunkCreateSpot = (spot) => async dispatch => {
         if (imageResponse.ok) {
             const imageData = await imageResponse.json()
             data.previewImage = imageData.url
-            dispatch(thunkCreateSpot(data))
+            dispatch(createSpot(data))
         }
 
     }

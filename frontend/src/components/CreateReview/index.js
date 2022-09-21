@@ -27,9 +27,11 @@ function CreateReviewForm() {
         if (review.length <= 0) {
             newErrors.push("Please write a review.");
         }
+
         if (stars < 1 || stars > 5) {
             newErrors.push("Rating must be an integer from 1 to 5.");
         }
+
         setErrors(newErrors);
     }, [review, stars]);
 
@@ -44,7 +46,7 @@ function CreateReviewForm() {
         setIsSubmitted(true)
 
         if (errors.length > 0) {
-            return;
+            return alert("invalid submission");
         }
 
         const payload = {

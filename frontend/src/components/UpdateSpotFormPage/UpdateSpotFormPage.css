@@ -65,12 +65,11 @@
 }
 
 .edit-form-errors {
-    min-height: 3.5em;
-    display: flex;
-    align-items: center;
+    margin-top: 20px;
+    margin-bottom: -50px;
 }
 
-.submit-button {
+.edit-submit-button {
     background: linear-gradient(0.25turn, #E61E4D, #D70666);
     color: white;
     border: none;
@@ -79,8 +78,19 @@
     min-width: 39em;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    margin-top: 80px;
 }
 
-.submit-button:active {
-    transform: scale(.97);
+.edit-submit-button:disabled {
+    background: linear-gradient(0.25turn, grey, grey);
+    color: white;
+    border: none;
+    height: 2.6em;
+    border-radius: .5em;
+    min-width: 39em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-top: 2em;
+    margin-bottom: 20px;
+
 }

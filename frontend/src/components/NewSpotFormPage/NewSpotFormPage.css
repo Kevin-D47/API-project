@@ -34,6 +34,10 @@
   color: white;
 }
 
+.create-errors-container {
+  color: rgb(212, 24, 24);
+}
+
 .new-spot-form {
   display: flex;
   flex-direction: column;
@@ -54,6 +58,14 @@
   margin-top: 2em;
 }
 
-.create.submit-button:active {
-  transform: scale(.97);
+.create.submit-button:disabled {
+  background: linear-gradient(0.25turn, grey, grey);
+  color: white;
+  border: none;
+  height: 2.6em;
+  border-radius: .5em;
+  min-width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-top: 2em;
 }

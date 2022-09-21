@@ -18,9 +18,8 @@ const NewSpotFormPage = () => {
     const [lng, setLng] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
-    // const [previewImage, setPreviewImage] = useState('')
     const [url, setUrl] = useState('')
-    const [hasSubmitted, setHasSubmitted] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
     const [errors, setErrors] = useState([])
 
     const dispatch = useDispatch();
@@ -29,7 +28,7 @@ const NewSpotFormPage = () => {
     useEffect(() => {
         const errors = [];
 
-        if (name.length < 1 || name.length > 49) errors.push("Name length must be between 1 and 49 characters")
+        if (!name) errors.push("Please provide a name")
         if (!address.length) errors.push("Please provide an address");
         if (!city.length) errors.push("Please provide a city");
         if (!state.length) errors.push("Please provide a state")
@@ -37,7 +36,6 @@ const NewSpotFormPage = () => {
         if (lat < -90 || lat > 90) errors.push("Please provide a valid latitude between -90 to 90")
         if (lng < -180 || lng > 180) errors.push("Please provide a valid longitude between -180 to 180")
         if (price <= 0) errors.push("Please set a valid price");
-        // if (!previewImage) errors.push("Please provide a image");
         if (!url) errors.push("Please provide a image");
         if (!description) errors.push("Please provide a description")
 
@@ -53,14 +51,14 @@ const NewSpotFormPage = () => {
 
     if (user === null) {
         alert("You must be logged in to Become a Host")
-        return <Redirect to='/' />
+        return history.push('/')
     }
 
 
     async function onSubmit(e) {
         e.preventDefault();
 
-        setHasSubmitted(true);
+        setIsSubmitted(true);
 
         if (errors.length > 0) {
             return alert("invalid submission")
@@ -77,8 +75,11 @@ const NewSpotFormPage = () => {
             dispatch(thunkCreateSpot(payload)).then(() => dispatch(thunkGetAllSpots()))
             history.push('/')
         }
-
     }
+
+    const errorList = errors.map((error) => (
+        <p key={error}>{error}</p>
+    ))
 
     return (
         <div className="host-page-container">
@@ -91,96 +92,67 @@ const NewSpotFormPage = () => {
                         <h3 className="create-spot-title">Host your Spot!</h3>
                     </div>
                     <div className="create-errors-container">
-                    {hasSubmitted && errors.length > 0 && (
-                        <ul className="errors-list">
-                            {errors.map(error => (
-                                <li key={error}>{error}</li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
+                        {isSubmitted && errorList}
+                    </div>
                     <div className="create-spot-input-wrapper">
                         <input
                             className="form-input first create"
                             type="text"
                             placeholder="Name of Spot"
-                            minLength="1"
-                            maxLength="50"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            required
                         />
                         <input
                             className="form-input middle create"
                             type="text"
                             placeholder="Address"
-                            minLength="1"
-                            maxLength="50"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
-                            required
+
                         />
                         <input
                             className="form-input middle create"
                             type="text"
                             placeholder="City"
-                            minLength="1"
-                            maxLength="30"
                             value={city}
                             onChange={(e) => setCity(e.target.value)}
-                            required
                         />
                         <input
                             className="form-input middle create"
                             type="text"
                             placeholder="State"
-                            minLength="1"
-                            maxLength="30"
                             value={state}
                             onChange={(e) => setState(e.target.value)}
-                            required
                         />
                         <input
                             className="form-input middle create"
                             type="text"
                             placeholder="Country"
-                            minLength="1"
-                            maxLength="30"
                             value={country}
                             onChange={(e) => setCountry(e.target.value)}
-                            required
                         />
                         <input
                             className="form-input middle create"
                             type="number"
                             placeholder="Latitude"
-                            min="-90"
-                            max="90"
                             step="0.01"
                             value={lat}
                             onChange={(e) => setLat(e.target.value)}
-                            required
                         />
                         <input
                             className="form-input middle create"
                             type="number"
                             placeholder="Logitude"
-                            min="-180"
-                            max="180"
                             step="0.01"
                             value={lng}
                             onChange={(e) => setLng(e.target.value)}
-                            required
                         />
                         <input
                             className="form-input middle create"
                             type="number"
                             placeholder="Price"
-                            min="0.01"
-                            step="0.01"
                             value={price}
                             onChange={(e) => setPrice(e.target.value)}
-                            required
                         />
                         <input
                             className="form-input middle create"
@@ -189,20 +161,22 @@ const NewSpotFormPage = () => {
                             placeholder="Image URL"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
-                            required
                         />
                         <input
                             className="form-input last desc create"
                             type="text"
                             placeholder="Description"
-                            minLength="1"
-                            maxLength="50"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                            required
                         />
                     </div>
-                    <button className="create submit-button" type="submit">Create Spot</button>
+                    <button
+                        className="create submit-button"
+                        type="submit"
+                        disabled={isSubmitted && errors.length > 0}
+                    >
+                        Create Spot
+                    </button>
                 </form>
             </div>
         </div>

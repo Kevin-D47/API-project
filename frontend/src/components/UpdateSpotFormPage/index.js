@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux"
-import { Redirect, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { thunkEditSpot } from "../../store/spots";
 import './UpdateSpotFormPage.css'
 
 function UpdateSpotForm({ setShowUpdate }) {
+
+  const history = useHistory()
 
   const user = useSelector(state => state.session.user)
 
@@ -21,24 +23,23 @@ function UpdateSpotForm({ setShowUpdate }) {
   const [lng, setLng] = useState(formInfo.lng)
   const [price, setPrice] = useState(formInfo.price)
   const [description, setDescription] = useState(formInfo.description)
-  // const [previewImage, setPreviewImage] = useState('')
   const [url, setUrl] = useState(formInfo.Images[0].url)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [errors, setErrors] = useState([])
-  const [hasSubmitted, setHasSubmitted] = useState(false)
+
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     const errors = []
-    if (name.length < 1 || name.length > 49) errors.push("Name length must be between 1 and 49 characters")
+    if (!name) errors.push("Please provide an name")
     if (!address.length) errors.push("Please provide an address");
     if (!city.length) errors.push("Please provide a city");
     if (!state.length) errors.push("Please provide a state")
     if (!country.length) errors.push("Please provide a country")
-    if (!lat) errors.push("Please provide a lat")
-    if (!lng) errors.push("Please provide a lng")
+    if (lat < -90 || lat > 90 || !lat) errors.push("Please provide a valid latitude between -90 to 90")
+    if (lng < -180 || lng > 180 || !lng) errors.push("Please provide a valid longitude between -180 to 180")
     if (price <= 0) errors.push("Please set a valid price");
-    // if (!previewImage) errors.push("Please provide a image");
     if (!url) errors.push("Please provide a image");
     if (!description) errors.push("Please provide a description")
 
@@ -50,7 +51,8 @@ function UpdateSpotForm({ setShowUpdate }) {
   async function onSubmit(e) {
     e.preventDefault()
 
-    setHasSubmitted(true)
+    setIsSubmitted(true)
+
     if (errors.length > 0) return alert('invalid submission')
 
     const updatedSpot = {
@@ -75,12 +77,14 @@ function UpdateSpotForm({ setShowUpdate }) {
     }
   }
 
+  const errorList = errors.map((error) => (
+    <ul className="errors-list" key={error}>{error}</ul>
+  ))
 
   if (user === null) {
     alert("must be logged in to edit a spot")
-    return <Redirect to="/" />
+    return history.push('/')
   }
-
 
   return (
     <form className="edit-form-container" onSubmit={onSubmit}>
@@ -93,8 +97,6 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input first update"
             type="text"
             placeholder='Name'
-            minLength="1"
-            maxLength="50"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -102,8 +104,6 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="text"
             placeholder="Address"
-            minLength="1"
-            maxLength="50"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
@@ -111,8 +111,6 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="text"
             placeholder="City"
-            minLength="1"
-            maxLength="30"
             value={city}
             onChange={(e) => setCity(e.target.value)}
           />
@@ -120,8 +118,6 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="text"
             placeholder="State"
-            minLength="1"
-            maxLength="30"
             value={state}
             onChange={(e) => setState(e.target.value)}
           />
@@ -129,8 +125,6 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="text"
             placeholder="Country"
-            minLength="1"
-            maxLength="30"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
           />
@@ -138,8 +132,6 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="number"
             placeholder="Latitude"
-            min="-90"
-            max="90"
             step="0.01"
             value={lat}
             onChange={(e) => setLat(e.target.value)}
@@ -148,22 +140,16 @@ function UpdateSpotForm({ setShowUpdate }) {
             className="form-input middle update"
             type="number"
             placeholder="Longitude"
-            min="-180"
-            max="180"
             step="0.01"
             value={lng}
             onChange={(e) => setLng(e.target.value)}
-            required
           />
           <input
             className="form-input middle update"
             type="number"
             placeholder="Price"
-            min="0.01"
-            step="0.01"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            required
           />
           <input
             className="form-input middle update"
@@ -172,30 +158,26 @@ function UpdateSpotForm({ setShowUpdate }) {
             placeholder="Image URL"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            required
           />
           <input
             className="form-input last desc update"
             type="text"
             placeholder="Description"
-            minLength="1"
-            maxLength="50"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            required
           />
           <div className="edit-form-errors">
-            {hasSubmitted && errors.length > 0 && (
-              <ul>
-                {errors.map(error => (
-                  <li key={error}>{error}</li>
-                ))}
-              </ul>
-            )}
+            {isSubmitted && errorList}
           </div>
         </div>
       </div>
-      <button className="submit-button" type="submit">Update Spot</button>
+      <button
+        className="edit-submit-button"
+        type="submit"
+        disabled={isSubmitted && errors.length > 0}
+      >
+        Update Spot
+      </button>
     </form>
   )
 }

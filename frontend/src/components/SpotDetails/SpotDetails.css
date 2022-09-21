@@ -149,6 +149,8 @@
     font-weight: bold;
 }
 
+
+
 .add-review-button {
     margin-left: 50.5em;
     background: linear-gradient(0.25turn, #E61E4D, #D70666);
@@ -158,6 +160,18 @@
     border-radius: .5em;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+}
+
+.add-review-container:disabled {
+    display: flex;
+    align-items: column;
+}
+
+.add-review-disable-text {
+    font-size: 14px;
+    color: grey;
+    margin-top: 5px;
+    margin-left: 40.5em;
 }
 
 .add-review-button:disabled {

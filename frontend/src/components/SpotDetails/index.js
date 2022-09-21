@@ -59,6 +59,7 @@ const GetSpotDetails = () => {
         return history.push("/")
     }
 
+
     if (isLoaded && currSpot.Owner === undefined) {
         dispatch(thunkGetSpotById(spotId))
         return (<div></div>)
@@ -81,12 +82,12 @@ const GetSpotDetails = () => {
                         <div className='spot-location'>{currSpot.city}, {currSpot.state}, {currSpot.country}</div>
                     </div>
                     <div>
-                        <img className='spot-details-img' src={currSpot.Images[0].url} alt=''/>
+                        <img className='spot-details-img' src={currSpot.Images[0].url} alt='' />
                     </div>
                     <div className='spot-host-container'>
                         <div className='spot-host-title'>
                             <div className='host-profile-container'>
-                                <img className='spot-host-profile-pic' src={icon} alt=''/>
+                                <img className='spot-host-profile-pic' src={icon} alt='' />
                                 Spot hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}
                             </div>
                             <div className='spot-price'>
@@ -120,11 +121,15 @@ const GetSpotDetails = () => {
                         <div className='rating-review-container'>
                             <div className='rating'><img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</div>
                             <div className='num-reviews'>{currSpot.numReviews} reviews</div>
-                            {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id &&
-                                <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)} disabled={disableCreateReview}>
-                                    Review This Spot
-                                </button>
-                            }
+                            <div className='add-review-container'>
+                                {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id &&
+                                    <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)} disabled={disableCreateReview}>
+                                        Review This Spot
+                                    </button>
+                                }
+                                {disableCreateReview && (
+                                    <div className='add-review-disable-text'>You have already reviewed this spot</div>)}
+                            </div>
                         </div>
                         <div>
                             <GetSpotReviews spotId={spotId} sessionUser={sessionUser} setShowReview={setShowReview} />

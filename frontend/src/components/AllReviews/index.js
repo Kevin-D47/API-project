@@ -4,13 +4,14 @@ import { useParams } from "react-router-dom"
 import { thunkDeleteReview, thunkGetAllReviews } from "../../store/reviews";
 import icon from './icons/icon.svg'
 import './AllReview.css'
+import { thunkGetSpotById } from '../../store/spots';
 
 
-const GetSpotReviews = () => {
+const GetSpotReviews = ({ spotId }) => {
 
     const sessionUser = useSelector(state => state.session.user)
 
-    const { spotId } = useParams();
+    // const { spotId } = useParams();
 
     const allReviews = useSelector(state => state.reviews)
     const getAllReviewArr = Object.values(allReviews)
@@ -20,7 +21,7 @@ const GetSpotReviews = () => {
 
     const deleteReview = (e, id) => {
         e.preventDefault()
-        dispatch(thunkDeleteReview(id))
+        dispatch(thunkDeleteReview(id)).then(() => dispatch(thunkGetSpotById(spotId)))
     }
 
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const GetSpotReviews = () => {
         return null
     }
 
-    
+
     return (
         isLoaded && (
             <div>

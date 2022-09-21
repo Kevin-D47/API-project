@@ -1,0 +1,142 @@
+.create-review-container {
+   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
+}
+
+.rate-review-title {
+    display: flex;
+    justify-content: left;
+    margin-left: 20em;
+    font-size: 20px;
+}
+
+.create-review-wrapper {
+    display: flex;
+    position: fixed;
+    min-width: 100vw;
+    min-height: 100vh;
+
+}
+
+.create-review-container-left {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    min-width: 30%;
+    margin-left: 25em;
+}
+
+.spot-review-img {
+    width: 400px;
+    height: 290px;
+    border-radius: 10px;
+}
+
+.create-review-spot-details-container {
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.review-spot-name {
+    margin-bottom: 5px;
+}
+
+.review-spot-location {
+    margin-bottom: 5px;
+}
+
+.review-spot-owner {
+    margin-bottom: 5px;
+}
+
+.create-review-container-right {
+    display: flex;
+    justify-content: right;
+    flex-direction: column;
+    align-items: right;
+    min-width: 30%;
+}
+
+.create-review-header-container {
+    font-size: 18px;
+    margin-top: -20px;
+}
+
+.create-review-errors {
+    color: rgb(212, 24, 24);
+    margin-bottom: 15px;
+}
+
+.create-review-label {
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.create-review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    width: 25em;
+    height: 20em;
+}
+
+textarea.review-input {
+    border: 1px solid #d1cfcf;
+    border-radius: 5px;
+    width: 280px;
+    height: 60px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+textarea:focus {
+    outline: none !important;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #719ECE;
+}
+
+.rating-input-container {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.rating-input {
+    outline: none;
+    border: 1px solid #d1cfcf;
+    border-radius: 5px;
+    width: 21em;
+}
+
+.review-input:focus {
+    outline: none !important;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #719ECE;
+}
+
+.create-review-button {
+    background: linear-gradient(0.25turn, #E61E4D, #D70666);
+    color: white;
+    border: none;
+    height: 2.6em;
+    border-radius: .5em;
+    min-width: 9em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-top: 15px;
+    margin-right: 2em;
+}
+
+.create-review-button:disabled {
+    background: linear-gradient(0.25turn, grey, grey);
+    color: white;
+    border: none;
+    height: 2.6em;
+    border-radius: .5em;
+    min-width: 9em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-top: 15px;
+    margin-right: 2em;
+}

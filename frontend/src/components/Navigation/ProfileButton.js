@@ -11,12 +11,15 @@ import './ProfileButton.css'
 
 function ProfileButton({ user, isLoaded }) {
 
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const sessionUser = useSelector(state => state.session.user);
 
   const [showMenu, setShowMenu] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
+
+  const history = useHistory();
+
+  const dispatch = useDispatch();
 
   const openMenu = () => {
     if (showMenu) return;
@@ -35,8 +38,6 @@ function ProfileButton({ user, isLoaded }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  const sessionUser = useSelector(state => state.session.user);
-
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout())
@@ -54,7 +55,7 @@ function ProfileButton({ user, isLoaded }) {
       {showSignupModal && (<SignUpFormModal showSignupModal={showSignupModal} setShowSignupModal={setShowSignupModal} />)}
       <div className='right-profile-container'>
         <div className='host-hover-border' >
-          <NavLink className='become-host-link' to="/spots/create" style={{ textDecoration:'none'}}>Become a Host</NavLink>
+          <NavLink className='become-host-link' to="/spots/create" style={{ textDecoration: 'none' }}>Become a Host</NavLink>
         </div>
       </div>
       <div className="profile-button-border"

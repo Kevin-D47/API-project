@@ -8,10 +8,10 @@ import './AllSpots.css'
 
 const GetAllSpots = () => {
 
-    const [isLoaded, setIsLoaded] = useState(false)
-
     const allSpots = useSelector(state => state.spots)
     const allSpotsArr = Object.values(allSpots)
+
+    const [isLoaded, setIsLoaded] = useState(false)
 
     const dispatch = useDispatch();
 
@@ -25,41 +25,39 @@ const GetAllSpots = () => {
 
     return (
         isLoaded && (
-            <>
-                <div className='spots-container'>
-                    <div className='spots-cards-container'>
-                        {allSpotsArr.map((spot) => (
-                            <div key={spot.id}>
-                                <NavLink to={`/spots/${spot.id}`}>
-                                    <img className='spot-img' src={spot.previewImage} alt='true'></img>
-                                </NavLink>
-                                <div className='spot-info-container'>
-                                    <div className='spot-info-left'>
-                                        <div style={{ fontSize: '18px', fontWeight: '600' }}>
-                                            {spot.name}
-                                        </div>
-                                        <div style={{ fontSize: '16px' }}>
-                                            {spot.city}, {spot.state}
-                                        </div>
-                                        <div className='price-container'>
-                                            <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
-                                                ${spot.price}
-                                            </div>
-                                            &nbsp;night
-                                        </div>
+            <div className='spots-container'>
+                <div className='spots-cards-container'>
+                    {allSpotsArr.map((spot) => (
+                        <div key={spot.id}>
+                            <NavLink to={`/spots/${spot.id}`}>
+                                <img className='spot-img' src={spot.previewImage} alt='true'></img>
+                            </NavLink>
+                            <div className='spot-info-container'>
+                                <div className='spot-info-left'>
+                                    <div style={{ fontSize: '18px', fontWeight: '600' }}>
+                                        {spot.name}
                                     </div>
-                                    <div className='spot-info-right'>
-                                        <div style={{ fontSize: '16px' }}>
-                                            <img className='star-icon' src={starIcon} alt='true' />
-                                            {Number(spot.avgRating).toFixed(2)}
+                                    <div style={{ fontSize: '16px' }}>
+                                        {spot.city}, {spot.state}
+                                    </div>
+                                    <div className='price-container'>
+                                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
+                                            ${spot.price}
                                         </div>
+                                        &nbsp;night
+                                    </div>
+                                </div>
+                                <div className='spot-info-right'>
+                                    <div style={{ fontSize: '16px' }}>
+                                        <img className='star-icon' src={starIcon} alt='true' />
+                                        {Number(spot.avgRating).toFixed(2)}
                                     </div>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
-            </>
+            </div>
         )
     )
 }

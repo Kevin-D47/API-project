@@ -6,8 +6,6 @@ import './UpdateSpotFormPage.css'
 
 function UpdateSpotForm({ setShowUpdate }) {
 
-  const history = useHistory()
-
   const user = useSelector(state => state.session.user)
 
   const { spotId } = useParams()
@@ -27,6 +25,7 @@ function UpdateSpotForm({ setShowUpdate }) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errors, setErrors] = useState([])
 
+  const history = useHistory()
 
   const dispatch = useDispatch()
 
@@ -77,14 +76,14 @@ function UpdateSpotForm({ setShowUpdate }) {
     }
   }
 
-  const errorList = errors.map((error) => (
-    <ul className="errors-list" key={error}>{error}</ul>
-  ))
-
   if (user === null) {
     alert("must be logged in to edit a spot")
     return history.push('/')
   }
+
+  const errorList = errors.map((error) => (
+    <ul className="errors-list" key={error}>{error}</ul>
+  ))
 
   return (
     <form className="edit-form-container" onSubmit={onSubmit}>

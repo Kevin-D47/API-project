@@ -1,40 +1,34 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from "react-router-dom"
 import { thunkDeleteReview, thunkGetAllReviews } from "../../store/reviews";
+import { thunkGetSpotById } from '../../store/spots';
 import icon from './icons/icon.svg'
 import './AllReview.css'
-import { thunkGetSpotById } from '../../store/spots';
 
 
 const GetSpotReviews = ({ spotId }) => {
 
     const sessionUser = useSelector(state => state.session.user)
 
-    // const { spotId } = useParams();
-
     const allReviews = useSelector(state => state.reviews)
     const getAllReviewArr = Object.values(allReviews)
 
     const [isLoaded, setIsLoaded] = useState(false)
 
+    const dispatch = useDispatch();
 
     const deleteReview = (e, id) => {
         e.preventDefault()
         dispatch(thunkDeleteReview(id)).then(() => dispatch(thunkGetSpotById(spotId)))
     }
 
-    const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(thunkGetAllReviews(spotId)).then(() => setIsLoaded(true))
     }, [dispatch, spotId])
 
-
     if (!getAllReviewArr.length) {
         return null
     }
-
 
     return (
         isLoaded && (

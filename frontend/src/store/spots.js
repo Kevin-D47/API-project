@@ -1,5 +1,6 @@
 import { csrfFetch } from "./csrf";
 
+
 // types
 const GET_ALL_SPOTS = '/spots/allSpots'
 const GET_SPOT_DETAILS = '/spots/spotDetails'
@@ -10,48 +11,30 @@ const DELETE_SPOT = '/spots/deleteSpot'
 
 
 // actions
-function getAllSpots(spots) {
-    return {
-        type: GET_ALL_SPOTS,
-        spots
-    }
-}
+const getAllSpots = (spots) => ({
+    type: GET_ALL_SPOTS,
+    spots
+})
 
-function getSpotById(spot) {
-    return {
-        type: GET_SPOT_DETAILS,
-        spot
-    }
-}
+const getSpotById = (spot) => ({
+    type: GET_SPOT_DETAILS,
+    spot
+})
 
-function createSpot(spot) {
-    return {
-        type: CREATE_SPOT,
-        spot
-    }
-}
+const createSpot = (spot) => ({
+    type: CREATE_SPOT,
+    spot
+})
 
-function editSpot(spot) {
-    return {
-        type: UPDATE_SPOT,
-        spot
-    }
-}
+const editSpot = (spot) => ({
+    type: UPDATE_SPOT,
+    spot
+})
 
-function deleteSpot(id) {
-    return {
-        type: DELETE_SPOT,
-        id
-    }
-}
-
-// function updateImage(image, spotId) {
-//     return {
-//         type: UPDATE_IMAGE,
-//         image,
-//         spotId
-//     }
-// }
+const deleteSpot = (id) => ({
+    type: DELETE_SPOT,
+    id
+})
 
 
 // thunks
@@ -68,7 +51,7 @@ export const thunkGetAllSpots = () => async dispatch => {
 
 export const thunkGetSpotById = (id) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${id}`);
-    
+
     if (response.ok) {
         const spot = await response.json();
         dispatch(getSpotById(spot))
@@ -128,7 +111,7 @@ export const thunkEditSpot = (payload) => async dispatch => {
             })
         }
         let updateDetails;
-        if(imageResponse.ok) {
+        if (imageResponse.ok) {
             updateDetails = await imageResponse.json();
             payload.previewImage = updateDetails
             spot.Images = [updateDetails]
@@ -158,6 +141,7 @@ const spotsReducer = (state = initialState, action) => {
     let newState;
 
     switch (action.type) {
+
         case GET_ALL_SPOTS:
             newState = { ...state }
             action.spots.forEach(spot => newState[spot.id] = spot)

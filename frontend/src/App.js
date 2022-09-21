@@ -1,24 +1,31 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
+
 import * as sessionActions from "./store/session";
-import Navigation from "./components/Navigation";
+
+import SignupFormPage from "./components/SignupFormPage";
 import GetAllSpots from "./components/AllSpots";
 import GetSpotDetails from "./components/SpotDetails";
 import NewSpotFormPage from "./components/NewSpotFormPage";
 import CreateReviewForm from "./components/CreateReview";
 
+import Navigation from "./components/Navigation";
+import { Route, Switch } from "react-router-dom";
+
+
 function App() {
-  const dispatch = useDispatch();
+
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (
-    <>
+    <div>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
@@ -39,7 +46,7 @@ function App() {
           </Route>
         </Switch>
       )}
-    </>
+    </div>
   );
 }
 

@@ -10,8 +10,9 @@ function CreateReviewForm() {
     const history = useHistory();
 
     const { spotId } = useParams();
-    const user = useSelector((state) => state.session.user);
     const spot = useSelector((state) => state.spots[spotId]);
+
+    const user = useSelector((state) => state.session.user);
 
     const [isLoaded, setIsLoaded] = useState(false)
     const [review, setReview] = useState("");
@@ -38,7 +39,6 @@ function CreateReviewForm() {
     useEffect(() => {
         dispatch(thunkGetSpotById(spotId)).then(() => setIsLoaded(true))
     }, [dispatch, spotId])
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();

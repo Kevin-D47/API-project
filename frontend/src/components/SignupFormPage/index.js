@@ -1,13 +1,14 @@
 // frontend/src/components/SignupFormPage/index.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
 
-function SignupFormPage({setShowSignupModal}) {
-  const dispatch = useDispatch();
+function SignupFormPage({ setShowSignupModal }) {
+
   const sessionUser = useSelector((state) => state.session.user);
+
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("");
@@ -16,7 +17,9 @@ function SignupFormPage({setShowSignupModal}) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  const dispatch = useDispatch();
+
+  const history = useHistory()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +35,8 @@ function SignupFormPage({setShowSignupModal}) {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
-  
+  if (sessionUser) return history.push('/');
+
   return (
     <form className="signup-form-container" onSubmit={handleSubmit}>
       <div className="signup-form-wrapper">

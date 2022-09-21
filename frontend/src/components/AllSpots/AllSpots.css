@@ -8,8 +8,7 @@ div.spots-container {
     display: flex;
     justify-content: center;
     max-width: 100%;
-    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue,
-    sans-serif;
+    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
 .star-icon {

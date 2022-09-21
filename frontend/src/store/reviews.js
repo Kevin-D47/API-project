@@ -9,23 +9,18 @@ const DELETE_REVIEW = '/reviews/deleteReview'
 
 // actions
 const getAllReviews = (reviews) => ({
-
     type: GET_ALL_REVIEWS,
     reviews
-
 })
 
 const createReview = (review) => ({
-
     type: CREATE_REVIEW,
     review
-
 })
 
 const deleteReview = (id) => ({
     type: DELETE_REVIEW,
     id
-
 })
 
 
@@ -68,11 +63,12 @@ export const thunkDeleteReview = (reviewId) => async dispatch => {
     return response
 }
 
+// reducer
 const intialState = {}
 
-// reducer
 const reviewsReducer = (state = intialState, action) => {
     let newState
+
     switch (action.type) {
 
         case GET_ALL_REVIEWS:

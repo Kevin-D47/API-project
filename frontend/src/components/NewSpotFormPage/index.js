@@ -23,6 +23,7 @@ const NewSpotFormPage = () => {
     const [errors, setErrors] = useState([])
 
     const dispatch = useDispatch();
+
     const history = useHistory()
 
     useEffect(() => {
@@ -43,17 +44,14 @@ const NewSpotFormPage = () => {
 
     }, [name, address, city, state, country, lat, lng, price, url, description])
 
-
     useEffect(() => {
         dispatch(thunkGetAllSpots())
     }, [dispatch])
-
 
     if (user === null) {
         alert("You must be logged in to Become a Host")
         return history.push('/')
     }
-
 
     async function onSubmit(e) {
         e.preventDefault();

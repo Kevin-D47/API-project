@@ -18,14 +18,6 @@ import './SpotDetails.css'
 
 const GetSpotDetails = () => {
 
-    const history = useHistory()
-
-    const [isLoaded, setIsLoaded] = useState(false)
-    const [showUpdate, setShowUpdate] = useState(false);
-    const [showDeleteSpot, setShowDeleteSpot] = useState(false);
-    const [, setShowReview] = useState(false);
-    const [disableCreateReview, setDisableCreateReview] = useState(true);
-
     const { spotId } = useParams()
     const sessionUser = useSelector(state => state.session.user)
     const currSpot = useSelector(state => state.spots[spotId])
@@ -33,6 +25,13 @@ const GetSpotDetails = () => {
     const allReviews = useSelector(state => state.reviews)
     const getAllReviewsArr = Object.values(allReviews)
 
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [showUpdate, setShowUpdate] = useState(false);
+    const [showDeleteSpot, setShowDeleteSpot] = useState(false);
+    const [, setShowReview] = useState(false);
+    const [disableCreateReview, setDisableCreateReview] = useState(true);
+
+    const history = useHistory()
 
     const addReview = (e, spotId) => {
         e.preventDefault();
@@ -59,13 +58,10 @@ const GetSpotDetails = () => {
         return history.push("/")
     }
 
-
     if (isLoaded && currSpot.Owner === undefined) {
         dispatch(thunkGetSpotById(spotId))
         return (<div></div>)
     }
-
-    const rating = currSpot?.avgStarRating
 
     return (
         isLoaded && (
@@ -77,7 +73,7 @@ const GetSpotDetails = () => {
                         </div>
                     </div>
                     <div className='spot-details-bottom-container'>
-                        <div className='spot-rating'><img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</div>
+                        <div className='spot-rating'><img className="star-icon" src={starIcon} alt="" />{Number(currSpot?.avgStarRating).toFixed(2)}</div>
                         <div className='spot-num-reviews'>{currSpot.numReviews} reviews</div>
                         <div className='spot-location'>{currSpot.city}, {currSpot.state}, {currSpot.country}</div>
                     </div>
@@ -119,7 +115,7 @@ const GetSpotDetails = () => {
                     </div>
                     <div className='review-details-container'>
                         <div className='rating-review-container'>
-                            <div className='rating'><img className="star-icon" src={starIcon} alt="" />{Number(rating).toFixed(2)}</div>
+                            <div className='rating'><img className="star-icon" src={starIcon} alt="" />{Number(currSpot?.avgStarRating).toFixed(2)}</div>
                             <div className='num-reviews'>{currSpot.numReviews} reviews</div>
                             <div className='add-review-container'>
                                 {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id &&

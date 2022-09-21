@@ -7,16 +7,16 @@ import './DeleteSpot.css'
 
 const SpotDelete = ({ spotId, setShowDeleteSpot }) => {
 
-  const dispatch = useDispatch()
   const history = useHistory()
+
+  const dispatch = useDispatch()
 
   const handleDelete = async (e) => {
     e.preventDefault()
 
     dispatch(thunkDeleteSpot(spotId))
-    .then(() => setShowDeleteSpot(false))
-    .then(() => history.push("/"))
-
+      .then(() => setShowDeleteSpot(false))
+      .then(() => history.push("/"))
   }
 
   return (
@@ -24,7 +24,7 @@ const SpotDelete = ({ spotId, setShowDeleteSpot }) => {
       <div className='delete-container'>
         <p>This spot will be deleted. Are you sure you want to proceed? </p>
         <div className="delete-buttons-container">
-          <button className="delete-button yes-button" onClick={ handleDelete }>YES</button>
+          <button className="delete-button yes-button" onClick={handleDelete}>YES</button>
           <button className="delete-button" onClick={() => setShowDeleteSpot(false)}>NO</button>
         </div>
       </div>

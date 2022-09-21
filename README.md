@@ -7,7 +7,6 @@ This website is intended to replicate a few key features and general look and fe
 Link to site: [https://airbnb-clone-aa-kevind.herokuapp.com/](https://airbnb-clone-aa-kevind.herokuapp.com/)
 
 <br />
-<br />
 
 ## Tech Stack
   Frameworks, Libraries, and Platform:
@@ -22,7 +21,6 @@ Link to site: [https://airbnb-clone-aa-kevind.herokuapp.com/](https://airbnb-clo
 
   ![Heroku](https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white)
 
-<br />
 <br />
 
 ## Features
@@ -56,7 +54,6 @@ Link to site: [https://airbnb-clone-aa-kevind.herokuapp.com/](https://airbnb-clo
 * Delete a Review if the Review belongs to the User
 
 <br />
-<br />
 
 ## Preview Images
 
@@ -87,7 +84,6 @@ Link to site: [https://airbnb-clone-aa-kevind.herokuapp.com/](https://airbnb-clo
 ### Create a Review Page
 ![Staybnb-CreateReview](https://user-images.githubusercontent.com/100639799/191557593-58b960eb-ba93-4873-a839-791814545d99.png)
 
-<br />
 <br />
 
 ## Run Locally

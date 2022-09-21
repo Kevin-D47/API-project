@@ -30,7 +30,7 @@ const GetAllSpots = () => {
                     {allSpotsArr.map((spot) => (
                         <div key={spot.id}>
                             <NavLink to={`/spots/${spot.id}`}>
-                                <img className='spot-img' src={spot.previewImage} alt='true'></img>
+                                <img className='spot-img' src={spot.previewImage} alt=''></img>
                             </NavLink>
                             <div className='spot-info-container'>
                                 <div className='spot-info-left'>
@@ -49,7 +49,7 @@ const GetAllSpots = () => {
                                 </div>
                                 <div className='spot-info-right'>
                                     <div style={{ fontSize: '16px' }}>
-                                        <img className='star-icon' src={starIcon} alt='true' />
+                                        <img className='star-icon' src={starIcon} alt='' />
                                         {Number(spot.avgRating).toFixed(2)}
                                     </div>
                                 </div>

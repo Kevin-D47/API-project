@@ -92,6 +92,9 @@ const GetSpotDetails = () => {
                                 </div>
                                 &nbsp;night
                             </div>
+                            <div className='spot-description'>
+                                {currSpot.description}
+                            </div>
                         </div>
                         {currSpot.ownerId === sessionUser?.id && (
                             <div className='spot-host-options-container'>

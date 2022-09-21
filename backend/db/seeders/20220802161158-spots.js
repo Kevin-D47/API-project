@@ -12,7 +12,7 @@ module.exports = {
         lat: 37.7645358,
         lng: -122.4730327,
         name: "Modern Luxury Home",
-        description: "Aestheticlly Modern Luxury Stay",
+        description: "4 guests - 3 bedroom - 3 bath",
         price: 890
       },
       {
@@ -24,7 +24,7 @@ module.exports = {
         lat: 40.7645358,
         lng: -100.4730327,
         name: "Fancy Condo",
-        description: "High End Living",
+        description: "2 guests - 1 bedroom - 2 bath",
         price: 560
       },
       {
@@ -36,7 +36,7 @@ module.exports = {
         lat: 55.7645358,
         lng: -92.4730327,
         name: "Simple Apartment",
-        description: "Small Homey Spot",
+        description: "1 guests - 1 bedroom - 2 bath",
         price: 220
       },
       {
@@ -48,7 +48,7 @@ module.exports = {
         lat: 20.7645358,
         lng: -120.4730327,
         name: "Peaceful Lake House",
-        description: "Cozy Lake Front",
+        description: "3 guests - 2 bedroom - 2 bath",
         price: 350
       },
       {
@@ -60,7 +60,7 @@ module.exports = {
         lat: 40.7645358,
         lng: -100.4730327,
         name: "Beach Front Home",
-        description: "Calming Ocean Side Stay",
+        description: "5 guests - 4 bedroom - 3 bath",
         price: 425
       },
       {
@@ -72,7 +72,7 @@ module.exports = {
         lat: 70.7645358,
         lng: -65.4730327,
         name: "Cozy Cabin",
-        description: "Warm Cozy Cabin",
+        description: "3 guests - 2 bedroom - 2 bath",
         price: 240
       },
       {
@@ -84,7 +84,7 @@ module.exports = {
         lat: 20.7645358,
         lng: -90.4730327,
         name: "Secluded Desert Home",
-        description: "Warming Getaway",
+        description: "4 guests - 3 bedroom - 3 bath",
         price: 300
       },
       {
@@ -96,7 +96,7 @@ module.exports = {
         lat: 80.7645358,
         lng: -50.4730327,
         name: "Massive Mansion",
-        description: "Extravagant Stay",
+        description: "10 guests - 8 bedroom - 6 bath",
         price: 1200
       },
       {
@@ -108,7 +108,7 @@ module.exports = {
         lat: 40.7645358,
         lng: -150.4730327,
         name: "Big Ranch House",
-        description: "Big Open Ranch",
+        description: "6 guests - 5 bedroom - 4 bath",
         price: 660
       },
       {
@@ -120,7 +120,7 @@ module.exports = {
         lat: 20.7645358,
         lng: -120.4730327,
         name: "Beautiful Condo",
-        description: "Beautiful Relaxing Stay",
+        description: "2 guests - 1 bedroom - 2 bath",
         price: 520
       },
       {
@@ -132,7 +132,7 @@ module.exports = {
         lat: 85.7645358,
         lng: -90.4730327,
         name: "Charming Modest Home",
-        description: "Comfy Modest Stay",
+        description: "3 guests - 2 bedroom - 2 bath",
         price: 290
       },
       {
@@ -144,7 +144,7 @@ module.exports = {
         lat: 46.7645358,
         lng: -110.4730327,
         name: "Stylish Modern Home ",
-        description: "Modern City Stay",
+        description: "4 guests - 3 bedroom - 3 bath",
         price: 610
       },
     ], {});

@@ -29,13 +29,17 @@
 .spot-title {
     font-size: 20px;
     font-weight: 600;
+}
 
+.spot-description {
+    font-size: 18px;
+    font-weight: normal;
+    margin-top: 20px;
 }
 
 .spot-details-bottom-container {
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
     margin-bottom: 1.5em;
 }
 
@@ -46,12 +50,10 @@
 
 .spot-num-reviews {
     margin-right: 20px;
-    /* text-decoration: underline; */
 }
 
 .spot-location {
     margin-right: 20px;
-    /* text-decoration: underline; */
 }
 
 .spot-price {

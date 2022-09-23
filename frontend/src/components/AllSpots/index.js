@@ -37,7 +37,7 @@ const GetAllSpots = () => {
                                     <div style={{ fontSize: '16px', fontWeight: '600' }}>
                                         {spot.name}
                                     </div>
-                                    <div style={{ fontSize: '14px' }}>
+                                    <div style={{ fontSize: '14px', color: 'dark grey'}}>
                                         {spot.city}, {spot.state}
                                     </div>
                                     <div className='price-container'>

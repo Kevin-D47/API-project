@@ -1,12 +1,13 @@
 .host-page-container {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
   display: flex;
   position: absolute;
-  min-width: 100vw;
-  min-height: 100vh;
+  min-width: 100%;
+  min-height: 100%;
   left: 0;
   top: 4.5em;
-  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .host-page-left-conatiner {
@@ -24,7 +25,6 @@
   align-items: center;
   min-width: 50%;
   min-height: 100%;
-  overflow: auto;
 }
 
 .welcome-message {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Redirect, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
 import { thunkCreateSpot, thunkGetAllSpots } from "../../store/spots";
 import "./NewSpotFormPage.css"
@@ -34,8 +34,8 @@ const NewSpotFormPage = () => {
         if (!city.length) errors.push("Please provide a city");
         if (!state.length) errors.push("Please provide a state")
         if (!country.length) errors.push("Please provide a country")
-        if (lat < -90 || lat > 90) errors.push("Please provide a valid latitude between -90 to 90")
-        if (lng < -180 || lng > 180) errors.push("Please provide a valid longitude between -180 to 180")
+        if (lat < -90 || lat > 90 || !lat) errors.push("Please provide a valid latitude between -90 to 90")
+        if (lng < -180 || lng > 180 || !lng) errors.push("Please provide a valid longitude between -180 to 180")
         if (price <= 0) errors.push("Please set a valid price");
         if (!url) errors.push("Please provide a image");
         if (!description) errors.push("Please provide a description")

@@ -1,27 +1,16 @@
-div.spots-cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-div.spots-container {
+.spots-container {
     display: flex;
     justify-content: center;
     max-width: 100%;
     font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
-.star-icon {
-    display: inline-flex;
-    height: 15px;
-    width: 15px;
-    padding-right: 2px;
-}
-
-.price-container {
-    display: inline-flex;
+.spots-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 img.spot-img {
@@ -33,14 +22,7 @@ img.spot-img {
 
 }
 
-div.spot-card-container {
-    margin: .6em;
-    width: 300px;
-    min-height: 388px;
-
-}
-
-div.spot-info-container {
+.spot-info-container {
     width: 300px;
     min-height: 90px;
     display: flex;
@@ -49,7 +31,7 @@ div.spot-info-container {
     margin-bottom: 2em;
 }
 
-div.spot-info-left {
+.spot-info-left {
     display: flex;
     max-width: 75%;
     min-height: inherit;
@@ -57,10 +39,21 @@ div.spot-info-left {
     justify-content: space-between;
 }
 
-div.spot-info-right {
+.spot-info-right {
     display: flex;
     flex-wrap: nowrap;
     width: 25%;
     justify-content: space-around;
     margin-right: 1em;
+}
+
+.star-icon {
+    display: inline-flex;
+    height: 15px;
+    width: 15px;
+    padding-right: 2px;
+}
+
+.price-container {
+    display: inline-flex;
 }

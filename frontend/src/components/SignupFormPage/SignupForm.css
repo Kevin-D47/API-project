@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 35em;
-    min-height: 35em;
+    width: 35em;
+    height: 32em;
     font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
@@ -77,6 +77,7 @@
     display: flex;
     align-items: center;
     margin-top: 30px;
+    margin-bottom: -20px;
 }
 
 .submit-button {
@@ -88,8 +89,7 @@
     min-width: 39em;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    margin-top: -30px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .submit-button:disabled {
@@ -101,6 +101,5 @@
     min-width: 39em;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-    margin-top: -30px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }

@@ -1,8 +1,8 @@
 .become-host-link {
+  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
   color: black;
   text-decoration: none;
-  font-size: .9rem;
-  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
+  font-size: 14px;
 }
 
 .host-hover-border {
@@ -11,21 +11,21 @@
   align-items: center;
   min-width: 8em;
   min-height: 2em;
-  margin-left: 15em;
   border-radius: 2em;
 }
 
 .host-hover-border:hover {
   background-color: rgb(247, 243, 243);
+  padding: 3px;
 }
 
 div.right-profile-container {
-  margin-right: 2em;
   display: flex;
   align-items: center;
-  width: 30%;
+  width: 25%;
   height: 100%;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  margin-right: 40px;
 }
 
 img.profile-icon{
@@ -49,6 +49,8 @@ ul.profile-list {
   color: black;
   text-decoration: none;
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 div.profile-dropdown {
@@ -60,8 +62,8 @@ div.profile-dropdown {
   border-radius: .5em;
   position: absolute;
   top: 90%;
-  right: 6%;
-  z-index: 2;
+  right: 9%;
+  /* z-index: 2; */
 }
 
 div.profile-button-border {
@@ -77,6 +79,7 @@ div.profile-button-border {
   transition: all .2s ease;
   justify-self: flex-end;
   cursor: pointer;
+  margin-left: 15px;
 }
 
 div.profile-button-border:hover{
@@ -85,13 +88,31 @@ div.profile-button-border:hover{
 
 .hover-link {
   margin-left: -2em;
+  cursor: pointer;
+  padding: 2px;
 }
 
 .hover-link:hover {
   margin-left: -2em;
   background-color: rgb(216, 207, 207);
+  padding: 2px;
 }
 
 .user-name-li {
+  margin-left: -2em;
+  margin-bottom: -5px;
+  font-weight: bold;
+}
+
+.user-email-li {
+  margin-top: 5px;
+  margin-left: -2em;
+  font-weight: bold;
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+}
+
+.logout-li {
+  margin-top: 15px;
   margin-left: -2em;
 }

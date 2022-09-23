@@ -85,13 +85,13 @@ const NewSpotFormPage = () => {
                 <h1 className="welcome-message">What kind of place will you host?</h1>
             </div>
             <div className="host-page-right-container">
+                <div className="create-spot-title-container">
+                    <h3 className="create-spot-title">Host your Spot!</h3>
+                </div>
+                <div className="create-errors-container">
+                    {isSubmitted && errorList}
+                </div>
                 <form className="new-spot-form" onSubmit={onSubmit}>
-                    <div className="create-spot-title-container">
-                        <h3 className="create-spot-title">Host your Spot!</h3>
-                    </div>
-                    <div className="create-errors-container">
-                        {isSubmitted && errorList}
-                    </div>
                     <div className="create-spot-input-wrapper">
                         <input
                             className="form-input first create"

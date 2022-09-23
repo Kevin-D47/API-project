@@ -1,11 +1,12 @@
 .host-page-container {
   display: flex;
-  position: fixed;
+  position: absolute;
   min-width: 100vw;
   min-height: 100vh;
   left: 0;
   top: 4.5em;
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
+  overflow: auto;
 }
 
 .host-page-left-conatiner {
@@ -23,19 +24,25 @@
   align-items: center;
   min-width: 50%;
   min-height: 100%;
-  margin-bottom: 10em;
+  /* margin-bottom: 10em; */
+  overflow: auto;
 }
 
 .welcome-message {
   position: relative;
   margin-left: 1.5em;
   margin-bottom: 3em;
-  font-size: 50px;
+  font-size: 40px;
   color: white;
+}
+
+.create-spot-title-container {
+  padding: 10px;
 }
 
 .create-errors-container {
   color: rgb(212, 24, 24);
+  margin-top: -15px;
 }
 
 .new-spot-form {
@@ -44,6 +51,7 @@
   align-items: center;
   width: 60%;
   padding: 2em;
+  margin-top: -20px;
 }
 
 .create.submit-button {

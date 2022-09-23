@@ -34,21 +34,23 @@ const GetAllSpots = () => {
                             </NavLink>
                             <div className='spot-info-container'>
                                 <div className='spot-info-left'>
-                                    <div style={{ fontSize: '18px', fontWeight: '600' }}>
+                                    <div style={{ fontSize: '16px', fontWeight: '600' }}>
                                         {spot.name}
                                     </div>
-                                    <div style={{ fontSize: '16px' }}>
+                                    <div style={{ fontSize: '14px' }}>
                                         {spot.city}, {spot.state}
                                     </div>
                                     <div className='price-container'>
-                                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
+                                        <div style={{ fontSize: '14px', fontWeight: 'bold' }}>
                                             ${spot.price}
                                         </div>
-                                        &nbsp;night
+                                        &nbsp; <div style={{ fontSize: '14px'}}>
+                                            night
+                                        </div>
                                     </div>
                                 </div>
                                 <div className='spot-info-right'>
-                                    <div style={{ fontSize: '16px' }}>
+                                    <div style={{ fontSize: '14px' }}>
                                         <img className='star-icon' src={starIcon} alt='' />
                                         {Number(spot.avgRating).toFixed(2)}
                                     </div>

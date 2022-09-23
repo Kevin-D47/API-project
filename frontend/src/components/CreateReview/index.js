@@ -73,9 +73,9 @@ function CreateReviewForm() {
     return (
         isLoaded && (
             <div className="create-review-container">
-                <div className="rate-review-title"><h2>Rate & Review</h2></div>
                 <div className="create-review-wrapper">
                     <div className="create-review-container-left">
+                        <div className="rate-review-title"><h2 >Rate & Review</h2></div>
                         <img className='spot-review-img' src={spot.Images[0].url} alt='' />
                         <div className="create-review-spot-details-container">
                             <div className="review-spot-name"> Stayed at
@@ -106,7 +106,7 @@ function CreateReviewForm() {
                             </div>
                             <div className="modal-body">
                                 <label className="create-review-label">
-                                    Describe Your Experince
+                                    Describe Your Experince:
                                     <div className="create-review-input-container">
                                         <textarea
                                             className="review-input"
@@ -118,7 +118,7 @@ function CreateReviewForm() {
                                     </div>
                                 </label>
                                 <label className="create-review-label">
-                                    Rating
+                                    Rating:
                                     <div className="rating-input-container">
                                         <input
                                             className="rating-input"

@@ -1,33 +1,30 @@
 .create-review-container {
-   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
 .rate-review-title {
-    display: flex;
-    justify-content: left;
-    margin-left: 20em;
     font-size: 20px;
 }
 
 .create-review-wrapper {
     display: flex;
-    position: fixed;
-    min-width: 100vw;
-    min-height: 100vh;
-
+    justify-content: center;
+    width: 100%;
 }
 
 .create-review-container-left {
     display: flex;
     align-items: left;
     flex-direction: column;
-    min-width: 30%;
-    margin-left: 25em;
+    margin-left: 35px;
 }
 
 .spot-review-img {
-    width: 400px;
-    height: 290px;
+    width: 420px;
+    height: 280px;
     border-radius: 10px;
 }
 
@@ -53,7 +50,9 @@
     justify-content: right;
     flex-direction: column;
     align-items: right;
-    min-width: 30%;
+    margin-top: 5em;
+    margin-left: 50px;
+
 }
 
 .create-review-header-container {
@@ -82,15 +81,18 @@
 
 textarea.review-input {
     border: 1px solid #d1cfcf;
-    border-radius: 5px;
-    width: 280px;
-    height: 60px;
+    border-radius: 8px;
+    min-width: 280px;
+    min-height: 60px;
+    max-width: 440px;
+    max-height: 180px;
     margin-top: 10px;
     margin-bottom: 20px;
+    padding: 8px;
 }
 
 textarea:focus {
-    outline: none !important;
+    outline: none;
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 0 0 5px #719ECE;
@@ -104,12 +106,13 @@ textarea:focus {
 .rating-input {
     outline: none;
     border: 1px solid #d1cfcf;
-    border-radius: 5px;
+    border-radius: 8px;
     width: 21em;
+    padding: 8px;
 }
 
 .review-input:focus {
-    outline: none !important;
+    outline: none;
     border: 1px solid black;
     border-radius: 5px;
     box-shadow: 0 0 5px #719ECE;

@@ -18,13 +18,13 @@
     justify-content: center;
     flex-direction: column;
     margin-left: 10px;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .review {
     margin-left: 20px;
     margin-bottom: 40px;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .delete-review-button {

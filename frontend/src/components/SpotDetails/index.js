@@ -77,9 +77,7 @@ const GetSpotDetails = () => {
                         <div className='spot-num-reviews'>{currSpot.numReviews} reviews</div>
                         <div className='spot-location'>{currSpot.city}, {currSpot.state}, {currSpot.country}</div>
                     </div>
-                    <div>
-                        <img className='spot-details-img' src={currSpot.Images[0].url} alt='' />
-                    </div>
+                    <img className='spot-details-img' src={currSpot.Images[0].url} alt='' />
                     <div className='spot-host-container'>
                         <div className='spot-host-title'>
                             <div className='host-profile-container'>
@@ -87,7 +85,7 @@ const GetSpotDetails = () => {
                                 Spot hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}
                             </div>
                             <div className='spot-price'>
-                                <div style={{ fontSize: '22px', fontWeight: 'bold' }}>
+                                <div style={{ fontSize: '18px', fontWeight: 'bold' }}>
                                     ${currSpot.price}
                                 </div>
                                 &nbsp;night
@@ -130,7 +128,7 @@ const GetSpotDetails = () => {
                                     <div className='add-review-disable-text'>You have already reviewed this spot</div>)}
                             </div>
                         </div>
-                        <div>
+                        <div className='details-reviews-wrapper'>
                             <GetSpotReviews spotId={spotId} sessionUser={sessionUser} setShowReview={setShowReview} />
                         </div>
                     </div>

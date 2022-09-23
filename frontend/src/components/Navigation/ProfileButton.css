@@ -49,21 +49,20 @@ ul.profile-list {
   color: black;
   text-decoration: none;
   font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
-  padding-top: 5px;
+  padding-top: 2px;
   padding-bottom: 5px;
 }
 
 div.profile-dropdown {
   display: flex;
   flex-direction: column;
-  width: 15em;
+  width: 14em;
   background-color: white;
   box-shadow: 1px -2px 4px rgb(195, 195, 195);
   border-radius: .5em;
   position: absolute;
   top: 90%;
-  right: 9%;
-  /* z-index: 2; */
+  right: 9.5%;
 }
 
 div.profile-button-border {

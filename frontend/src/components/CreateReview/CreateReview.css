@@ -139,6 +139,7 @@ textarea:focus {
     border-radius: .5em;
     min-width: 9em;
     cursor: pointer;
+    pointer-events: none;
     transition: all 0.2s ease-in-out;
     margin-top: 15px;
     margin-right: 2em;

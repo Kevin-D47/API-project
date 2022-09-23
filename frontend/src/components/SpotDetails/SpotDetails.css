@@ -154,7 +154,7 @@
     border-radius: .5em;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
-     margin-left: 32.5em;
+    margin-left: 32.5em;
 }
 
 .add-review-container:disabled {
@@ -176,8 +176,11 @@
     padding: 10px;
     border-radius: .5em;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-left: 32.5em;
+    pointer-events: none;
 }
 
-.details-reviews-wrapper{
+.details-reviews-wrapper {
     margin-left: -25px;
 }

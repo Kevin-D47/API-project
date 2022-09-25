@@ -6,7 +6,6 @@
     height: 21em;
     padding: 24px;
     border-radius: .5em;
-    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
 .login-title-container {
@@ -43,8 +42,8 @@
     margin-top: -0.8em;
     margin-left: 4em;
     margin-bottom: -1em;
-    font-weight: 600;
     font-size: 20px;
+    font-weight: 600;
 }
 
 .form-input-wrapper {
@@ -61,12 +60,12 @@
     padding-left: 1rem;
 }
 
-input.login-input:placeholder-shown {
+input.login-input {
     padding-left: 1rem;
 }
 
 input:focus {
-    outline: none !important;
+    outline: none;
     border: 1px solid black;
     box-shadow: 0 0 5px #719ECE;
 }

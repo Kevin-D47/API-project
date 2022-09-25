@@ -4,7 +4,6 @@
     align-items: center;
     width: 35em;
     height: 32em;
-    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
 .signup-form-wrapper {
@@ -90,6 +89,10 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     margin-bottom: 25px;
+}
+
+.submit-button:active {
+    transform: scale(.97);
 }
 
 .submit-button:disabled {

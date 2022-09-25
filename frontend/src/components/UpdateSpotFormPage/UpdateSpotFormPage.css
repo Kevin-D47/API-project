@@ -4,7 +4,6 @@
     align-items: center;
     max-width: 35em;
     min-height: 40em;
-    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
 .edit-form-wrapper {
@@ -21,12 +20,12 @@
 }
 
 .edit-title-container {
-    margin-bottom: 0.7em;
     display: block;
-    min-width: 109%;
     text-align: center;
     border-bottom: 1px solid rgb(224, 219, 219);
+    min-width: 109%;
     margin-top: -1.8em;
+    margin-bottom: 0.7em;
 }
 
 #edit-title {
@@ -81,6 +80,10 @@
     margin-top: 80px;
 }
 
+.edit-submit-button:active {
+    transform: scale(.97);
+}
+
 .edit-submit-button:disabled {
     background: linear-gradient(0.25turn, grey, grey);
     color: white;
@@ -93,5 +96,4 @@
     transition: all 0.2s ease-in-out;
     margin-top: 2em;
     margin-bottom: 20px;
-
 }

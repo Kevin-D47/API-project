@@ -2,8 +2,6 @@
     display: flex;
     justify-content: center;
     margin-top: -2em;
-    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
-
 }
 
 .spot-details-wrapper {
@@ -107,7 +105,7 @@
     margin-right: 8px;
 }
 
-.button {
+.host-option-buttons {
     background: linear-gradient(0.25turn, #E61E4D, #D70666);
     color: white;
     border: none;
@@ -117,7 +115,7 @@
     transition: all 0.2s ease-in-out;
 }
 
-.button:active {
+.host-option-buttons:active {
     transform: scale(.97);
 }
 
@@ -155,6 +153,10 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     margin-left: 32.5em;
+}
+
+.add-review-button:active {
+    transform: scale(.97);
 }
 
 .add-review-container:disabled {

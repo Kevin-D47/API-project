@@ -98,8 +98,8 @@ const GetSpotDetails = () => {
                             <div className='spot-host-options-container'>
                                 <div>
                                     <div className='spot-owner-options-title'>Host Options: </div>
-                                    <button className='button edit-button' onClick={() => setShowUpdate(true)}>Edit My Spot</button>
-                                    <button className='button' onClick={() => setShowDeleteSpot(true)}>Delete My Spot</button>
+                                    <button className='host-option-buttons edit-button' onClick={() => setShowUpdate(true)}>Edit My Spot</button>
+                                    <button className='host-option-buttons' onClick={() => setShowDeleteSpot(true)}>Delete My Spot</button>
                                     {showUpdate && (
                                         <Modal onClose={() => setShowUpdate(false)}>
                                             <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />

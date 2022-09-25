@@ -1,5 +1,4 @@
 .host-page-container {
-  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
   display: flex;
   position: absolute;
   min-width: 100%;
@@ -53,7 +52,7 @@
   margin-top: -20px;
 }
 
-.create.submit-button {
+.create-submit-button {
   background: linear-gradient(0.25turn, #E61E4D, #D70666);
   color: white;
   border: none;
@@ -65,7 +64,11 @@
   margin-top: 2em;
 }
 
-.create.submit-button:disabled {
+.create-submit-button:active {
+  transform: scale(.97);
+}
+
+.create-submit-button:disabled {
   background: linear-gradient(0.25turn, grey, grey);
   color: white;
   border: none;

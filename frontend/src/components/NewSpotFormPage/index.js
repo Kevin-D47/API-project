@@ -36,7 +36,7 @@ const NewSpotFormPage = () => {
         if (!country.length) errors.push("Please provide a country")
         if (lat < -90 || lat > 90 || !lat) errors.push("Please provide a valid latitude between -90 to 90")
         if (lng < -180 || lng > 180 || !lng) errors.push("Please provide a valid longitude between -180 to 180")
-        if (price <= 0) errors.push("Please set a valid price");
+        if (!price || price <= 0) errors.push("Please set a valid price");
         if (!url) errors.push("Please provide a image");
         if (!description) errors.push("Please provide a description")
 
@@ -169,7 +169,7 @@ const NewSpotFormPage = () => {
                         />
                     </div>
                     <button
-                        className="create submit-button"
+                        className="create-submit-button"
                         type="submit"
                         disabled={isSubmitted && errors.length > 0}
                     >

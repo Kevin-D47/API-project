@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     max-width: 100%;
-    font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
 }
 
 .spots-cards-container {
@@ -23,27 +22,27 @@ img.spot-img {
 }
 
 .spot-info-container {
-    width: 300px;
-    min-height: 90px;
     display: flex;
     justify-content: space-between;
+    width: 300px;
+    height: 90px;
     margin-top: .5em;
     margin-bottom: 2em;
 }
 
 .spot-info-left {
     display: flex;
-    max-width: 75%;
-    min-height: inherit;
     flex-direction: column;
     justify-content: space-between;
+    max-width: 75%;
+    min-height: inherit;
 }
 
 .spot-info-right {
     display: flex;
     flex-wrap: nowrap;
-    width: 25%;
     justify-content: space-around;
+    width: 25%;
     margin-right: 1em;
 }
 

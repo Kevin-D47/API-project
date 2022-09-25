@@ -28,7 +28,6 @@
 }
 
 .delete-review-button {
-    margin-top: 3px;
     background: linear-gradient(0.25turn, #E61E4D, #D70666);
     color: white;
     border: none;
@@ -36,4 +35,9 @@
     border-radius: .5em;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    margin-top: 3px;
+}
+
+.delete-review-button:active {
+    transform: scale(.97);
 }

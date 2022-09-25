@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5em;
   min-height: 6em;
-  font-family: Circular, -apple-system, "system-ui", Roboto, Helvetica Neue, sans-serif;
+  padding: 1.5em;
 }
 
 .delete-button {

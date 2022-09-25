@@ -18,7 +18,11 @@ img.spot-img {
     height: 260px;
     border-radius: .7em;
     margin-right: 2em;
+    transition: all 0.2s ease-in-out;
+}
 
+img.spot-img:active {
+    transform: scale(.97);
 }
 
 .spot-info-container {

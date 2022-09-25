@@ -5,11 +5,11 @@ nav.main-navbar {
     align-items: center;
     top: 0%;
     margin-bottom: 2em;
-    height: 4em;
+    min-height: 4em;
     width: 100%;
     background-color: #ffffff;
     border-bottom: 1px solid rgb(234, 229, 229);
-    z-index: 1;
+    z-index: 3;
 }
 
 .home-button-container {
@@ -22,10 +22,20 @@ nav.main-navbar {
     max-height: 40px;
     max-width: 40px;
     margin-left: 43px;
+    transition: all 0.2s ease-in-out;
 }
+
+.logo:active {
+    transform: scale(.97);
+  }
 
 .text {
     max-height: 90px;
     max-width: 90px;
     margin-left: 3.5px;
+    transition: all 0.2s ease-in-out;
 }
+
+.text:active {
+    transform: scale(.97);
+  }

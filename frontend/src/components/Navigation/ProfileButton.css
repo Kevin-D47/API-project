@@ -11,6 +11,7 @@
   min-width: 8em;
   min-height: 2em;
   border-radius: 2em;
+  transition: all 0.2s ease-in-out;
 }
 
 .host-hover-border:active {
@@ -61,7 +62,7 @@ ul.profile-list {
   position: absolute;
   width: 14em;
   background-color: white;
-  box-shadow: 1px -2px 4px rgb(195, 195, 195);
+  box-shadow: 0px 0px 6px rgb(195, 195, 195);
   border-radius: .5em;
   top: 90%;
   right: 9.5%;

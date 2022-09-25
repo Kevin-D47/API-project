@@ -34,7 +34,7 @@ function LoginForm({setShowLoginModal}) {
         className='login-input'
         id="login-email-input"
         type="text"
-        placeholder={'email'}
+        placeholder={'Email / Username'}
         value={credential}
         onChange={(e) => setCredential(e.target.value)}
         required
@@ -43,7 +43,7 @@ function LoginForm({setShowLoginModal}) {
         className='login-input'
         id="login-pw-input"
         type="password"
-        placeholder={'password'}
+        placeholder={'Password'}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required

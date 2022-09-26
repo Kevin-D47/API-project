@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
 
+
 function SignupFormPage({ setShowSignupModal }) {
 
   const sessionUser = useSelector((state) => state.session.user);

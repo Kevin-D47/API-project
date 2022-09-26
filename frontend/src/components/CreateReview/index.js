@@ -5,6 +5,7 @@ import { thunkCreateReview } from '../../store/reviews'
 import { thunkGetSpotById } from "../../store/spots";
 import "./CreateReview.css"
 
+
 function CreateReviewForm() {
 
     const history = useHistory();
@@ -95,7 +96,6 @@ function CreateReviewForm() {
                             </div>
                         </div>
                     </div>
-
                     <div className="create-review-container-right">
                         <form className="create-review-form" onSubmit={handleSubmit}>
                             <div className="create-review-header-container">
@@ -144,7 +144,6 @@ function CreateReviewForm() {
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         )

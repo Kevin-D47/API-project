@@ -9,6 +9,7 @@ import icon from './Images/icon.svg'
 import hamburger from './Images/hamburgerIcon.svg'
 import './ProfileButton.css'
 
+
 function ProfileButton({ user, isLoaded }) {
 
   const sessionUser = useSelector(state => state.session.user);
@@ -50,7 +51,7 @@ function ProfileButton({ user, isLoaded }) {
   };
 
   return (
-    <>
+    <div>
       {showLoginModal && (<LoginFormModal showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} />)}
       {showSignupModal && (<SignUpFormModal showSignupModal={showSignupModal} setShowSignupModal={setShowSignupModal} />)}
       <div className='right-profile-container'>
@@ -86,7 +87,7 @@ function ProfileButton({ user, isLoaded }) {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
 

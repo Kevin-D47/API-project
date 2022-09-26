@@ -1,4 +1,3 @@
-// src/components/DeleteSpots/DeleteSpots.js
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { thunkDeleteSpot } from "../../store/spots";
@@ -20,7 +19,7 @@ const SpotDelete = ({ spotId, setShowDeleteSpot }) => {
   }
 
   return (
-    <>
+    <div>
       <div className='delete-container'>
         <p>This spot will be deleted. Are you sure you want to proceed? </p>
         <div className="delete-buttons-container">
@@ -28,7 +27,7 @@ const SpotDelete = ({ spotId, setShowDeleteSpot }) => {
           <button className="delete-button" onClick={() => setShowDeleteSpot(false)}>NO</button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

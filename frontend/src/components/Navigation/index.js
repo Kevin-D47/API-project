@@ -7,6 +7,7 @@ import staybnbLogo from './Images/staybnbLogo.png'
 import staybnbText from './Images/staybnbText.png'
 import './Navigation.css';
 
+
 function Navigation({ isLoaded }) {
 
   const sessionUser = useSelector(state => state.session.user);
@@ -14,7 +15,8 @@ function Navigation({ isLoaded }) {
   return (
     <nav className='main-navbar'>
       <div className='home-button-container'>
-        <NavLink exact to="/"> <img className='logo' src={staybnbLogo}/></NavLink> <NavLink exact to="/"> <img className='text' src={staybnbText}/> </NavLink>
+        <NavLink exact to="/"> <img className='logo' src={staybnbLogo} /></NavLink>
+        <NavLink exact to="/"> <img className='text' src={staybnbText} /> </NavLink>
       </div>
       {isLoaded && (
         <div className='right-profile-container'>

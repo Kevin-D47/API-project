@@ -133,7 +133,6 @@ const GetSpotDetails = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     )

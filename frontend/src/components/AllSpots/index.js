@@ -37,14 +37,14 @@ const GetAllSpots = () => {
                                     <div style={{ fontSize: '16px', fontWeight: '600' }}>
                                         {spot.name}
                                     </div>
-                                    <div style={{ fontSize: '14px', color: 'grey'}}>
+                                    <div style={{ fontSize: '14px', color: 'grey' }}>
                                         {spot.city}, {spot.state}
                                     </div>
                                     <div className='price-container'>
                                         <div style={{ fontSize: '14px', fontWeight: 'bold' }}>
                                             ${spot.price}
                                         </div>
-                                        &nbsp; <div style={{ fontSize: '14px'}}>
+                                        &nbsp; <div style={{ fontSize: '14px' }}>
                                             night
                                         </div>
                                     </div>

@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { thunkEditSpot } from "../../store/spots";
 import './UpdateSpotFormPage.css'
 
+
 function UpdateSpotForm({ setShowUpdate }) {
 
   const user = useSelector(state => state.session.user)

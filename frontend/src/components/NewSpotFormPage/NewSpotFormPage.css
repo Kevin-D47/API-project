@@ -49,6 +49,11 @@
 .create-errors-container {
   color: rgb(212, 24, 24);
   margin-top: -15px;
+  margin-bottom: 20px;
+}
+
+.each-error {
+  margin-bottom: -8px ;
 }
 
 .new-spot-form {

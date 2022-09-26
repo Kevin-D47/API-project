@@ -76,7 +76,7 @@ const NewSpotFormPage = () => {
     }
 
     const errorList = errors.map((error) => (
-        <p key={error}>{error}</p>
+        <p className="each-error" key={error}>{error}</p>
     ))
 
     return (

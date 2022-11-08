@@ -1,8 +1,14 @@
 'use strict';
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('Images', [
+    options.tableName = 'Images';
+    await queryInterface.bulkInsert(options, [
       {
         url: 'https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041__340.jpg',
         previewImage: true,
@@ -92,6 +98,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Images', null, {});
+    options.tableName = 'Images';
+    await queryInterface.bulkDelete(options, null, {});
   }
 };

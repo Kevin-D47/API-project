@@ -6,6 +6,7 @@ import { Modal } from '../../context/Modal'
 import UpdateSpotForm from '../UpdateSpotFormPage'
 import SpotDelete from '../DeleteSpot'
 import GetSpotReviews from '../AllReviews'
+import CreateBooking from '../CreateBooking'
 
 import { thunkGetSpotById } from '../../store/spots'
 import { thunkGetAllReviews } from '../../store/reviews'
@@ -30,6 +31,10 @@ const GetSpotDetails = () => {
     const [showDeleteSpot, setShowDeleteSpot] = useState(false);
     const [, setShowReview] = useState(false);
     const [disableCreateReview, setDisableCreateReview] = useState(true);
+
+    const todayDate = new Date().toISOString().slice(0, 10);
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
 
     const history = useHistory()
 
@@ -113,6 +118,41 @@ const GetSpotDetails = () => {
                                 </div>
                             </div>
                         )}
+                        <div>
+                            <div className="description-checkin-container">
+                                <div className="checkin">
+                                    <div className="checkin-star-price">
+                                        <div>{`$${currSpot.price} /night`}</div>
+                                    </div>
+                                    <div className="spotDetailBoxTwo ">
+                                        <CreateBooking
+                                            setStartDate={setStartDate}
+                                            setEndDate={setEndDate}
+                                            todayDate={todayDate}
+                                            startDate={startDate}
+                                            endDate={endDate}
+                                            spotId={spotId}
+                                        />
+                                        <span className="you-wont-be-charged">
+                                            You won't be charged yet
+                                        </span>
+                                    </div>
+
+                                    <div className="checkin-star-price">
+                                        <div>Cleaning Fee</div>
+                                        <div>Free</div>
+                                    </div>
+                                    <div className="checkin-star-price">
+                                        <div>Service Fee</div>
+                                        <div>Free</div>
+                                    </div>
+                                    <div className="checkin-star-price total-price">
+                                        <div>Total before Taxes</div>
+                                        <div>${currSpot.price}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className='review-details-container'>
                         <div className='rating-review-container'>

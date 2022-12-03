@@ -1,7 +1,7 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import LoginFormModal from '../LoginFormModal/index'
 import SignUpFormModal from '../SignupFormPage/SignupFormModal'
@@ -19,6 +19,8 @@ function ProfileButton({ user, isLoaded }) {
   const [showSignupModal, setShowSignupModal] = useState(false);
 
   const history = useHistory();
+
+  const location = useLocation();
 
   const dispatch = useDispatch();
 
@@ -70,6 +72,15 @@ function ProfileButton({ user, isLoaded }) {
             <ul className="profile-list">
               <li className="profile-list-item user-name-li">{user.username}</li>
               <li className="profile-list-item user-email-li">{user.email}</li>
+              <div
+                className="bookings-textt"
+                onClick={() => {
+                  if (location.pathname === "/myProfile") {
+                    return;
+                  }
+                  history.push("/myProfile");
+                }}
+              >My Profile</div>
               <li className="hover-link logout-li" onClick={logout}>
                 <div className='profile-list-item'>Log Out</div>
               </li>

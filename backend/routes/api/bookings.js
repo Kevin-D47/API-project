@@ -6,19 +6,41 @@ const router = express.Router();
 
 
 
-// Get all of the Current User's Bookings
-router.get('/current', requireAuth, restoreUser, async (req, res) => {
-  let userId = req.user.dataValues.id
+// // Get all of the Current User's Bookings
+// router.get('/current', requireAuth, restoreUser, async (req, res) => {
+//   let userId = req.user.dataValues.id
 
-  const allBooking = await Booking.findAll({
-    where: { userId },
-    include: [{ model: Spot,  attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"] }]
-  })
+//   const allBooking = await Booking.findAll({
+//     where: { userId },
+//     include: [{ model: Spot,  attributes: ["id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"] }]
+//   })
 
-  // Successful Response
-  res.status(200)
-  res.json({ allBooking })
-})
+//   // Successful Response
+//   res.status(200)
+//   res.json({ allBooking })
+// })
+
+router.get("/current", requireAuth, restoreUser, async (req, res) => {
+  const user = req.user.id;
+  const bookings = await Booking.findAll({
+    where: { userId: user },
+  });
+  for (let book of bookings) {
+    const spot = await Spot.findOne({
+      where: { id: book.spotId },
+      attributes: [ "id", "ownerId", "address", "city", "state", "country", "lat", "lng", "name", "price"],
+    });
+    const image = await Image.findOne({
+      where: { previewImage: true, spotId: book.spotId },
+      attributes: ["url"],
+    });
+    spot.dataValues.previewImage = image.url;
+    book.dataValues.Spot = spot;
+  }
+
+  res.status(200);
+  res.json({ Bookings: bookings });
+});
 
 
 

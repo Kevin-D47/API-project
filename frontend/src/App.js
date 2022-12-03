@@ -9,6 +9,7 @@ import GetAllSpots from "./components/AllSpots";
 import GetSpotDetails from "./components/SpotDetails";
 import NewSpotFormPage from "./components/NewSpotFormPage";
 import CreateReviewForm from "./components/CreateReview";
+import UserProfilePage from "./components/UsersProfile"
 
 import Navigation from "./components/Navigation";
 import { Route, Switch } from "react-router-dom";
@@ -29,6 +30,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path='/myProfile'>
+            <UserProfilePage/>
+          </Route>
           <Route path='/spots/:spotId/create'>
             <CreateReviewForm />
           </Route>

@@ -1,0 +1,55 @@
+.user-spots-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.my-listing-header{
+    margin-right: 50rem;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+
+}
+
+.user-single-spot-container {
+    display: flex;
+    flex-direction: row;
+    width: 60rem;
+    padding: 15px;
+}
+.user-single-spot-container:hover{
+    border-radius: .5em;
+    background-color: white;
+    box-shadow: 0px 0px 15px rgb(211, 210, 210);
+}
+
+.user-single-spot-container-left{
+
+}
+
+.user-spot-img{
+    object-fit: cover;
+    width: 270px;
+    height: 260px;
+    border-radius: 8px;
+    margin-right: 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+.user-spot-img:active {
+    transform: scale(.97);
+}
+
+.user-single-spot-container-right{
+    display: flex;
+    flex-direction: column;
+}
+
+.user-spot-info-container{
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    gap: 15px;
+    padding-top: 10px;
+}

@@ -10,6 +10,7 @@ import GetSpotDetails from "./components/SpotDetails";
 import NewSpotFormPage from "./components/NewSpotFormPage";
 import CreateReviewForm from "./components/CreateReview";
 import UserBookingsPage from "./components/UserBookings"
+import UserSpotsPage from "./components/UserListings";
 
 import Navigation from "./components/Navigation";
 import { Route, Switch } from "react-router-dom";
@@ -30,6 +31,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+           <Route exact path='/myListings'>
+            <UserSpotsPage/>
+          </Route>
           <Route exact path='/myBookings'>
             <UserBookingsPage/>
           </Route>

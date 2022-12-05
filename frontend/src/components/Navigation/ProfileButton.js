@@ -72,15 +72,22 @@ function ProfileButton({ user, isLoaded }) {
             <ul className="profile-list">
               <li className="profile-list-item user-name-li">{user.username}</li>
               <li className="profile-list-item user-email-li">{user.email}</li>
-              <div
-                className="bookings-textt"
-                onClick={() => {
-                  if (location.pathname === "/myBookings") {
-                    return;
-                  }
-                  history.push("/myBookings");
-                }}
-              >My Profile</div>
+              <li className="hover-link logout-li">
+                <div
+                  className='profile-list-item'
+                  onClick={() => {
+                    if (location.pathname === "/myBookings") {
+                      return;
+                    }
+                    history.push("/myBookings");
+                  }}
+                >
+                  My Bookings
+                </div>
+              </li>
+              <li className="hover-link logout-li">
+                <NavLink className='profile-list-item' to={`/myListings`}>Manage Listings</NavLink>
+              </li>
               <li className="hover-link logout-li" onClick={logout}>
                 <div className='profile-list-item'>Log Out</div>
               </li>

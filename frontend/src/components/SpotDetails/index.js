@@ -96,10 +96,10 @@ const GetSpotDetails = () => {
                             </div>
                             <div className='stay-cover-container'>
                                 <div className='stay-cover-title'>
-                                    <div style={{color:'#fd5a5f'}}>stay</div><div>cover</div>
+                                    <div style={{ color: '#fd5a5f' }}>stay</div><div>cover</div>
                                 </div>
                                 <div className='stay-cover-description'>
-                                Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
+                                    Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
                                 </div>
 
                             </div>
@@ -110,8 +110,10 @@ const GetSpotDetails = () => {
                                     <div className='spot-host-options-container'>
                                         <div>
                                             <div className='spot-owner-options-title'>Host Options: </div>
-                                            <button className='host-option-buttons edit-button' onClick={() => setShowUpdate(true)}>Edit My Spot</button>
-                                            <button className='host-option-buttons' onClick={() => setShowDeleteSpot(true)}>Delete My Spot</button>
+                                            <div className='host-option-buttons-container'>
+                                                <button className='host-option-buttons' onClick={() => setShowUpdate(true)}>Edit My Spot</button>
+                                                <button className='host-option-buttons spot-delete-button' onClick={() => setShowDeleteSpot(true)}>Delete My Spot</button>
+                                            </div>
                                             {showUpdate && (
                                                 <Modal onClose={() => setShowUpdate(false)}>
                                                     <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
@@ -172,8 +174,10 @@ const GetSpotDetails = () => {
                     </div>
                     <div className='review-details-container'>
                         <div className='rating-review-container'>
-                            <div className='rating'><img className="star-icon" src={starIcon} alt="" />{Number(currSpot?.avgStarRating).toFixed(2)}</div>
-                            <div className='num-reviews'>{currSpot.numReviews} reviews</div>
+                            <div className='overall-review-info'>
+                                <div className='rating'><img className="star-icon" src={starIcon} alt="" />{Number(currSpot?.avgStarRating).toFixed(2)}</div>
+                                <div className='num-reviews'>{currSpot.numReviews} reviews</div>
+                            </div>
                             <div className='add-review-container'>
                                 {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id &&
                                     <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)} disabled={disableCreateReview}>

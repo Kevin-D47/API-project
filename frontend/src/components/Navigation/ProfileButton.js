@@ -75,10 +75,10 @@ function ProfileButton({ user, isLoaded }) {
               <div
                 className="bookings-textt"
                 onClick={() => {
-                  if (location.pathname === "/myProfile") {
+                  if (location.pathname === "/myBookings") {
                     return;
                   }
-                  history.push("/myProfile");
+                  history.push("/myBookings");
                 }}
               >My Profile</div>
               <li className="hover-link logout-li" onClick={logout}>

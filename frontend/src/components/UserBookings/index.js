@@ -5,9 +5,10 @@ import { useEffect, useState } from "react";
 import { getBookingsByUserthunk } from "../../store/bookings";
 import { deleteBookingId } from "../../store/bookings";
 import { thunkGetAllSpots } from "../../store/spots";
-import "./UsersProfile.css";
 
-function UserProfilePage() {
+import "./UserBookings.css";
+
+function UserBookingsPage() {
     const bookings = useSelector((state) => Object.values(state.bookings));
     const spot = useSelector((state) => Object.values(state.spots));
     const dispatch = useDispatch();
@@ -40,7 +41,7 @@ function UserProfilePage() {
         );
     } else {
         userBookings = (
-            <div className="bookings-container page-container">
+            <div className="user-bookings-page-container">
                 <h2 className="mySpotHeader">Upcoming Bookings</h2>
                 <div className="gridSpot">
                     {bookings.map((booking) => (
@@ -86,4 +87,4 @@ function UserProfilePage() {
     );
 }
 
-export default UserProfilePage;
+export default UserBookingsPage;

@@ -84,47 +84,58 @@ const GetSpotDetails = () => {
                     </div>
                     <img className='spot-details-img' src={currSpot.Images[0].url} alt='' />
                     <div className='spot-host-container'>
-                        <div className='spot-host-title'>
-                            <div className='host-profile-container'>
-                                <img className='spot-host-profile-pic' src={icon} alt='' />
-                                Spot hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}
-                            </div>
-                            <div className='spot-price'>
-                                <div style={{ fontSize: '18px', fontWeight: 'bold' }}>
-                                    ${currSpot.price}
+                        <div className='spot-host-container-left'>
+                            <div className='spot-host-title'>
+                                <div className='host-profile-container'>
+                                    <div>Spot hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}</div>
+                                    <div className='spot-description'>
+                                        {currSpot.description}
+                                    </div>
                                 </div>
-                                &nbsp;night
+                                <img className='spot-host-profile-pic' src={icon} alt='' />
                             </div>
-                            <div className='spot-description'>
-                                {currSpot.description}
+                            <div className='stay-cover-container'>
+                                <div className='stay-cover-title'>
+                                    <div style={{color:'#fd5a5f'}}>stay</div><div>cover</div>
+                                </div>
+                                <div className='stay-cover-description'>
+                                Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
+                                </div>
+
                             </div>
                         </div>
-                        {currSpot.ownerId === sessionUser?.id && (
-                            <div className='spot-host-options-container'>
-                                <div>
-                                    <div className='spot-owner-options-title'>Host Options: </div>
-                                    <button className='host-option-buttons edit-button' onClick={() => setShowUpdate(true)}>Edit My Spot</button>
-                                    <button className='host-option-buttons' onClick={() => setShowDeleteSpot(true)}>Delete My Spot</button>
-                                    {showUpdate && (
-                                        <Modal onClose={() => setShowUpdate(false)}>
-                                            <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
-                                        </Modal>
-                                    )}
-                                    {showDeleteSpot && (
-                                        <Modal onClose={() => setShowDeleteSpot(false)} >
-                                            <SpotDelete spotId={spotId} setShowDeleteSpot={setShowDeleteSpot} />
-                                        </Modal>
-                                    )}
-                                </div>
-                            </div>
-                        )}
-                        <div>
-                            <div className="description-checkin-container">
-                                <div className="checkin">
-                                    <div className="checkin-star-price">
-                                        <div>{`$${currSpot.price} /night`}</div>
+                        <div className='spot-host-container-right'>
+                            <div className='host-options-bookings-container'>
+                                {currSpot.ownerId === sessionUser?.id && (
+                                    <div className='spot-host-options-container'>
+                                        <div>
+                                            <div className='spot-owner-options-title'>Host Options: </div>
+                                            <button className='host-option-buttons edit-button' onClick={() => setShowUpdate(true)}>Edit My Spot</button>
+                                            <button className='host-option-buttons' onClick={() => setShowDeleteSpot(true)}>Delete My Spot</button>
+                                            {showUpdate && (
+                                                <Modal onClose={() => setShowUpdate(false)}>
+                                                    <UpdateSpotForm spotId={spotId} setShowUpdate={setShowUpdate} />
+                                                </Modal>
+                                            )}
+                                            {showDeleteSpot && (
+                                                <Modal onClose={() => setShowDeleteSpot(false)} >
+                                                    <SpotDelete spotId={spotId} setShowDeleteSpot={setShowDeleteSpot} />
+                                                </Modal>
+                                            )}
+                                        </div>
                                     </div>
-                                    <div className="spotDetailBoxTwo ">
+                                )}
+                                <div className='bookings-container'>
+                                    <div className='booking-price-reviews-container'>
+                                        <div className='booking-spot-price'>
+                                            <div style={{ fontSize: '18px', fontWeight: 'bold', color: 'black' }}>
+                                                ${currSpot.price}
+                                            </div>
+                                            &nbsp;night
+                                        </div>
+                                        <div className='booking-num-reviews'>{currSpot.numReviews} reviews</div>
+                                    </div>
+                                    <div className="booking-input-container">
                                         <CreateBooking
                                             setStartDate={setStartDate}
                                             setEndDate={setEndDate}
@@ -133,23 +144,28 @@ const GetSpotDetails = () => {
                                             endDate={endDate}
                                             spotId={spotId}
                                         />
-                                        <span className="you-wont-be-charged">
-                                            You won't be charged yet
-                                        </span>
+                                    </div>
+                                    <div className="you-wont-be-charged">
+                                        You won't be charged yet
+                                    </div>
+                                    <div className="check-fee-price">
+                                        <div>Cleaning Fee</div>
+                                        <div style={{ fontWeight: 'bold' }}>Charged when reserved</div>
+                                    </div>
+                                    <div className="check-fee-price">
+                                        <div>Service Fee</div>
+                                        <div style={{ fontWeight: 'bold' }}>Charged when reserved</div>
+                                    </div>
+                                    <div className="check-fee-price">
+                                        <div>Total before Taxes</div>
+                                        <div className='booking-spot-price' style={{ color: 'black' }}>
+                                            <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'black' }}>
+                                                ${currSpot.price}
+                                            </div>
+                                            /night
+                                        </div>
                                     </div>
 
-                                    <div className="checkin-star-price">
-                                        <div>Cleaning Fee</div>
-                                        <div>Free</div>
-                                    </div>
-                                    <div className="checkin-star-price">
-                                        <div>Service Fee</div>
-                                        <div>Free</div>
-                                    </div>
-                                    <div className="checkin-star-price total-price">
-                                        <div>Total before Taxes</div>
-                                        <div>${currSpot.price}</div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

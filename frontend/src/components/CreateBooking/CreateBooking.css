@@ -1,0 +1,113 @@
+.create-booking-input-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.check-in-label {
+    display: flex;
+    justify-content: center;
+    margin-right: -32px;
+    margin-left: -15px;
+}
+
+.check-in-label label {
+    font-size: .75rem;
+    position: absolute;
+    margin-top: 1.5rem;
+    margin-right: 5.6rem;
+    opacity: .6;
+}
+
+.check-in-label input {
+    width: 9rem;
+    height: 3rem;
+    margin: 1rem;
+    border-radius: .3rem;
+    font-size: 1rem;
+    border: 1px solid gray;
+    border-radius: 5px 0px 0px 5px;
+    ;
+}
+
+.check-out-label {
+    display: flex;
+    justify-content: center;
+    margin-right: -15px;
+}
+
+.check-out-label label {
+    font-size: .75rem;
+    position: absolute;
+    margin-top: 1.5rem;
+    margin-right: 5.6rem;
+    opacity: .6;
+}
+
+
+.check-out-label input {
+    width: 9rem;
+    height: 3rem;
+    margin: 1rem;
+    border-radius: .3rem;
+    font-size: 1rem;
+    border: 1px solid gray;
+    border-left: none;
+    border-radius: 0px 5px 5px 0px;
+    ;
+}
+
+.check-out-input {
+    padding-left: 18px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.check-input {
+    padding-left: 18px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+
+.booking-submit-bttn-container{
+    display: flex;
+    justify-content: center;
+}
+
+.booking-submit-bttn {
+    background: linear-gradient(0.25turn, #E61E4D, #D70666);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    width: 21.5rem;
+    font-size: 16px;
+}
+
+.booking-submit-bttn:disabled {
+    background: linear-gradient(0.25turn, gray, gray);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: .5em;
+    cursor: pointer;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    width: 21.5rem;
+    font-size: 16px;
+}
+
+.booking-submit-bttn:active {
+    transform: scale(.97);
+}
+
+.createBookingErrorList{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.create-booking-error{
+    color: rgb(212, 24, 24);
+    width: 22rem;
+}

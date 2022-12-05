@@ -12,9 +12,10 @@
 .spot-details-img {
     display: flex;
     border-radius: 5em;
-    width: 720px;
-    height: 390px;
+    width: 1040px;
+    height: 560px;
     border-radius: .7em;
+    object-fit: cover;
 }
 
 .spot-details-top-container {
@@ -31,7 +32,6 @@
 .spot-description {
     font-size: 16px;
     font-weight: normal;
-    margin-top: 20px;
 }
 
 .spot-details-bottom-container {
@@ -69,15 +69,26 @@
 
 .spot-host-container {
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: space-between;
-    margin-top: 1.5em;
-    margin-bottom: 35px;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.spot-host-container-left{
+    display: flex;
+    flex-direction: column;
+}
+
+.spot-host-container-right{
+    display: flex;
+    flex-direction: column;
 }
 
 .host-profile-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .spot-host-options-container {
@@ -90,9 +101,31 @@
 }
 
 .spot-host-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 37rem;
     margin-left: 10px;
-    margin-bottom: 20px;
     font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 2rem;
+}
+
+.stay-cover-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 37rem;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+.stay-cover-title{
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
     font-weight: bold;
 }
 
@@ -117,6 +150,56 @@
 
 .host-option-buttons:active {
     transform: scale(.97);
+}
+
+.host-options-bookings-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bookings-container{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border: 1px solid rgb(213, 213, 213);
+    border-radius: .5em;
+    background-color: white;
+    box-shadow: 0px 0px 15px rgb(211, 210, 210);
+    padding: 1.5rem;
+}
+
+.booking-price-reviews-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.booking-spot-price {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: normal;
+    color: gray;
+}
+
+.booking-num-reviews {
+    color: gray;
+}
+
+.booking-input-container{
+    margin-top: -15px;
+}
+
+.you-wont-be-charged{
+    display: flex;
+    justify-content: center;
+}
+
+.check-fee-price{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .review-details-container {

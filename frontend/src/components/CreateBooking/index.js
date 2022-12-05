@@ -4,12 +4,18 @@ import { useEffect, useState } from "react";
 
 import { createNewUserBookingThunk, getBookingsByUserthunk } from "../../store/bookings";
 
+import './CreateBooking.css'
+
 
 const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDate }) => {
-    const [errors, setErrors] = useState([]);
-    const { spotId } = useParams();
+
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const { spotId } = useParams();
+
+    const [errors, setErrors] = useState([]);
+    const [isSubmitted, setIsSubmitted] = useState(false)
 
     const spots = useSelector((state) => state.spots);
     const spot = spots[spotId];
@@ -52,27 +58,21 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
         });
     };
 
+
     useEffect(() => {
         dispatch(getBookingsByUserthunk(spotId));
         errorValidations();
     }, [startDateNum, endDateNum]);
 
-    let errorsList;
-
-    if (errors.length > 0) {
-        errorsList = (
-            <div className="createBookingErrorList">
-                {errors.map((error, i) => (
-                    <div className="errorMessageContainer" key={i}>
-                        <div className="errorMessage">{error}</div>
-                    </div>
-                ))}
-            </div>
-        );
-    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setIsSubmitted(true)
+
+        if (errors.length > 0) {
+            return alert("invalid submission");
+        }
 
         let data = {
             startDate,
@@ -89,39 +89,46 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
         }
     };
 
+    const errorsList = errors.map((error) => (
+        <p key={error}>{error}</p>
+    ))
+
     return (
         <div className="CreateBookingContainer">
             <form className="CreateBookingForm" onSubmit={handleSubmit}>
-                <div className="handleErrors">{errorsList}</div>
-
-                <div className="createBookingDiv">
-                    <div className="createBookingInputContainer">
-                        <label className="checkin-label">CHECK-IN {" "} &nbsp; &nbsp;</label>
+                <div className="create-booking-error">{isSubmitted && errorsList}</div>
+                <div className="create-booking-input-container">
+                    <div className="check-in-label">
+                        <label >CHECK-IN</label>
                         <input
-                            className="BookingCheckinInput"
+                            className="check-input"
                             type="date"
+                            min={todayDate}
+                            max={"9000-1-1"}
                             onChange={(e) => setStartDate(e.target.value)}
                             required
-                            min={todayDate}
-                            max={"9000-1-1"}
                         />
                     </div>
-
-                    <div className="createBookingInputContainer">
-                        <label className="checkout-label"> CHECKOUT </label>
+                    <div className="check-out-label">
+                        <label>CHECKOUT</label>
                         <input
-                            className="BookingCheckOutInput"
+                            className="check-input"
                             type="date"
-                            onChange={(e) => setEndDate(e.target.value)}
-                            required
                             min={todayDate}
                             max={"9000-1-1"}
+                            onChange={(e) => setEndDate(e.target.value)}
+                            required
                         />
                     </div>
                 </div>
-
-                <div className="CreateBookingContainer">
-                    <input className="BookingSubmit " type="Submit" defaultValue="Reserve" />
+                <div className='booking-submit-bttn-container'>
+                    <button
+                        className="booking-submit-bttn"
+                        type="Submit"
+                        disabled={isSubmitted && errors.length > 0}
+                    >
+                        Reserve
+                    </button>
                 </div>
             </form>
         </div>

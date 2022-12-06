@@ -82,7 +82,7 @@ const GetSpotDetails = () => {
                         <div className='spot-num-reviews'>{currSpot.numReviews} reviews</div>
                         <div className='spot-location'>{currSpot.city}, {currSpot.state}, {currSpot.country}</div>
                     </div>
-                    <img className='spot-details-img' src={currSpot.Images[0].url} alt='' />
+                    <img className='spot-details-img' src={currSpot.Images[0]?.url} alt='' />
                     <div className='spot-host-container'>
                         <div className='spot-host-container-left'>
                             <div className='spot-host-title'>

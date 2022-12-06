@@ -41,14 +41,27 @@ function UserBookingsPage() {
         );
     } else {
         userBookings = (
-            <div className="user-bookings-page-container">
-                <h2 className="mySpotHeader">Upcoming Bookings</h2>
+            <div className="user-bookings-container">
+                <div className='my-booking-header'>Upcoming Bookings</div>
                 <div className="gridSpot">
                     {bookings.map((booking) => (
-                        <div className="booking-card cardsforOwned" key={booking.id}>
-                            <div className="booking-card-left">
+                        <div className='user-single-spot-container' key={booking.id}>
+                            <div className='user-single-spot-container-left'>
+                                <div className="booking-card-right" onClick={() => redirectUser()}>
+                                    <img className='user-spot-img' src={booking.Spot?.previewImage} alt="Spot" />
+                                </div>
+                            </div>
+                            <div className='user-single-spot-container-right'>
+                                <div className="booking-card-info">
+                                    <h3 className="spotAddy-Owned spacing">{booking.Spot?.name}</h3>
+                                    <p className="grouping-info spacing">
+                                        {new Date(booking.startDate).toLocaleDateString()} -{" "}
+                                        {new Date(booking.endDate).toLocaleDateString()}
+                                        &nbsp;&nbsp;{booking.Spot?.city}, {booking.Spot?.state} &nbsp;
+                                    </p>
+                                </div>
                                 <div className="booking-card-buttons">
-                                    <NavLink to={`/spots/${booking.Spot.id}`} className="spacing booking-card-button">
+                                    <NavLink to={`/spots/${booking.Spot?.id}`} className="spacing booking-card-button">
                                         View Spot
                                     </NavLink>
                                     <button
@@ -57,17 +70,6 @@ function UserBookingsPage() {
                                     >
                                         Cancel Booking
                                     </button>
-                                </div>
-                                <div className="booking-card-right" onClick={() => redirectUser()}>
-                                    <img className="Image" src={booking.Spot.previewImage} alt="Spot" />
-                                </div>
-                                <div className="booking-card-info">
-                                    <h3 className="spotAddy-Owned spacing">{booking.Spot.name}</h3>
-                                    <p className="grouping-info spacing">
-                                        {new Date(booking.startDate).toLocaleDateString()} -{" "}
-                                        {new Date(booking.endDate).toLocaleDateString()}
-                                        &nbsp;&nbsp;{booking.Spot.city}, {booking.Spot.state} &nbsp;
-                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -78,12 +80,13 @@ function UserBookingsPage() {
     }
 
     return (
-        <div className="user-booking-container">
-            <div className="user-booking-inner-container">
-                {/* <div className="user-booking-header mySpotHeader">My Bookings</div> */}
-                {userBookings}
+        isLoaded && (
+            <div className="user-booking-container">
+                <div className="user-booking-inner-container">
+                    {userBookings}
+                </div>
             </div>
-        </div>
+        )
     );
 }
 

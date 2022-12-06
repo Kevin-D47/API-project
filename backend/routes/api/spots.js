@@ -554,6 +554,12 @@ router.get('/', async (req, res) => {
             } else {
                 spot.previewImage = null
             }
+
+            const images = await Image.findAll({
+                attributes: ['id', ['spotId', 'imageableId'], 'url'],
+                where: { spotId: spot.id }
+            })
+            spot.Images = images
         }
 
         // Successful Response

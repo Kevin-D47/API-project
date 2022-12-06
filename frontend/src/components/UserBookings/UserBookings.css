@@ -1,0 +1,13 @@
+.user-bookings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.my-booking-header{
+    margin-right: 50rem;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+
+}

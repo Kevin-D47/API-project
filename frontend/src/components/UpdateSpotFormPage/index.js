@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { useHistory, useParams } from "react-router-dom";
-import { thunkEditSpot } from "../../store/spots";
+import { thunkEditSpot, thunkGetAllSpots } from "../../store/spots";
 import './UpdateSpotFormPage.css'
 
 
-function UpdateSpotForm({ setShowUpdate }) {
+function UpdateSpotForm({ setShowUpdate, spotId }) {
 
   const user = useSelector(state => state.session.user)
 
-  const { spotId } = useParams()
+  // const { spotId } = useParams()
 
   const formInfo = useSelector(state => state.spots[spotId])
 
@@ -22,7 +22,7 @@ function UpdateSpotForm({ setShowUpdate }) {
   const [lng, setLng] = useState(formInfo.lng)
   const [price, setPrice] = useState(formInfo.price)
   const [description, setDescription] = useState(formInfo.description)
-  const [url, setUrl] = useState(formInfo.Images[0].url)
+  const [url, setUrl] = useState(formInfo.Images[0]?.url)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [errors, setErrors] = useState([])
 
@@ -73,7 +73,9 @@ function UpdateSpotForm({ setShowUpdate }) {
     const isImg = (url) => url;
 
     if (isImg(url)) {
-      dispatch(thunkEditSpot(updatedSpot)).then(() => setShowUpdate(false))
+      dispatch(thunkEditSpot(updatedSpot))
+      .then(() => dispatch(thunkGetAllSpots()))
+      .then(() => setShowUpdate(false))
     }
   }
 

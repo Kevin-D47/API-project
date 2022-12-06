@@ -20,6 +20,7 @@ const UserSpotsPage = () => {
 
     const [showUpdate, setShowUpdate] = useState(false);
     const [showDeleteSpot, setShowDeleteSpot] = useState(false);
+    const [currUserSpot, setCurrUserSpot] = useState(false)
 
     useEffect(() => {
         dispatch(thunkGetAllSpots());
@@ -44,7 +45,7 @@ const UserSpotsPage = () => {
                     <div className='user-single-spot-container' key={spot.id}>
                         <div className='user-single-spot-container-left'>
                             <NavLink to={`/spots/${spot.id}`}>
-                                <img className='user-spot-img' src={spot.previewImage} alt=''></img>
+                                <img className='user-spot-img' src={spot.Images[0]?.url} alt=''></img>
                             </NavLink>
                         </div>
                         <div className='user-single-spot-container-right'>
@@ -69,16 +70,16 @@ const UserSpotsPage = () => {
                                     {Number(spot.avgRating).toFixed(2)}
                                 </div>
                                 <div>
-                                    <button className='host-option-buttons edit-button' onClick={() => setShowUpdate(true)}>Edit My Spot</button>
-                                    <button className='host-option-buttons' onClick={() => setShowDeleteSpot(true)}>Delete My Spot</button>
+                                    <button className='host-option-buttons edit-button' onClick={() => {setShowUpdate(true); setCurrUserSpot(spot)}}>Edit My Spot</button>
+                                    <button className='host-option-buttons' onClick={() => {setShowDeleteSpot(true); setCurrUserSpot(spot)}}>Delete My Spot</button>
                                     {showUpdate && (
                                         <Modal onClose={() => setShowUpdate(false)}>
-                                            <UpdateSpotForm spotId={spot.id} setShowUpdate={setShowUpdate} />
+                                            <UpdateSpotForm spotId={currUserSpot.id} setShowUpdate={setShowUpdate} />
                                         </Modal>
                                     )}
                                     {showDeleteSpot && (
                                         <Modal onClose={() => setShowDeleteSpot(false)} >
-                                            <SpotDelete spotId={spot.id} setShowDeleteSpot={setShowDeleteSpot} />
+                                            <SpotDelete spotId={currUserSpot.id} setShowDeleteSpot={setShowDeleteSpot} />
                                         </Modal>
                                     )}
                                 </div>

@@ -9,7 +9,6 @@
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 1rem;
-
 }
 
 .user-single-spot-container {
@@ -52,4 +51,8 @@
     width: 30rem;
     gap: 15px;
     padding-top: 10px;
+}
+
+.edit-button{
+    margin-right: 10px;
 }

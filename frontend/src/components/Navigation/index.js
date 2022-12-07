@@ -1,16 +1,29 @@
 // frontend/src/components/Navigation/index.js
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+
+import { searchAllSpotThunk } from '../../store/search';
+
 import ProfileButton from './ProfileButton';
+import SearchBar from '../SearchBar';
+
 import staybnbLogo from './Images/staybnbLogo.png'
 import staybnbText from './Images/staybnbText.png'
+
 import './Navigation.css';
 
 
 function Navigation({ isLoaded }) {
 
+ const dispatch = useDispatch()
+
   const sessionUser = useSelector(state => state.session.user);
+
+  useEffect(() => {
+    dispatch(searchAllSpotThunk())
+  })
 
   return (
     <nav className='main-navbar'>
@@ -18,9 +31,15 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/"> <img className='logo' src={staybnbLogo} /></NavLink>
         <NavLink exact to="/"> <img className='text' src={staybnbText} /> </NavLink>
       </div>
+
       {isLoaded && (
-        <div className='right-profile-container'>
-          <ProfileButton user={sessionUser} isLoaded={isLoaded} />
+        <div className='search-profile-bttn-container'>
+          <div>
+            <SearchBar/>
+          </div>
+          <div className='right-profile-container'>
+            <ProfileButton user={sessionUser} isLoaded={isLoaded} />
+          </div>
         </div>
       )}
     </nav>

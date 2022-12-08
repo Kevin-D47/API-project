@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink, useHistory } from 'react-router-dom'
 
+import magnifyGlassIcon from './icons/search-icon.png'
+
 import './searchBar.css'
 
 
@@ -48,8 +50,6 @@ const SearchBar = () => {
         handleSubmit()
     }
 
-    console.log('SPOTS-------', filteredSpots)
-
 
     return (
         <div className='search-container'>
@@ -66,6 +66,9 @@ const SearchBar = () => {
                 <div >
                     {search.length !== 0 ? (<button className='clear-search-button' onClick={clearSearch}>X</button>) : ('')}
                 </div>
+                <div>
+                    <img className='search-bttn' src={magnifyGlassIcon} onClick={onClick}></img>
+                </div>
             </div>
             <div className='search-res-container'>
                 {filteredSpots.slice(0, 6).map((spot, idx) => (
@@ -73,9 +76,12 @@ const SearchBar = () => {
                         <div key={idx} onClick={clearSearch}>
                             <div className='search-single-spot-res'>
                                 <img className='search-spot-image' src={spot.previewImage}></img>
-                                <div>
+                                <div className='search-spot-info'>
                                     <div>{spot.name}</div>
-                                    <div>{spot.city}</div>
+                                    <div className='search-spot-city-state'>
+                                        <div>{spot.city}, </div><div>{spot.state}</div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

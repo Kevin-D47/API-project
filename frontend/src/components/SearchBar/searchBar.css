@@ -1,54 +1,112 @@
-.search-container{
+.search-container {
     display: flex;
     flex-direction: column;
     margin-right: 17rem;
     margin-left: 10rem;
 }
 
-.search-bar-conatainer{
+.search-bar-conatainer {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     z-index: 2;
-}
-
-.search-bar-input{
-    width: 25rem;
+    width: 27rem;
     height: 2rem;
+    background: white;
     border: 1px solid lightgray;
     border-radius: 20px;
     box-shadow: 0px 0px 6px rgb(195, 195, 195);
     padding-left: 12px;
+    padding-right: 12px;
     padding-top: 5px;
     padding-bottom: 5px;
-
 }
 
-.clear-search-button{
-  
+.search-bar-input {
+    width: 21rem;
+    height: 1.5rem;
+    border: none;
 }
 
-.search-spot-image{
+.search-bar-input:focus {
+    border-style: none;
+    outline-style: none;
+    outline-color: none;
+    box-shadow: none;
+}
+
+.search-bttn {
+    width: 32px;
+    height: 32px;
+    border-radius: 20px;
+}
+
+.search-bttn:hover {
+    cursor: pointer;
+}
+
+.clear-search-button {
+    border: none;
+    background: white;
+    font-size: 18px;
+    color: gray;
+}
+
+.clear-search-button:hover{
+    cursor: pointer;
+}
+
+.search-spot-image {
     width: 60px;
     height: 60px;
 }
 
-.search-res-container{
+.search-res-container {
     display: flex;
     flex-direction: column;
     position: absolute;
     width: 24rem;
-    margin-top: 40px;
+    margin-top: 30px;
     margin-left: 15px;
     z-index: 1;
     border: 1px solid lightgray;
+    border-radius: 10px;
     box-shadow: 0px 0px 6px rgb(195, 195, 195);
     background-color: white;
-
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
 }
 
-.search-single-spot-res{
+.search-single-spot-res {
     display: flex;
     flex-direction: row;
-    padding-top: 12px;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-bottom: 1px solid lightgray;
 }
+
+.search-single-spot-res:hover {
+    background-color: lightgray;
+    border-radius: 5px;
+}
+
+.search-spot-info{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-left: 10px;
+    color: black;
+}
+
+.search-spot-city-state{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    color: grey;
+}
+
+

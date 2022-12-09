@@ -71,22 +71,26 @@ const SearchBar = () => {
                 </div>
             </div>
             <div className='search-res-container'>
-                {filteredSpots.slice(0, 6).map((spot, idx) => (
-                    <NavLink to={`/spots/${spot.id}`}>
-                        <div key={idx} onClick={clearSearch}>
-                            <div className='search-single-spot-res'>
-                                <img className='search-spot-image' src={spot.previewImage}></img>
-                                <div className='search-spot-info'>
-                                    <div>{spot.name}</div>
-                                    <div className='search-spot-city-state'>
-                                        <div>{spot.city}, </div><div>{spot.state}</div>
-                                    </div>
+                {filteredSpots.length === 0 && search ?
+                    <div className='search-res-no-data-container'>
+                        <div className='search-res-no-data-info'>No results found</div>
+                    </div> :
+                    filteredSpots.slice(0, 6).map((spot, idx) => (
+                        <NavLink className='search-spot-container' to={`/spots/${spot.id}`}>
+                            <div key={idx} onClick={clearSearch}>
+                                <div className='search-single-spot-res'>
+                                    <img className='search-spot-image' src={spot.previewImage}></img>
+                                    <div className='search-spot-info'>
+                                        <div>{spot.name}</div>
+                                        <div className='search-spot-city-state'>
+                                            <div>{spot.city}, </div><div>{spot.state}</div>
+                                        </div>
 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </NavLink>
-                ))}
+                        </NavLink>
+                    ))}
             </div>
         </div>
     )

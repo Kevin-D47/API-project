@@ -37,8 +37,8 @@
 }
 
 .search-bttn {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 20px;
 }
 
@@ -53,13 +53,15 @@
     color: gray;
 }
 
-.clear-search-button:hover{
+.clear-search-button:hover {
     cursor: pointer;
 }
 
 .search-spot-image {
     width: 60px;
     height: 60px;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 .search-res-container {
@@ -89,12 +91,16 @@
     border-bottom: 1px solid lightgray;
 }
 
+.search-spot-container {
+    text-decoration: none;
+}
+
 .search-single-spot-res:hover {
     background-color: lightgray;
     border-radius: 5px;
 }
 
-.search-spot-info{
+.search-spot-info {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -102,7 +108,7 @@
     color: black;
 }
 
-.search-spot-city-state{
+.search-spot-city-state {
     display: flex;
     flex-direction: row;
     gap: 5px;
@@ -110,3 +116,27 @@
 }
 
 
+.search-res-no-data-container{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 24rem;
+    margin-top: 5px;
+    z-index: 1;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px rgb(195, 195, 195);
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.search-res-no-data-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}

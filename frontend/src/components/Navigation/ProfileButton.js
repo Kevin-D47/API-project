@@ -88,6 +88,9 @@ function ProfileButton({ user, isLoaded }) {
               <li className="hover-link logout-li">
                 <NavLink className='profile-list-item' to={`/myListings`}>Manage Listings</NavLink>
               </li>
+              <li className="hover-link logout-li">
+                <NavLink className='profile-list-item' to={`/aboutDev`}>About Developer</NavLink>
+              </li>
               <li className="hover-link logout-li" onClick={logout}>
                 <div className='profile-list-item'>Log Out</div>
               </li>

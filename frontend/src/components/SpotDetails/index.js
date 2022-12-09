@@ -87,7 +87,7 @@ const GetSpotDetails = () => {
                         <div className='spot-host-container-left'>
                             <div className='spot-host-title'>
                                 <div className='host-profile-container'>
-                                    <div>Spot hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}</div>
+                                    <div>Stay hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}</div>
                                     <div className='spot-description'>
                                         {currSpot.description}
                                     </div>
@@ -181,7 +181,7 @@ const GetSpotDetails = () => {
                             <div className='add-review-container'>
                                 {!sessionUser ? null : currSpot.ownerId !== sessionUser?.id &&
                                     <button className='add-review-button' onClick={(e) => addReview(e, currSpot.id)} disabled={disableCreateReview}>
-                                        Review This Spot
+                                        Review This Stay
                                     </button>
                                 }
                                 {disableCreateReview && (

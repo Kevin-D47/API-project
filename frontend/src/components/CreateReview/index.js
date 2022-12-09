@@ -83,7 +83,7 @@ function CreateReviewForm() {
                                 &nbsp;<span style={{ fontWeight: "bold" }}>{spot.name}</span>
                             </div>
                             <div className="review-spot-location">{spot.city}, {spot.state}, {spot.country}</div>
-                            <div className="review-spot-owner">Spot hosted by
+                            <div className="review-spot-owner">Stay hosted by
                                 &nbsp;<span style={{ fontSize: '16px', fontWeight: 'bold' }}>
                                     {spot.Owner.firstName} {spot.Owner.lastName}
                                 </span>

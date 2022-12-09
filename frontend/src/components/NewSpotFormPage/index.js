@@ -89,7 +89,7 @@ const NewSpotFormPage = () => {
             <div className="host-page-right-container">
                 <div className="form-el-container">
                     <div className="create-spot-title-container">
-                        <h3 className="create-spot-title">Host your Spot!</h3>
+                        <h3 className="create-spot-title">Host your Stay!</h3>
                     </div>
                     <div className="create-errors-container">
                         {isSubmitted && errorList}
@@ -99,7 +99,7 @@ const NewSpotFormPage = () => {
                             <input
                                 className="form-input first create"
                                 type="text"
-                                placeholder="Name of Spot"
+                                placeholder="Name of Stay"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                             />

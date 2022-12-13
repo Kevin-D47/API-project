@@ -17,7 +17,7 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
 
- const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   const sessionUser = useSelector(state => state.session.user);
 
@@ -31,16 +31,16 @@ function Navigation({ isLoaded }) {
         <NavLink exact to="/"> <img className='logo' src={staybnbLogo} /></NavLink>
         <NavLink exact to="/"> <img className='text' src={staybnbText} /> </NavLink>
       </div>
-
       {isLoaded && (
-        <div className='search-profile-bttn-container'>
+        <>
           <div>
-            <SearchBar/>
+            <SearchBar />
           </div>
-          <div className='right-profile-container'>
+          <div>
             <ProfileButton user={sessionUser} isLoaded={isLoaded} />
           </div>
-        </div>
+        </>
+
       )}
     </nav>
   );

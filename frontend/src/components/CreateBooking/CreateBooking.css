@@ -111,3 +111,9 @@
     color: rgb(212, 24, 24);
     width: 22rem;
 }
+
+.booking-login-message{
+    padding-top: 5px;
+    padding-left: 10px;
+    color: gray;
+}

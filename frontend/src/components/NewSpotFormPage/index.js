@@ -58,6 +58,10 @@ const NewSpotFormPage = () => {
 
         setIsSubmitted(true);
 
+        if (!user) {
+            return alert('Must be login to create a listing')
+        }
+
         if (errors.length > 0) {
             return alert("invalid submission")
         }

@@ -1,9 +1,10 @@
 nav.main-navbar {
     position: sticky;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    top: 0%;
+    /* top: 0%; */
     margin-bottom: 2em;
     min-height: 4em;
     width: 100%;
@@ -39,10 +40,4 @@ nav.main-navbar {
 
 .text:active {
     transform: scale(.97);
-}
-
-.search-profile-bttn-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }

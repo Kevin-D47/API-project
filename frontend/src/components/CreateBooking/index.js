@@ -70,6 +70,10 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
 
         setIsSubmitted(true)
 
+        if (!sessionUser) {
+            return alert('Must be login to make a booking')
+        }
+
         if (errors.length > 0) {
             return alert("invalid submission");
         }
@@ -86,8 +90,8 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
         }
         if (errors.length === 0 && spot?.ownerId !== sessionUser.id) {
             dispatch(createNewUserBookingThunk(spotId, data))
-            .then(() => getBookingsByUserthunk())
-            .then((res) => history.push(`/myBookings`));
+                .then(() => getBookingsByUserthunk())
+                .then((res) => history.push(`/myBookings`));
         }
     };
 
@@ -127,11 +131,16 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
                     <button
                         className="booking-submit-bttn"
                         type="Submit"
-                        disabled={isSubmitted && errors.length > 0}
+                        disabled={isSubmitted && errors.length > 0 || !sessionUser}
                     >
                         Reserve
                     </button>
                 </div>
+                {!sessionUser && (
+                    <div className="booking-login-message">
+                        Please login to make a booking
+                    </div>
+                )}
             </form>
         </div>
     );

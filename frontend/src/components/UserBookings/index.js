@@ -43,38 +43,37 @@ function UserBookingsPage() {
         userBookings = (
             <div className="user-bookings-container">
                 <div className='my-booking-header'>Upcoming Bookings</div>
-                <div className="gridSpot">
-                    {bookings.map((booking) => (
-                        <div className='user-single-spot-container' key={booking.id}>
-                            <div className='user-single-spot-container-left'>
-                                <div className="booking-card-right" onClick={() => redirectUser()}>
-                                    <img className='user-spot-img' src={booking.Spot?.previewImage} alt="Spot" />
+                {bookings.map((booking) => (
+                    <div className='user-single-spot-container' key={booking.id}>
+                        <div className='user-single-spot-container-left'>
+                            <NavLink className="booking-card-right" to={`/spots/${booking.Spot?.id}`}>
+                                <img className='user-spot-img' src={booking.Spot?.previewImage} alt="Spot" />
+                            </NavLink>
+                        </div>
+                        <div className='user-single-spot-container-right'>
+                            <div className="user-booking-card-info">
+                                <div className="user-booking-spot-name">{booking.Spot?.name}</div>
+                                <div className="user-booking-spot-info">Location: <div style={{ fontWeight: 'bold' }}>{booking.Spot?.city}, {booking.Spot?.state}</div></div>
+                                <div className="user-booking-spot-info">Price:<div style={{ fontWeight: 'bold' }}>${booking.Spot?.price}/night</div></div>
+                                <div className="user-booking-spot-checkin-checkout">
+                                    <div className="user-booking-spot-info">CHECK-IN: <div style={{ fontWeight: 'bold' }}>{new Date(booking.startDate).toLocaleDateString()}</div></div>
+                                    <div className="user-booking-spot-info">CHECKOUT: <div style={{ fontWeight: 'bold' }}>{new Date(booking.endDate).toLocaleDateString()}</div></div>
                                 </div>
                             </div>
-                            <div className='user-single-spot-container-right'>
-                                <div className="booking-card-info">
-                                    <h3 className="spotAddy-Owned spacing">{booking.Spot?.name}</h3>
-                                    <p className="grouping-info spacing">
-                                        {new Date(booking.startDate).toLocaleDateString()} -{" "}
-                                        {new Date(booking.endDate).toLocaleDateString()}
-                                        &nbsp;&nbsp;{booking.Spot?.city}, {booking.Spot?.state} &nbsp;
-                                    </p>
-                                </div>
-                                <div className="booking-card-buttons">
-                                    <NavLink to={`/spots/${booking.Spot?.id}`} className="spacing booking-card-button">
-                                        View Spot
-                                    </NavLink>
-                                    <button
-                                        className="buttonforowned booking-card-button spacing"
-                                        onClick={() => dispatch(deleteBookingId(booking.id))}
-                                    >
-                                        Cancel Booking
-                                    </button>
-                                </div>
+                            <div className="user-booking-card-buttons">
+                                <NavLink className="booking-view-spot-bttn" to={`/spots/${booking.Spot?.id}`} >
+                                    View Stay
+                                </NavLink>
+                                <button
+                                    className="host-option-buttons"
+                                    onClick={() => dispatch(deleteBookingId(booking.id))}
+                                >
+                                    Cancel Booking
+                                </button>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
         );
     }

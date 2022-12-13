@@ -5,9 +5,58 @@
 }
 
 .my-booking-header{
-    margin-right: 50rem;
+    margin-right: 42rem;
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 1rem;
 
+}
+
+.user-single-spot-container-right{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.user-booking-card-info{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-top: 10px;
+}
+
+.user-booking-spot-name{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.user-booking-spot-info{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.user-booking-spot-checkin-checkout{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.user-booking-card-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.booking-view-spot-bttn{
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    border: 1px solid linear-gradient(0.25turn, #E61E4D, #D70666);
+    background: linear-gradient(0.25turn, #E61E4D, #D70666);
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
 }

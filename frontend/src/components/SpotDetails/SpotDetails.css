@@ -75,12 +75,12 @@
     padding-bottom: 2rem;
 }
 
-.spot-host-container-left{
+.spot-host-container-left {
     display: flex;
     flex-direction: column;
 }
 
-.spot-host-container-right{
+.spot-host-container-right {
     display: flex;
     flex-direction: column;
 }
@@ -114,7 +114,7 @@
     padding-bottom: 2rem;
 }
 
-.stay-cover-container{
+.stay-cover-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -123,7 +123,7 @@
     margin-left: 10px;
 }
 
-.stay-cover-title{
+.stay-cover-title {
     display: flex;
     flex-direction: row;
     font-size: 30px;
@@ -135,7 +135,7 @@
     font-weight: bold;
 }
 
-.host-option-buttons-container{
+.host-option-buttons-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -159,13 +159,13 @@
     transform: scale(.97);
 }
 
-.host-options-bookings-container{
+.host-options-bookings-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.bookings-container{
+.bookings-container {
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -176,7 +176,7 @@
     padding: 1.5rem;
 }
 
-.booking-price-reviews-container{
+.booking-price-reviews-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -194,16 +194,16 @@
     color: gray;
 }
 
-.booking-input-container{
+.booking-input-container {
     margin-top: -15px;
 }
 
-.you-wont-be-charged{
+.you-wont-be-charged {
     display: flex;
     justify-content: center;
 }
 
-.check-fee-price{
+.check-fee-price {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -212,6 +212,7 @@
 .review-details-container {
     border-top: 1px solid rgb(235, 228, 228);
     border-bottom: 1px solid rgb(235, 228, 228);
+    margin-top: 30px;
     margin-bottom: 60px;
 }
 
@@ -224,7 +225,7 @@
     font-size: 20px;
 }
 
-.overall-review-info{
+.overall-review-info {
     display: flex;
     flex-direction: row;
 }
@@ -283,11 +284,40 @@
     margin-left: -25px;
 }
 
-.stay-cover-learn-more{
+.stay-cover-learn-more {
     text-decoration: underline;
     font-weight: bold;
 }
 
-.stay-cover-learn-more:hover{
+.stay-cover-learn-more:hover {
     cursor: pointer;
+}
+
+.spot-plus-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    border-top: 1px solid lightgray;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 20px;
+}
+
+.spot-plus-title-container {
+    display: flex;
+    justify-content: left;
+}
+
+.spot-plus-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.stay-plus-pic {
+    object-fit: cover;
+    width: 65rem;
 }

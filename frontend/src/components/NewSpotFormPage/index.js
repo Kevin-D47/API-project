@@ -146,7 +146,7 @@ const NewSpotFormPage = () => {
                             <input
                                 className="form-input middle create"
                                 type="number"
-                                placeholder="Logitude"
+                                placeholder="Longitude"
                                 step="0.01"
                                 value={lng}
                                 onChange={(e) => setLng(e.target.value)}

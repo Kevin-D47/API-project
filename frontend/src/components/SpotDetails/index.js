@@ -13,6 +13,7 @@ import { thunkGetAllReviews } from '../../store/reviews'
 
 import starIcon from './icons/starIcon.png'
 import icon from './icons/icon.svg'
+import stayPlus from './icons/airbnb-plus-pic.png'
 
 import './SpotDetails.css'
 import StayCover from '../StayCoverModal'
@@ -178,6 +179,12 @@ const GetSpotDetails = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className='spot-plus-details-container'>
+                        <div className='spot-plus-title-container'>
+                            <div className='spot-plus-title'>Every Staybnb place is inspected in person for quality</div>
+                        </div>
+                        <img className='stay-plus-pic' src={stayPlus}></img>
                     </div>
                     <div className='review-details-container'>
                         <div className='rating-review-container'>

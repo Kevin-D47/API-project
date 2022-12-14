@@ -15,6 +15,7 @@ import starIcon from './icons/starIcon.png'
 import icon from './icons/icon.svg'
 
 import './SpotDetails.css'
+import StayCover from '../StayCoverModal'
 
 
 const GetSpotDetails = () => {
@@ -31,6 +32,7 @@ const GetSpotDetails = () => {
     const [showDeleteSpot, setShowDeleteSpot] = useState(false);
     const [, setShowReview] = useState(false);
     const [disableCreateReview, setDisableCreateReview] = useState(true);
+    const [showStayCover, setShowStayCover] = useState(false)
 
     const todayDate = new Date().toISOString().slice(0, 10);
     const [startDate, setStartDate] = useState();
@@ -101,7 +103,12 @@ const GetSpotDetails = () => {
                                 <div className='stay-cover-description'>
                                     Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.
                                 </div>
-
+                                <div className='stay-cover-learn-more' onClick={() => setShowStayCover(true)}>Learn more</div>
+                                {showStayCover && (
+                                    <Modal onClose={() => setShowStayCover(false)}>
+                                        <StayCover spotId={spotId} setShowStayCover={setShowStayCover} />
+                                    </Modal>
+                                )}
                             </div>
                         </div>
                         <div className='spot-host-container-right'>

@@ -282,3 +282,12 @@
 .details-reviews-wrapper {
     margin-left: -25px;
 }
+
+.stay-cover-learn-more{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.stay-cover-learn-more:hover{
+    cursor: pointer;
+}

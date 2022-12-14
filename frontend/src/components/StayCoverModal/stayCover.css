@@ -1,0 +1,66 @@
+.stay-cover-modal-container {
+    display: flex;
+    flex-direction: column;
+    width: 55rem;
+    height: 24rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 6rem;
+}
+
+.stay-cover-header-conatiner {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding-bottom: 35px;
+    border-bottom: 1px solid lightgray;
+}
+
+.stay-cover-bottom-container {
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+    margin-top: 40px;
+}
+
+.stay-cover-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.stay-cover-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.stay-cover-protection-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.stay-cover-sub-title{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.stay-cover-modal-description{
+    color: gray;
+}
+
+.stay-cover-close-container{
+    margin-bottom: 20px;
+}
+
+.stay-cover-close-bttn{
+    color: gray;
+    font-size: 18px;
+}
+
+.stay-cover-close-bttn:hover{
+    cursor: pointer;
+}

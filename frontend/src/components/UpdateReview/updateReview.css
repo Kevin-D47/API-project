@@ -1,0 +1,22 @@
+.edit-review-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 38rem;
+    height: 30rem;
+    margin-bottom: 20px;
+}
+
+.edit-review-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5rem;
+}
+
+.edit-review-header{
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

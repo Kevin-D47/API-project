@@ -13,6 +13,7 @@ import apartmentIcon from './icons/apartment-icon.png'
 import cabinIcon from './icons/cabin-icon.png'
 import mansionIcon from './icons/mansion-icon.png'
 import otherIcon from './icons/other-icon.png'
+import staybnbLogo from './icons/staybnbLogo.png'
 
 import './AllSpots.css'
 
@@ -79,37 +80,47 @@ const GetAllSpots = () => {
                     </div>
                 </div>
                 <div className='spots-cards-container'>
-                    {typeSpotArr.map((spot) => (
-                        <div key={spot.id}>
-                            <NavLink to={`/spots/${spot.id}`}>
-                                <img className='spot-img' src={spot.previewImage} alt=''></img>
-                            </NavLink>
-                            <div className='spot-info-container'>
-                                <div className='spot-info-left'>
-                                    <div style={{ fontSize: '16px', fontWeight: '600' }}>
-                                        {spot.name}
-                                    </div>
-                                    <div style={{ fontSize: '14px', color: 'grey' }}>
-                                        {spot.city}, {spot.state}
-                                    </div>
-                                    <div className='price-container'>
-                                        <div style={{ fontSize: '14px', fontWeight: 'bold' }}>
-                                            ${spot.price}
-                                        </div>
-                                        &nbsp; <div style={{ fontSize: '14px' }}>
-                                            night
-                                        </div>
-                                    </div>
+                    {typeSpotArr.length === 0 ?
+                        <div className="DNF-container">
+                            <div className="inner-DNF">
+                                <img className="logo-DNF" src={staybnbLogo}></img>
+                                <div className="title-DNF">No results found</div>
+                                <div className={filterType === 'allResultsType' ? "clear-filter-buttons-no-data" : "clear-filter-buttons-no-data"} onClick={() => setFilterType('allResultsType')}>
+                                    Click here to go back to seeing all results
                                 </div>
-                                <div className='spot-info-right'>
-                                    <div style={{ fontSize: '14px' }}>
-                                        <img className='star-icon' src={starIcon} alt='' />
-                                        {Number(spot.avgRating).toFixed(2)}
+                            </div>
+                        </div> :
+                        typeSpotArr.map((spot) => (
+                            <div key={spot.id}>
+                                <NavLink to={`/spots/${spot.id}`}>
+                                    <img className='spot-img' src={spot.previewImage} alt=''></img>
+                                </NavLink>
+                                <div className='spot-info-container'>
+                                    <div className='spot-info-left'>
+                                        <div style={{ fontSize: '16px', fontWeight: '600' }}>
+                                            {spot.name}
+                                        </div>
+                                        <div style={{ fontSize: '14px', color: 'grey' }}>
+                                            {spot.city}, {spot.state}
+                                        </div>
+                                        <div className='price-container'>
+                                            <div style={{ fontSize: '14px', fontWeight: 'bold' }}>
+                                                ${spot.price}
+                                            </div>
+                                            &nbsp; <div style={{ fontSize: '14px' }}>
+                                                night
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='spot-info-right'>
+                                        <div style={{ fontSize: '14px' }}>
+                                            <img className='star-icon' src={starIcon} alt='' />
+                                            {Number(spot.avgRating).toFixed(2)}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
                 </div>
                 <div className="hompage-footer-container">
                     <div className='copyright-container'>

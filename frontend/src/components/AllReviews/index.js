@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { thunkDeleteReview, thunkGetAllReviews } from "../../store/reviews";
+import { thunkGetAllReviews } from "../../store/reviews";
 import { thunkGetSpotById } from '../../store/spots';
+import { Modal } from "../../context/Modal";
+
+import UpdateReviewForm from '../UpdateReview';
+import ReviewDelete from '../DeleteReview';
+
 import icon from './icons/icon.svg'
+
 import './AllReview.css'
 
 
@@ -14,21 +20,18 @@ const GetSpotReviews = ({ spotId }) => {
     const getAllReviewArr = Object.values(allReviews)
 
     const [isLoaded, setIsLoaded] = useState(false)
+    const [currReview, setCurrReview] = useState(false)
+    const [showUpdateReview, setShowUpdateReview] = useState(false)
+    const [showDeleteReview, setShowDeleteReview] = useState(false)
 
     const dispatch = useDispatch();
 
-    const deleteReview = (e, id) => {
-        e.preventDefault()
-        dispatch(thunkDeleteReview(id)).then(() => dispatch(thunkGetSpotById(spotId)))
-    }
-
     useEffect(() => {
-        dispatch(thunkGetAllReviews(spotId)).then(() => setIsLoaded(true))
-    }, [dispatch, spotId])
+        dispatch(thunkGetAllReviews(spotId))
+            .then(() => dispatch(thunkGetSpotById(spotId)))
+            .then(() => setIsLoaded(true))
+    }, [dispatch, spotId, showUpdateReview])
 
-    if (!getAllReviewArr.length) {
-        return null
-    }
 
     return (
         isLoaded && (
@@ -41,13 +44,28 @@ const GetSpotReviews = ({ spotId }) => {
                                     <div className='box'>
                                         <img className='profile-img' src={icon} />
                                         <div className='user-name'>
-                                            {review.User.firstName}&nbsp;
-                                            {review.User.lastName}
+                                            {review.User ? review.User.firstName : ""}&nbsp;
+                                            {review.User ? review.User.lastName : ""}
                                             {!sessionUser ? null : sessionUser.id === review.userId &&
-                                                <button className='delete-review-button' onClick={(e) => deleteReview(e, review.id)}>
+                                                <button className='delete-review-button' onClick={() => { setShowUpdateReview(true); setCurrReview(review) }}>
+                                                    Edit Review
+                                                </button>
+                                            }
+                                            {showUpdateReview && (
+                                                <Modal onClose={() => setShowUpdateReview(false)}>
+                                                    <UpdateReviewForm currReview={currReview} spotId={spotId} setShowUpdateReview={setShowUpdateReview} />
+                                                </Modal>
+                                            )}
+                                            {!sessionUser ? null : sessionUser.id === review.userId &&
+                                                <button className='delete-review-button' onClick={() => { setShowDeleteReview(true); setCurrReview(review) }}>
                                                     Delete Review
                                                 </button>
                                             }
+                                            {showDeleteReview && (
+                                                <Modal onClose={() => setShowDeleteReview(false)}>
+                                                    <ReviewDelete currReview={currReview} spotId={spotId} setShowDeleteReview={setShowDeleteReview} />
+                                                </Modal>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

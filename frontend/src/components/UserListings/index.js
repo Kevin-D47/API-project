@@ -41,52 +41,56 @@ const UserSpotsPage = () => {
         <div className='user-spots-container'>
             <div className='my-listing-header'>My Listings</div>
             <div>
-                {userSpotsArr.map((spot) => (
-                    <div className='user-single-spot-container' key={spot.id}>
-                        <div className='user-single-spot-container-left'>
-                            <NavLink to={`/spots/${spot.id}`}>
-                                <img className='user-spot-img' src={spot.Images[0]?.url} alt=''></img>
-                            </NavLink>
-                        </div>
-                        <div className='user-single-spot-container-right'>
-                            <div className='user-spot-info-container'>
-                                <div style={{ fontSize: '26px', fontWeight: '600' }}>
-                                    {spot.name}
-                                </div>
-                                <div style={{ fontSize: '18px', color: 'grey' }}>
-                                    {spot.address}, {spot.city}, {spot.state}
-                                </div>
-                                <div>Property Type: {spot.type}</div>
-                                <div className='price-container'>
-                                    <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
-                                        ${spot.price}
+                {userSpotsArr.length === 0 ?
+                    <div className="no-booking-container">
+                        <div className="no-booking-message">You have no existing listings</div>
+                    </div> :
+                    userSpotsArr.map((spot) => (
+                        <div className='user-single-spot-container' key={spot.id}>
+                            <div className='user-single-spot-container-left'>
+                                <NavLink to={`/spots/${spot.id}`}>
+                                    <img className='user-spot-img' src={spot.Images[0]?.url} alt=''></img>
+                                </NavLink>
+                            </div>
+                            <div className='user-single-spot-container-right'>
+                                <div className='user-spot-info-container'>
+                                    <div style={{ fontSize: '26px', fontWeight: '600' }}>
+                                        {spot.name}
                                     </div>
-                                    &nbsp; <div style={{ fontSize: '16px' }}>
-                                        night
+                                    <div style={{ fontSize: '18px', color: 'grey' }}>
+                                        {spot.address}, {spot.city}, {spot.state}
                                     </div>
-                                </div>
-                                <div style={{ fontSize: '16px' }}>
-                                    <img className='star-icon' src={starIcon} alt='' />
-                                    {Number(spot.avgRating).toFixed(2)}
-                                </div>
-                                <div>
-                                    <button className='host-option-buttons edit-button' onClick={() => {setShowUpdate(true); setCurrUserSpot(spot)}}>Edit My Spot</button>
-                                    <button className='host-option-buttons' onClick={() => {setShowDeleteSpot(true); setCurrUserSpot(spot)}}>Delete My Spot</button>
-                                    {showUpdate && (
-                                        <Modal onClose={() => setShowUpdate(false)}>
-                                            <UpdateSpotForm spotId={currUserSpot.id} setShowUpdate={setShowUpdate} />
-                                        </Modal>
-                                    )}
-                                    {showDeleteSpot && (
-                                        <Modal onClose={() => setShowDeleteSpot(false)} >
-                                            <SpotDelete spotId={currUserSpot.id} setShowDeleteSpot={setShowDeleteSpot} />
-                                        </Modal>
-                                    )}
+                                    <div>Property Type: {spot.type}</div>
+                                    <div className='price-container'>
+                                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
+                                            ${spot.price}
+                                        </div>
+                                        &nbsp; <div style={{ fontSize: '16px' }}>
+                                            night
+                                        </div>
+                                    </div>
+                                    <div style={{ fontSize: '16px' }}>
+                                        <img className='star-icon' src={starIcon} alt='' />
+                                        {Number(spot.avgRating).toFixed(2)}
+                                    </div>
+                                    <div>
+                                        <button className='host-option-buttons edit-button' onClick={() => { setShowUpdate(true); setCurrUserSpot(spot) }}>Edit My Spot</button>
+                                        <button className='host-option-buttons' onClick={() => { setShowDeleteSpot(true); setCurrUserSpot(spot) }}>Delete My Spot</button>
+                                        {showUpdate && (
+                                            <Modal onClose={() => setShowUpdate(false)}>
+                                                <UpdateSpotForm spotId={currUserSpot.id} setShowUpdate={setShowUpdate} />
+                                            </Modal>
+                                        )}
+                                        {showDeleteSpot && (
+                                            <Modal onClose={() => setShowDeleteSpot(false)} >
+                                                <SpotDelete spotId={currUserSpot.id} setShowDeleteSpot={setShowDeleteSpot} />
+                                            </Modal>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
             </div>
         </div>
     )

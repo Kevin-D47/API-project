@@ -1,16 +1,21 @@
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { Modal } from "../../context/Modal";
 
 import { getBookingsByUserthunk } from "../../store/bookings";
 import { deleteBookingId } from "../../store/bookings";
 import { thunkGetAllSpots } from "../../store/spots";
 
+import BookingDelete from "../DeleteBooking";
+
 import "./UserBookings.css";
 
 function UserBookingsPage() {
+
     const bookings = useSelector((state) => Object.values(state.bookings));
     const spot = useSelector((state) => Object.values(state.spots));
+
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -18,7 +23,12 @@ function UserBookingsPage() {
         return new Date(a.endDate) - new Date(b.endDate);
     });
 
+
     const [isLoaded, setIsLoaded] = useState(false);
+    const [showDeleteBooking, setShowDeleteBooking] = useState(false)
+    const [currBooking, setCurrBooking] = useState(false)
+
+
     const redirectUser = (id) => {
         history.push(`/spots/${spot.id}`);
     };
@@ -35,8 +45,9 @@ function UserBookingsPage() {
     let userBookings;
     if (Object.keys(bookings).length === 0) {
         userBookings = (
-            <div className="no-bookings">
-                <h2>You have no bookings</h2>
+            <div className="no-booking-container">
+                <div className='my-booking-header'>Upcoming Bookings</div>
+                <div className="no-booking-message">You have no existing bookings</div>
             </div>
         );
     } else {
@@ -64,12 +75,19 @@ function UserBookingsPage() {
                                 <NavLink className="booking-view-spot-bttn" to={`/spots/${booking.Spot?.id}`} >
                                     View Stay
                                 </NavLink>
+
                                 <button
                                     className="host-option-buttons"
-                                    onClick={() => dispatch(deleteBookingId(booking.id))}
+                                    onClick={() => { setShowDeleteBooking(true); setCurrBooking(booking) }}
                                 >
                                     Cancel Booking
                                 </button>
+                                {showDeleteBooking && (
+                                    <Modal onClose={() => setShowDeleteBooking(false)}>
+                                        <BookingDelete currBooking={currBooking} setShowDeleteBooking={setShowDeleteBooking} />
+                                    </Modal>
+                                )}
+
                             </div>
                         </div>
                     </div>

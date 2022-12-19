@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-.my-booking-header{
+.my-booking-header {
     margin-right: 42rem;
     font-size: 30px;
     font-weight: bold;
@@ -12,43 +12,43 @@
 
 }
 
-.user-single-spot-container-right{
+.user-single-spot-container-right {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-.user-booking-card-info{
+.user-booking-card-info {
     display: flex;
     flex-direction: column;
     gap: 15px;
     padding-top: 10px;
 }
 
-.user-booking-spot-name{
+.user-booking-spot-name {
     font-size: 24px;
     font-weight: bold;
 }
 
-.user-booking-spot-info{
+.user-booking-spot-info {
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
 
-.user-booking-spot-checkin-checkout{
+.user-booking-spot-checkin-checkout {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.user-booking-card-buttons{
+.user-booking-card-buttons {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-.booking-view-spot-bttn{
+.booking-view-spot-bttn {
     font-size: 14px;
     color: white;
     text-decoration: none;
@@ -59,4 +59,17 @@
     padding-bottom: 10px;
     padding-left: 50px;
     padding-right: 50px;
+}
+
+.no-booking-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-booking-message{
+    margin-top: 5rem;
+    font-size: 22px;
+    color: gray;
 }

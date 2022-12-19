@@ -163,7 +163,7 @@ img.spot-img:active {
 }
 
 .type-active-filter-bg{
-    border: 1px solid lightgrey;
+    border: 1px solid #fd5a5f;
     border-radius: 8px;
 }
 
@@ -224,4 +224,43 @@ img.spot-img:active {
 
 .filter-icon{
     width: 27px
+}
+
+
+.DNF-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    margin-bottom: 2.6rem;
+}
+
+.inner-DNF {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 30rem;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.logo-DNF{
+    width: 50px;
+}
+
+.title-DNF{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.clear-filter-buttons-no-data{
+
+}
+
+.clear-filter-buttons-no-data:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: #fd5a5f;
 }

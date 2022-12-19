@@ -62,10 +62,6 @@ const NewSpotFormPage = () => {
             return alert('Must be login to create a listing')
         }
 
-        if (errors.length > 0) {
-            return alert("invalid submission")
-        }
-
         const payload = {
             name, address, city, state, country, lng, lat, price, previewImage: true, url, description
         }

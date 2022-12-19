@@ -29,9 +29,9 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
     const errorValidations = () => {
         const errors = [];
 
-        if (spot.ownerId === sessionUser.id) {
-            errors.push("Owners cannot book their own listing");
-        }
+        // if (spot.ownerId === sessionUser.id) {
+        //     errors.push("Owners cannot book their own listing");
+        // }
 
         if (startDateNum >= endDateNum) {
             errors.push("Checkout Date cannot be the same or before CheckIn Date");
@@ -90,12 +90,18 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
         //     return alert("invalid submission");
         // }
 
+        if (spot?.ownerId === sessionUser.id) {
+            // let errors = [];
+            errors.push("User cannot book their own listing");
+            // setErrors(errors);
+        }
+
         let data = {
             startDate,
             endDate,
         };
 
-        if (errors.length === 0 && sessionUser) {
+        if (errors.length === 0 && spot?.ownerId !== sessionUser.id) {
             dispatch(createNewUserBookingThunk(spotId, data))
                 .then(() => getBookingsByUserthunk())
                 .then((res) => history.push(`/myBookings`));

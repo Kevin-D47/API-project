@@ -19,6 +19,7 @@ module.exports = {
         lng: -122.4730327,
         name: "Modern Luxury Home",
         description: "4 guests - 3 bedroom - 3 bath",
+        type:"House",
         price: 890
       },
       {
@@ -31,6 +32,7 @@ module.exports = {
         lng: -100.4730327,
         name: "Fancy Condo",
         description: "2 guests - 1 bedroom - 2 bath",
+        type:"Condo",
         price: 560
       },
       {
@@ -43,6 +45,7 @@ module.exports = {
         lng: -92.4730327,
         name: "Simple Apartment",
         description: "1 guests - 1 bedroom - 2 bath",
+        type:"Apartment",
         price: 220
       },
       {
@@ -55,6 +58,7 @@ module.exports = {
         lng: -120.4730327,
         name: "Peaceful Lake House",
         description: "3 guests - 2 bedroom - 2 bath",
+        type:"House",
         price: 350
       },
       {
@@ -67,6 +71,7 @@ module.exports = {
         lng: -100.4730327,
         name: "Beach Front Home",
         description: "5 guests - 4 bedroom - 3 bath",
+        type:"House",
         price: 425
       },
       {
@@ -79,6 +84,7 @@ module.exports = {
         lng: -65.4730327,
         name: "Cozy Cabin",
         description: "3 guests - 2 bedroom - 2 bath",
+        type:"Cabin",
         price: 240
       },
       {
@@ -91,6 +97,7 @@ module.exports = {
         lng: -90.4730327,
         name: "Secluded Desert Home",
         description: "4 guests - 3 bedroom - 3 bath",
+        type:"House",
         price: 300
       },
       {
@@ -103,6 +110,7 @@ module.exports = {
         lng: -50.4730327,
         name: "Massive Mansion",
         description: "10 guests - 8 bedroom - 6 bath",
+        type:"Mansion",
         price: 1200
       },
       {
@@ -115,6 +123,7 @@ module.exports = {
         lng: -150.4730327,
         name: "Big Ranch House",
         description: "6 guests - 5 bedroom - 4 bath",
+        type:"House",
         price: 660
       },
       {
@@ -127,6 +136,7 @@ module.exports = {
         lng: -120.4730327,
         name: "Beautiful Condo",
         description: "2 guests - 1 bedroom - 2 bath",
+        type:"Condo",
         price: 520
       },
       {
@@ -139,6 +149,7 @@ module.exports = {
         lng: -90.4730327,
         name: "Charming Modest Home",
         description: "3 guests - 2 bedroom - 2 bath",
+        type:"House",
         price: 290
       },
       {
@@ -151,6 +162,7 @@ module.exports = {
         lng: -110.4730327,
         name: "Stylish Modern Home ",
         description: "4 guests - 3 bedroom - 3 bath",
+        type:"House",
         price: 610
       },
     ], {});

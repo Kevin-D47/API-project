@@ -54,9 +54,9 @@ const UserSpotsPage = () => {
                                     {spot.name}
                                 </div>
                                 <div style={{ fontSize: '18px', color: 'grey' }}>
-                                    {spot.city}, {spot.state}
+                                    {spot.address}, {spot.city}, {spot.state}
                                 </div>
-                                <div>{spot.description}</div>
+                                <div>Property Type: {spot.type}</div>
                                 <div className='price-container'>
                                     <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
                                         ${spot.price}

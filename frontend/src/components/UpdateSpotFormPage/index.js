@@ -4,6 +4,14 @@ import { useHistory, useParams } from "react-router-dom";
 import { thunkEditSpot, thunkGetAllSpots } from "../../store/spots";
 import './UpdateSpotFormPage.css'
 
+const TYPES = [
+  'House',
+  'Condo',
+  'Apartment',
+  'Cabin',
+  'Mansion',
+  'Other'
+]
 
 function UpdateSpotForm({ setShowUpdate, spotId }) {
 
@@ -21,6 +29,7 @@ function UpdateSpotForm({ setShowUpdate, spotId }) {
   const [lat, setLat] = useState(formInfo.lat)
   const [lng, setLng] = useState(formInfo.lng)
   const [price, setPrice] = useState(formInfo.price)
+  const [type, setType] = useState(formInfo.type)
   const [description, setDescription] = useState(formInfo.description)
   const [url, setUrl] = useState(formInfo.Images[0]?.url)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -42,10 +51,11 @@ function UpdateSpotForm({ setShowUpdate, spotId }) {
     if (!price || price <= 0) errors.push("Please set a valid price");
     if (!url) errors.push("Please provide a image");
     if (!description) errors.push("Please provide a description")
+    if (!type) errors.push("Please provide a propery type")
 
     return setErrors(errors)
 
-  }, [name, address, city, state, country, lat, lng, price, url, description])
+  }, [name, address, city, state, country, lat, lng, price, url, type, description])
 
 
   async function onSubmit(e) {
@@ -67,6 +77,7 @@ function UpdateSpotForm({ setShowUpdate, spotId }) {
       price,
       url,
       imageId: formInfo.Images[0].id,
+      type,
       description
     }
 
@@ -74,8 +85,8 @@ function UpdateSpotForm({ setShowUpdate, spotId }) {
 
     if (isImg(url)) {
       dispatch(thunkEditSpot(updatedSpot))
-      .then(() => dispatch(thunkGetAllSpots()))
-      .then(() => setShowUpdate(false))
+        .then(() => dispatch(thunkGetAllSpots()))
+        .then(() => setShowUpdate(false))
     }
   }
 
@@ -161,6 +172,23 @@ function UpdateSpotForm({ setShowUpdate, spotId }) {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
+          <select
+            className="form-input middle update"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+          >
+            <option selected disabled value="">
+              Select a Property Type
+            </option>
+            {TYPES.map(type => (
+              <option
+                key={type}
+                value={type}
+              >
+                {type}
+              </option>
+            ))}
+          </select>
           <input
             className="form-input last desc update"
             type="text"

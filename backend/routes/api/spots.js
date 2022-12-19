@@ -98,12 +98,12 @@ router.get('/:spotId', async (req, res) => {
 
 // Create a Spot
 router.post('/', requireAuth, restoreUser, async (req, res) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const { address, city, state, country, lat, lng, name, description, type, price } = req.body
 
     let userId = req.user.dataValues.id
 
     const newSpot = await Spot.create({
-        ownerId: userId, address, city, state, country, lat, lng, name, description, price
+        ownerId: userId, address, city, state, country, lat, lng, name, description, type, price
     })
 
     // Successful Response
@@ -170,7 +170,7 @@ router.post('/:spotId/images', requireAuth, restoreUser, async (req, res) => {
 
 // Edit a Spot
 router.put('/:spotId', requireAuth, restoreUser, async (req, res) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body
+    const { address, city, state, country, lat, lng, name, description, type, price } = req.body
 
     const { spotId } = req.params
     const editSpot = await Spot.findByPk(spotId)
@@ -188,7 +188,7 @@ router.put('/:spotId', requireAuth, restoreUser, async (req, res) => {
 
     // Edit spot
     if (editSpot) {
-        editSpot.set({ address, city, state, country, lat, lng, name, description, price });
+        editSpot.set({ address, city, state, country, lat, lng, name, description, type, price });
 
         await editSpot.save()
 

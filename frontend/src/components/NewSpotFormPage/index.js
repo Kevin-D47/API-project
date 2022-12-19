@@ -4,6 +4,14 @@ import { useSelector, useDispatch } from "react-redux"
 import { thunkCreateSpot, thunkGetAllSpots } from "../../store/spots";
 import "./NewSpotFormPage.css"
 
+const TYPES = [
+    'House',
+    'Condo',
+    'Apartment',
+    'Cabin',
+    'Mansion',
+    'Other'
+]
 
 const NewSpotFormPage = () => {
 
@@ -19,6 +27,7 @@ const NewSpotFormPage = () => {
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
     const [url, setUrl] = useState('')
+    const [type, setType] = useState('')
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [errors, setErrors] = useState([])
 
@@ -38,11 +47,12 @@ const NewSpotFormPage = () => {
         if (lng < -180 || lng > 180 || !lng) errors.push("Please provide a valid longitude between -180 to 180")
         if (!price || price <= 0) errors.push("Please set a valid price");
         if (!url) errors.push("Please provide a image");
+        if (!type) errors.push("Please provide a property type");
         if (!description) errors.push("Please provide a description")
 
         return setErrors(errors);
 
-    }, [name, address, city, state, country, lat, lng, price, url, description])
+    }, [name, address, city, state, country, lat, lng, price, url, type, description])
 
     useEffect(() => {
         dispatch(thunkGetAllSpots())
@@ -63,13 +73,13 @@ const NewSpotFormPage = () => {
         }
 
         const payload = {
-            name, address, city, state, country, lng, lat, price, previewImage: true, url, description
+            name, address, city, state, country, lng, lat, price, previewImage: true, url, type, description
         }
 
         function isImg(url) {
             return url;
         }
-        if (isImg(url)) {
+        if (isImg(url) && errors.length === 0) {
             dispatch(thunkCreateSpot(payload)).then(() => dispatch(thunkGetAllSpots()))
             history.push('/')
         }
@@ -162,6 +172,23 @@ const NewSpotFormPage = () => {
                                 value={url}
                                 onChange={(e) => setUrl(e.target.value)}
                             />
+                            <select
+                                className="form-input middle create"
+                                value={type}
+                                onChange={(e) => setType(e.target.value)}
+                            >
+                                <option selected disabled value="">
+                                    Select a Property Type
+                                </option>
+                                {TYPES.map(type => (
+                                    <option
+                                        key={type}
+                                        value={type}
+                                    >
+                                        {type}
+                                    </option>
+                                ))}
+                            </select>
                             <input
                                 className="form-input last desc create"
                                 type="text"

@@ -6,6 +6,13 @@ import { NavLink } from 'react-router-dom'
 import starIcon from './icons/starIcon.png'
 import githubIcon from './icons/github-icon.png'
 import linkedinIcon from './icons/linkedin-icon.png'
+import filterIcon from './icons/filter-icon.png'
+import houseIcon from './icons/house-icon.png'
+import condoIcon from './icons/condo-icon.png'
+import apartmentIcon from './icons/apartment-icon.png'
+import cabinIcon from './icons/cabin-icon.png'
+import mansionIcon from './icons/mansion-icon.png'
+import otherIcon from './icons/other-icon.png'
 
 import './AllSpots.css'
 
@@ -16,6 +23,15 @@ const GetAllSpots = () => {
     const allSpotsArr = Object.values(allSpots)
 
     const [isLoaded, setIsLoaded] = useState(false)
+    const [filterType, setFilterType] = useState('allResultsType')
+
+    let typeSpotArr;
+
+    if (filterType !== 'allResultsType') {
+        typeSpotArr = allSpotsArr.filter((spot) => spot.type == filterType)
+    } else {
+        typeSpotArr = allSpotsArr
+    }
 
     const dispatch = useDispatch();
 
@@ -30,8 +46,40 @@ const GetAllSpots = () => {
     return (
         isLoaded && (
             <div className='spots-container'>
+                <div className='filter-type-container'>
+                    <div className='filter-type-options'>
+                        <div className={filterType === 'House' ? "filter-type-buttons type-active-filter-bg" : "filter-type-buttons"} onClick={() => setFilterType('House')}>
+                            <img className='house-icon' src={houseIcon}></img>
+                            <div>House</div>
+                        </div>
+                        <div className={filterType === 'Condo' ? "filter-type-buttons type-active-filter-bg" : "filter-type-buttons"} onClick={() => setFilterType('Condo')}>
+                            <img className='condo-icon' src={condoIcon}></img>
+                            <div>Condo</div>
+                        </div>
+                        <div className={filterType === 'Apartment' ? "filter-type-buttons type-active-filter-bg" : "filter-type-buttons"} onClick={() => setFilterType('Apartment')}>
+                            <img className='apartment-icon' src={apartmentIcon}></img>
+                            <div>Apartment</div>
+                        </div>
+                        <div className={filterType === 'Cabin' ? "filter-type-buttons type-active-filter-bg" : "filter-type-buttons"} onClick={() => setFilterType('Cabin')}>
+                            <img className='cabin-icon' src={cabinIcon}></img>
+                            <div>Cabin</div>
+                        </div>
+                        <div className={filterType === 'Mansion' ? "filter-type-buttons type-active-filter-bg" : "filter-type-buttons"} onClick={() => setFilterType('Mansion')}>
+                            <img className='mansion-icon' src={mansionIcon}></img>
+                            <div>Mansion</div>
+                        </div>
+                        <div className={filterType === 'Other' ? "filter-type-buttons type-active-filter-bg" : "filter-type-buttons"} onClick={() => setFilterType('Other')}>
+                            <img className='other-icon' src={otherIcon}></img>
+                            <div>Other</div>
+                        </div>
+                    </div>
+                    <div className={filterType === 'allResultsType' ? "clear-filter-buttons-inactive" : "clear-filter-buttons-active"} onClick={() => setFilterType('allResultsType')}>
+                        <img className='filter-icon' src={filterIcon}></img>
+                        <div className='clear-filter-buttons-text'>clear filter</div>
+                    </div>
+                </div>
                 <div className='spots-cards-container'>
-                    {allSpotsArr.map((spot) => (
+                    {typeSpotArr.map((spot) => (
                         <div key={spot.id}>
                             <NavLink to={`/spots/${spot.id}`}>
                                 <img className='spot-img' src={spot.previewImage} alt=''></img>

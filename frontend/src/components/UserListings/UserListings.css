@@ -56,3 +56,9 @@
 .edit-button{
     margin-right: 10px;
 }
+
+.user-property-type-container{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}

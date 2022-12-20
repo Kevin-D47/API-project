@@ -189,8 +189,8 @@ const NewSpotFormPage = () => {
                                     </option>
                                 ))}
                             </select>
-                            <input
-                                className="form-input last desc create"
+                            <textarea
+                                className="form-input last desc create-description-input"
                                 type="text"
                                 placeholder="Description"
                                 value={description}

@@ -91,9 +91,6 @@ const GetSpotDetails = () => {
                             <div className='spot-host-title'>
                                 <div className='host-profile-container'>
                                     <div>Stay hosted by {currSpot.Owner.firstName} {currSpot.Owner.lastName}</div>
-                                    <div className='spot-description'>
-                                        {currSpot.description}
-                                    </div>
                                 </div>
                                 <img className='spot-host-profile-pic' src={icon} alt='' />
                             </div>
@@ -111,6 +108,16 @@ const GetSpotDetails = () => {
                                     </Modal>
                                 )}
                             </div>
+                            <div className='spot-description-container'>
+                                <div className='spot-type-container'>
+                                    <div>Property type:</div>
+                                    <div style={{fontWeight:'bold'}}>{currSpot.type}</div>
+                                </div>
+                                <div className='spot-description'>
+                                    {currSpot.description}
+                                </div>
+                            </div>
+
                         </div>
                         <div className='spot-host-container-right'>
                             <div className='host-options-bookings-container'>

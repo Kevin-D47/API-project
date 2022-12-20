@@ -189,8 +189,8 @@ function UpdateSpotForm({ setShowUpdate, spotId }) {
               </option>
             ))}
           </select>
-          <input
-            className="form-input last desc update"
+          <textarea
+            className="form-input last desc update-description-input"
             type="text"
             placeholder="Description"
             value={description}

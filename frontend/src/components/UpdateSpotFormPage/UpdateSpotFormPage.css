@@ -78,6 +78,7 @@
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     margin-top: 80px;
+    margin-bottom: 20px;
 }
 
 .edit-submit-button:active {
@@ -97,3 +98,16 @@
     margin-top: 2em;
     margin-bottom: 20px;
 }
+
+.update-description-input {
+    border: 1px solid #d1cfcf;
+    border-radius: 8px;
+    min-width: 513px;
+    min-height: 60px;
+    max-width: 513px;
+    max-height: 180px;
+    margin-top: 10px;
+    margin-top: -1px;
+    margin-bottom: 20px;
+    padding: 8px;
+  }

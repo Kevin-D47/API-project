@@ -48,7 +48,7 @@ function UpdateReviewForm({ setShowUpdateReview, currReview, spotId }) {
         }
 
         dispatch(thunkUpdateReview(currReview.id, userId, spotId, review, stars))
-        .then(() => dispatch(thunkGetAllReviews(spotId)))
+            .then(() => dispatch(thunkGetAllReviews(spotId)))
         setShowUpdateReview(false)
     };
 
@@ -59,9 +59,12 @@ function UpdateReviewForm({ setShowUpdateReview, currReview, spotId }) {
     return (
         <div className="edit-review-container">
             <div className="edit-review-wrapper">
-                <div className="edit-review-header">Edit Review</div>
-                <form className="create-review-form" onSubmit={handleSubmit}>
+                <div className="edit-review-header-container">
+                    <div className="edit-review-header">Edit Review</div>
+                    <div className="edit-review-close-bttn" onClick={() => setShowUpdateReview(false)}>X</div>
+                </div>
 
+                <form className="create-review-form" onSubmit={handleSubmit}>
                     <div className="create-review-errors">
                         {isSubmitted && errorList}
                     </div>
@@ -70,7 +73,7 @@ function UpdateReviewForm({ setShowUpdateReview, currReview, spotId }) {
                             Describe Your Experince:
                             <div className="create-review-input-container">
                                 <textarea
-                                    className="review-input"
+                                    className="review-edit-input"
                                     type="string"
                                     placeholder="What was it like to stay here?"
                                     value={review}
@@ -94,9 +97,9 @@ function UpdateReviewForm({ setShowUpdateReview, currReview, spotId }) {
                             </div>
                         </label>
                     </div>
-                    <div className="review-submit-container">
+                    <div className="edit-review-submit-container">
                         <button
-                            className="create-review-button"
+                            className="create-review-button edit-review-submit-button"
                             type="submit"
                             disabled={isSubmitted && errors.length > 0}
                         >

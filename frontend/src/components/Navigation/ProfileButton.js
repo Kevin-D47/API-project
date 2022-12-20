@@ -69,9 +69,12 @@ function ProfileButton({ user, isLoaded }) {
       {showMenu && (
         <div className="profile-dropdown">
           {isLoaded && sessionUser && (
+
             <ul className="profile-list">
-              <li className="profile-list-item user-name-li">{user.username}</li>
-              <li className="profile-list-item user-email-li">{user.email}</li>
+              <div className="greeting-container">
+                <div>Welcome,</div>
+                <div className="user-name-li">{user.username}</div>
+              </div>
               <li className="hover-link logout-li">
                 <div
                   className='profile-list-item'
@@ -84,6 +87,9 @@ function ProfileButton({ user, isLoaded }) {
                 >
                   My Bookings
                 </div>
+              </li>
+              <li className="hover-link logout-li">
+                <NavLink className='profile-list-item' to={`/myReviews`}>My Reviews</NavLink>
               </li>
               <li className="hover-link logout-li">
                 <NavLink className='profile-list-item' to={`/myListings`}>Manage Listings</NavLink>

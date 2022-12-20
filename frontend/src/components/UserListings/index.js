@@ -60,7 +60,7 @@ const UserSpotsPage = () => {
                                     <div style={{ fontSize: '18px', color: 'grey' }}>
                                         {spot.address}, {spot.city}, {spot.state}
                                     </div>
-                                    <div>Property Type: {spot.type}</div>
+                                    <div className='user-property-type-container'>Property Type: <div style={{fontWeight:'bold'}}>{spot.type}</div></div>
                                     <div className='price-container'>
                                         <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
                                             ${spot.price}
@@ -69,7 +69,7 @@ const UserSpotsPage = () => {
                                             night
                                         </div>
                                     </div>
-                                    <div style={{ fontSize: '16px' }}>
+                                    <div style={{ fontSize: '16px', fontWeight:'bold' }}>
                                         <img className='star-icon' src={starIcon} alt='' />
                                         {Number(spot.avgRating).toFixed(2)}
                                     </div>

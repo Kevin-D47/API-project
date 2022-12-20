@@ -25,7 +25,8 @@ const SearchBar = () => {
             return (
                 spot.name.toLowerCase().includes(spotSearch.toLowerCase()) ||
                 spot.city.toLowerCase().includes(spotSearch.toLowerCase()) ||
-                spot.state.toLowerCase().includes(spotSearch.toLowerCase())
+                spot.state.toLowerCase().includes(spotSearch.toLowerCase()) ||
+                spot.type.toLowerCase().includes(spotSearch.toLowerCase())
             )
         })
 

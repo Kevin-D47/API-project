@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf"
 
 
 // types
+const GET_ALL_USER_REVIEWS = '/reviews/allUserReviews'
 const GET_ALL_REVIEWS = '/reviews/allReviews'
 const CREATE_REVIEW = '/reviews/createReview'
 const UPDATE_REVIEW = '/spots/updateReview'
@@ -9,6 +10,12 @@ const DELETE_REVIEW = '/reviews/deleteReview'
 
 
 // actions
+
+const getAllUserReviews = (reviews) => ({
+    type: GET_ALL_USER_REVIEWS,
+    reviews
+})
+
 const getAllReviews = (reviews) => ({
     type: GET_ALL_REVIEWS,
     reviews
@@ -31,6 +38,16 @@ const deleteReview = (id) => ({
 
 
 // thunks
+export const getAllUserReviewsThunk = () => async (dispatch) => {
+    const response = await fetch("/api/reviews/current");
+
+    if (response.ok) {
+        const allReviews = await response.json();
+        dispatch(getAllUserReviews(allReviews));
+        return allReviews;
+    }
+};
+
 export const thunkGetAllReviews = (spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
 
@@ -88,7 +105,10 @@ const reviewsReducer = (state = intialState, action) => {
     let newState
 
     switch (action.type) {
-
+        case GET_ALL_USER_REVIEWS: {
+            const newState = { ...action.reviews }
+            return newState
+        }
         case GET_ALL_REVIEWS:
             newState = {}
             action.reviews.forEach(review => newState[review.id] = review)

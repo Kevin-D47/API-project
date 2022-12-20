@@ -11,10 +11,12 @@ import NewSpotFormPage from "./components/NewSpotFormPage";
 import CreateReviewForm from "./components/CreateReview";
 import UserBookingsPage from "./components/UserBookings"
 import UserSpotsPage from "./components/UserListings";
+import UserReviewsPage from "./components/UserReviews";
 import { AboutDevPage } from "./components/DevelpoerPage";
 
 import Navigation from "./components/Navigation";
 import { Route, Switch } from "react-router-dom";
+
 
 
 function App() {
@@ -32,14 +34,17 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-           <Route exact path='/aboutDev'>
-            <AboutDevPage/>
+          <Route exact path='/aboutDev'>
+            <AboutDevPage />
           </Route>
-           <Route exact path='/myListings'>
-            <UserSpotsPage/>
+          <Route exact path='/myReviews'>
+            <UserReviewsPage />
+          </Route>
+          <Route exact path='/myListings'>
+            <UserSpotsPage />
           </Route>
           <Route exact path='/myBookings'>
-            <UserBookingsPage/>
+            <UserBookingsPage />
           </Route>
           <Route path='/spots/:spotId/create'>
             <CreateReviewForm />

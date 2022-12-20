@@ -2,10 +2,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     width: 38rem;
     height: 30rem;
-    margin-bottom: 20px;
+    margin-top: -2rem;
+    margin-bottom: 120px;
 }
 
 .edit-review-wrapper{
@@ -15,8 +15,37 @@
     padding-left: 5rem;
 }
 
+.edit-review-header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .edit-review-header{
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 10px;
+}
+
+.edit-review-close-bttn{
+    color: gray;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 2rem;
+}
+
+.edit-review-close-bttn:hover{
+    cursor: pointer;
+}
+
+textarea.review-edit-input {
+    border: 1px solid #d1cfcf;
+    border-radius: 8px;
+    max-width: 440px;
+    max-height: 180px;
+    min-width: 440px;
+    min-height: 180px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 8px;
 }

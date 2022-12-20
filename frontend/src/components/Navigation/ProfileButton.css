@@ -105,20 +105,21 @@ ul.profile-list {
 }
 
 .user-name-li {
-  margin-left: -2em;
   margin-bottom: -5px;
   font-weight: 600;
-}
-
-.user-email-li {
-  margin-top: 5px;
-  margin-left: -2em;
-  border-bottom: 1px solid grey;
-  padding-bottom: 10px;
-  font-weight: 600;
+  color: #fd5b5f;
 }
 
 .logout-li {
   margin-top: 15px;
   margin-left: -2em;
+}
+
+.greeting-container{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-left: -28px;
+  border-bottom: 1px solid grey;
+  padding-bottom: 15px;
 }

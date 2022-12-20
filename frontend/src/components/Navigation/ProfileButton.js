@@ -88,9 +88,9 @@ function ProfileButton({ user, isLoaded }) {
                   My Bookings
                 </div>
               </li>
-              <li className="hover-link logout-li">
+              {/* <li className="hover-link logout-li">
                 <NavLink className='profile-list-item' to={`/myReviews`}>My Reviews</NavLink>
-              </li>
+              </li> */}
               <li className="hover-link logout-li">
                 <NavLink className='profile-list-item' to={`/myListings`}>Manage Listings</NavLink>
               </li>

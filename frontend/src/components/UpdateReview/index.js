@@ -43,13 +43,11 @@ function UpdateReviewForm({ setShowUpdateReview, currReview, spotId }) {
 
         setIsSubmitted(true)
 
-        if (errors.length > 0) {
-            return alert("invalid submission");
+        if (errors.length === 0) {
+            dispatch(thunkUpdateReview(currReview.id, userId, spotId, review, stars))
+                .then(() => dispatch(thunkGetAllReviews(spotId)))
+            setShowUpdateReview(false)
         }
-
-        dispatch(thunkUpdateReview(currReview.id, userId, spotId, review, stars))
-            .then(() => dispatch(thunkGetAllReviews(spotId)))
-        setShowUpdateReview(false)
     };
 
     const errorList = errors.map((error) => (

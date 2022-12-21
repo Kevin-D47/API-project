@@ -63,7 +63,7 @@ function UpdateSpotForm({ setShowUpdate, spotId }) {
 
     setIsSubmitted(true)
 
-    if (errors.length > 0) return alert('invalid submission')
+    // if (errors.length > 0) return alert('invalid submission')
 
     const updatedSpot = {
       id: spotId,
@@ -83,7 +83,7 @@ function UpdateSpotForm({ setShowUpdate, spotId }) {
 
     const isImg = (url) => url;
 
-    if (isImg(url)) {
+    if (isImg(url) && errors.length === 0) {
       dispatch(thunkEditSpot(updatedSpot))
         .then(() => dispatch(thunkGetAllSpots()))
         .then(() => setShowUpdate(false))

@@ -46,9 +46,9 @@ function CreateReviewForm() {
 
         setIsSubmitted(true)
 
-        if (errors.length > 0) {
-            return alert("invalid submission");
-        }
+        // if (errors.length > 0) {
+        //     return alert("invalid submission");
+        // }
 
         const payload = {
             spotId,
@@ -58,7 +58,7 @@ function CreateReviewForm() {
 
         const createdReview = dispatch(thunkCreateReview(payload));
 
-        if (createdReview) {
+        if (createdReview && errors.length === 0) {
             history.push(`/spots/${spotId}`);
         }
     };

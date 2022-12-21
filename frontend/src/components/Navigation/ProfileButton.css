@@ -108,6 +108,12 @@ ul.profile-list {
   margin-bottom: -5px;
   font-weight: 600;
   color: #fd5b5f;
+  text-decoration: none;
+}
+
+.user-name-li:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .logout-li {

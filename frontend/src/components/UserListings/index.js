@@ -32,8 +32,6 @@ const UserSpotsPage = () => {
 
     const userSpotsArr = allSpotsArr.filter((spot) => spot.ownerId == sessionUser.id)
 
-    console.log('USER SPOTS', userSpotsArr)
-
     if (!allSpotsArr.length) {
         return null
     }

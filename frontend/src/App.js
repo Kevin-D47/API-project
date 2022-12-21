@@ -12,6 +12,7 @@ import CreateReviewForm from "./components/CreateReview";
 import UserBookingsPage from "./components/UserBookings"
 import UserSpotsPage from "./components/UserListings";
 import UserReviewsPage from "./components/UserReviews";
+import UserProfile from "./components/UserProfile";
 import { AboutDevPage } from "./components/DevelpoerPage";
 
 import Navigation from "./components/Navigation";
@@ -36,6 +37,9 @@ function App() {
         <Switch>
           <Route exact path='/aboutDev'>
             <AboutDevPage />
+          </Route>
+          <Route exact path='/myProfile'>
+            <UserProfile />
           </Route>
           <Route exact path='/myReviews'>
             <UserReviewsPage />

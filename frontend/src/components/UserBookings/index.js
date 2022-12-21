@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Modal } from "../../context/Modal";
 
 import { getBookingsByUserthunk } from "../../store/bookings";
-import { deleteBookingId } from "../../store/bookings";
 import { thunkGetAllSpots } from "../../store/spots";
 
 import BookingDelete from "../DeleteBooking";

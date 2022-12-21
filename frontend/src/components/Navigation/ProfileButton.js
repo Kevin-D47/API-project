@@ -73,7 +73,7 @@ function ProfileButton({ user, isLoaded }) {
             <ul className="profile-list">
               <div className="greeting-container">
                 <div>Welcome,</div>
-                <div className="user-name-li">{user.username}</div>
+                <NavLink className="user-name-li" to={'/myProfile'}>{user.username}</NavLink>
               </div>
               <li className="hover-link logout-li">
                 <div

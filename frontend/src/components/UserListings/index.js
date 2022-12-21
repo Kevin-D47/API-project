@@ -8,6 +8,7 @@ import UpdateSpotForm from '../UpdateSpotFormPage'
 import SpotDelete from '../DeleteSpot'
 
 import starIcon from './icons/starIcon.png'
+import staybnbLogo from './icons/staybnbLogo.png'
 
 import './UserListings.css'
 
@@ -43,7 +44,11 @@ const UserSpotsPage = () => {
             <div>
                 {userSpotsArr.length === 0 ?
                     <div className="no-booking-container">
-                        <div className="no-booking-message">You have no existing listings</div>
+                        <div className="user-no-data-container">
+                            <img className='no-data-logo' src={staybnbLogo}></img>
+                            <div className="no-booking-message">You have no existing listings</div>
+                            <NavLink className='listing-become-host-link' to={'/spots/create'}>Start hosting a stay by clicking here</NavLink>
+                        </div>
                     </div> :
                     userSpotsArr.map((spot) => (
                         <div className='user-single-spot-container' key={spot.id}>
@@ -57,21 +62,18 @@ const UserSpotsPage = () => {
                                     <div style={{ fontSize: '26px', fontWeight: '600' }}>
                                         {spot.name}
                                     </div>
-                                    <div style={{ fontSize: '18px', color: 'grey' }}>
-                                        {spot.address}, {spot.city}, {spot.state}
+                                    <div className='user-property-type-container'>
+                                        <div>Location:</div> <div style={{ fontWeight: 'bold' }}>{spot.address}, {spot.city}, {spot.state}</div>
                                     </div>
-                                    <div className='user-property-type-container'>Property Type: <div style={{fontWeight:'bold'}}>{spot.type}</div></div>
-                                    <div className='price-container'>
-                                        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
-                                            ${spot.price}
-                                        </div>
-                                        &nbsp; <div style={{ fontSize: '16px' }}>
-                                            night
-                                        </div>
+                                    <div className='user-property-type-container'>Property Type: <div style={{ fontWeight: 'bold' }}>{spot.type}</div></div>
+                                    <div className='user-property-type-container' >
+                                        <div>Price:</div> <div style={{ fontWeight: 'bold' }}>${spot.price}</div>
                                     </div>
-                                    <div style={{ fontSize: '16px', fontWeight:'bold' }}>
+
+                                    <div className='user-property-type-container'>
+                                        <div>Rating: </div>
                                         <img className='star-icon' src={starIcon} alt='' />
-                                        {Number(spot.avgRating).toFixed(2)}
+                                        <div style={{ fontWeight: 'bold' }}>{Number(spot.avgRating).toFixed(2)}</div>
                                     </div>
                                     <div>
                                         <button className='host-option-buttons edit-button' onClick={() => { setShowUpdate(true); setCurrUserSpot(spot) }}>Edit My Spot</button>

@@ -11,7 +11,7 @@ import NewSpotFormPage from "./components/NewSpotFormPage";
 import CreateReviewForm from "./components/CreateReview";
 import UserBookingsPage from "./components/UserBookings"
 import UserSpotsPage from "./components/UserListings";
-// import UserReviewsPage from "./components/UserReviews";
+import UserReviewsPage from "./components/UserReviews";
 import { AboutDevPage } from "./components/DevelpoerPage";
 
 import Navigation from "./components/Navigation";
@@ -37,9 +37,9 @@ function App() {
           <Route exact path='/aboutDev'>
             <AboutDevPage />
           </Route>
-          {/* <Route exact path='/myReviews'>
+          <Route exact path='/myReviews'>
             <UserReviewsPage />
-          </Route> */}
+          </Route>
           <Route exact path='/myListings'>
             <UserSpotsPage />
           </Route>

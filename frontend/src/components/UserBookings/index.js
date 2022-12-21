@@ -9,6 +9,8 @@ import { thunkGetAllSpots } from "../../store/spots";
 
 import BookingDelete from "../DeleteBooking";
 
+import staybnbLogo from './icons/staybnbLogo.png'
+
 import "./UserBookings.css";
 
 function UserBookingsPage() {
@@ -47,7 +49,10 @@ function UserBookingsPage() {
         userBookings = (
             <div className="no-booking-container">
                 <div className='my-booking-header'>Upcoming Bookings</div>
-                <div className="no-booking-message">You have no existing bookings</div>
+                <div className="user-no-data-container">
+                    <img className='no-data-logo' src={staybnbLogo}></img>
+                    <div className="no-booking-message">You have no existing bookings</div>
+                </div>
             </div>
         );
     } else {
@@ -64,7 +69,7 @@ function UserBookingsPage() {
                         <div className='user-single-spot-container-right'>
                             <div className="user-booking-card-info">
                                 <div className="user-booking-spot-name">{booking.Spot?.name}</div>
-                                <div className="user-booking-spot-info">Location: <div style={{ fontWeight: 'bold' }}>{booking.Spot?.city}, {booking.Spot?.state}</div></div>
+                                <div className="user-booking-spot-info">Location: <div style={{ fontWeight: 'bold' }}>{booking.Spot?.address}, {booking.Spot?.city}, {booking.Spot?.state}</div></div>
                                 <div className="user-booking-spot-info">Price:<div style={{ fontWeight: 'bold' }}>${booking.Spot?.price}/night</div></div>
                                 <div className="user-booking-spot-checkin-checkout">
                                     <div className="user-booking-spot-info">CHECK-IN: <div style={{ fontWeight: 'bold' }}>{new Date(booking.startDate).toLocaleDateString()}</div></div>
@@ -75,11 +80,7 @@ function UserBookingsPage() {
                                 <NavLink className="booking-view-spot-bttn" to={`/spots/${booking.Spot?.id}`} >
                                     View Stay
                                 </NavLink>
-
-                                <button
-                                    className="host-option-buttons"
-                                    onClick={() => { setShowDeleteBooking(true); setCurrBooking(booking) }}
-                                >
+                                <button className="host-option-buttons" onClick={() => { setShowDeleteBooking(true); setCurrBooking(booking) }}>
                                     Cancel Booking
                                 </button>
                                 {showDeleteBooking && (
@@ -87,7 +88,6 @@ function UserBookingsPage() {
                                         <BookingDelete currBooking={currBooking} setShowDeleteBooking={setShowDeleteBooking} />
                                     </Modal>
                                 )}
-
                             </div>
                         </div>
                     </div>

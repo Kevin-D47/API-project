@@ -43,8 +43,7 @@ export const getAllUserReviewsThunk = () => async (dispatch) => {
 
     if (response.ok) {
         const allReviews = await response.json();
-        dispatch(getAllUserReviews(allReviews));
-        return allReviews;
+        dispatch(getAllUserReviews(allReviews.allReviews));
     }
 };
 

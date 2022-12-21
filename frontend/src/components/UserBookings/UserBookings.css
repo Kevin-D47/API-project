@@ -69,7 +69,29 @@
 }
 
 .no-booking-message{
-    margin-top: 5rem;
     font-size: 22px;
     color: gray;
+}
+
+.user-no-data-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 3rem;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 40px;
+}
+
+.listing-become-host-link{
+    color:#E61E4D;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.listing-become-host-link:hover{
+    cursor: pointer;
+    text-decoration: underline;
 }

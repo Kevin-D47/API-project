@@ -73,8 +73,8 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
   }
 
   // Error response: Can't edit a booking that's past the end date
-  let now = new Date().getTime()
-  let bookingDate = new Date(editBooking.endDate).getTime()
+  let now = new Date()
+  let bookingDate = new Date(editBooking.endDate)
 
   if (now > bookingDate) {
     res.status(403)

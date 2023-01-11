@@ -36,8 +36,6 @@ function SignupFormPage({ setShowSignupModal }) {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
-  if (sessionUser) return history.push('/');
-
   return (
     <form className="signup-form-container" onSubmit={handleSubmit}>
       <div className="signup-form-wrapper">

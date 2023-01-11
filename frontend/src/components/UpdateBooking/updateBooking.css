@@ -1,0 +1,65 @@
+.edit-booking-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30rem;
+    height: 23rem;
+}
+
+.edit-booking-title{
+    display: flex;
+    justify-content: center;
+    width: 27.5rem;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 10px;
+    font-size: 1.17em;
+}
+
+.edit-booking-submit-bttn {
+    background: linear-gradient(0.25turn, #E61E4D, #D70666);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    width: 10rem;
+    font-size: 16px;
+}
+
+.edit-booking-submit-bttn:disabled {
+    background: linear-gradient(0.25turn, gray, gray);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: .5em;
+    cursor: pointer;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    width: 10rem;
+    font-size: 16px;
+}
+
+.edit-booking-submit-bttn:active {
+    transform: scale(.97);
+}
+
+.edit-booking-cancel-bttn{
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(0.25turn, #E61E4D, #D70666);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: .5em;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    width: 8.5rem;
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.edit-booking-cancel-bttn:active {
+    transform: scale(.97);
+}

@@ -29,28 +29,20 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
     const startDateNum = new Date(startDate) - 0;
     const endDateNum = new Date(endDate) - 0;
 
-    console.log("TEST today----", todayDate)
-    console.log("TEST start----", startDateNum)
-    console.log("TEST end----", endDateNum)
+    // console.log("TEST today----", todayDate)
+    // console.log("TEST start----", startDateNum)
+    // console.log("TEST end----", endDateNum)
 
     const errorValidations = () => {
         const errors = [];
-
-        // if (spot.ownerId === sessionUser.id) {
-        //     errors.push("Owners cannot book their own listing");
-        // }
 
         if (startDateNum >= endDateNum) {
             errors.push("Checkout Date cannot be the same or before CheckIn Date");
         }
 
         otherBookings.map((booking) => {
-            let bookedStartDate = new Date(booking?.startDate) - 0;
-            let bookedEndDate = new Date(booking?.endDate) - 0;
-
-            // if (currBooking.spotId === spot.id) {
-            //     errors.push("Cannot have more than one booking per spot at a time");
-            // }
+            let bookedStartDate = new Date(booking.startDate) - 0;
+            let bookedEndDate = new Date(booking.endDate) - 0;
 
             if (
                 startDateNum === bookedStartDate ||
@@ -107,16 +99,17 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
     ))
 
     return (
-        <div className="CreateBookingContainer">
+        <div className="edit-booking-container">
+            <div className="edit-booking-title">Update Booking</div>
             <form className="CreateBookingForm" onSubmit={handleSubmit}>
                 <div className="create-booking-error">{isSubmitted && errorsList}</div>
                 <div className="create-booking-input-container">
                     <div className="check-in-label">
                         <label >CHECK-IN</label>
                         <input
-                            placeholder={startDate}
                             className="check-input"
                             type="date"
+                            placeholder={startDate}
                             min={todayDate}
                             max={"9000-1-1"}
                             onChange={(e) => setStartDate(e.target.value)}
@@ -138,12 +131,13 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
                 </div>
                 <div className='booking-submit-bttn-container'>
                     <button
-                        className="booking-submit-bttn"
+                        className="edit-booking-submit-bttn"
                         type="Submit"
                         disabled={isSubmitted && errors.length > 0 || !sessionUser}
                     >
                         Reserve
                     </button>
+                    <div className="edit-booking-cancel-bttn" onClick={() => setShowUpdateBooking(false)}>Cancel</div>
                 </div>
                 {!sessionUser && (
                     <div className="booking-login-message">

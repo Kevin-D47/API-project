@@ -74,14 +74,14 @@ function UserBookingsPage() {
                                 <div className="user-booking-spot-info">Location: <div style={{ fontWeight: 'bold' }}>{booking.Spot?.address}, {booking.Spot?.city}, {booking.Spot?.state}</div></div>
                                 <div className="user-booking-spot-info">Price:<div style={{ fontWeight: 'bold' }}>${booking.Spot?.price}/night</div></div>
                                 <div className="user-booking-spot-checkin-checkout">
-                                    <div className="user-booking-spot-info">CHECK-IN: <div style={{ fontWeight: 'bold' }}>{new Date(booking.startDate).toLocaleDateString()}</div></div>
-                                    <div className="user-booking-spot-info">CHECKOUT: <div style={{ fontWeight: 'bold' }}>{new Date(booking.endDate).toLocaleDateString()}</div></div>
+                                    <div className="user-booking-spot-info">CHECK-IN: <div style={{ fontWeight: 'bold' }}>{booking.startDate.slice(5,7)}-{booking.startDate.slice(8,10)}-{booking.startDate.slice(0,4)}</div></div>
+                                    <div className="user-booking-spot-info">CHECKOUT: <div style={{ fontWeight: 'bold' }}>{booking.endDate.slice(5,7)}-{booking.endDate.slice(8,10)}-{booking.endDate.slice(0,4)}</div></div>
                                 </div>
                             </div>
                             <div className="user-booking-card-buttons">
-                                <NavLink className="booking-view-spot-bttn" to={`/spots/${booking.Spot?.id}`} >
+                                {/* <NavLink className="booking-view-spot-bttn" to={`/spots/${booking.Spot?.id}`} >
                                     View Stay
-                                </NavLink>
+                                </NavLink> */}
                                 <button className="host-option-buttons" onClick={() => { setShowUpdateBooking(true); setCurrBooking(booking) }}>
                                     Update Booking
                                 </button>

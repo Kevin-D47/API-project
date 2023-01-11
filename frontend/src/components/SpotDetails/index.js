@@ -58,12 +58,12 @@ const GetSpotDetails = () => {
         dispatch(thunkGetSpotById(spotId)).then(() => setIsLoaded(true))
     }, [dispatch, spotId])
 
-    if (!isLoaded) {
-        return (<div></div>)
-    }
+    // if (!isLoaded) {
+    //     return (<div></div>)
+    // }
 
     if (currSpot === undefined) {
-        return history.push("/")
+        return history.push("/404")
     }
 
     if (isLoaded && currSpot.Owner === undefined) {

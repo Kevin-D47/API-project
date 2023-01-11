@@ -14,6 +14,7 @@ import UserSpotsPage from "./components/UserListings";
 import UserReviewsPage from "./components/UserReviews";
 import UserProfile from "./components/UserProfile";
 import { AboutDevPage } from "./components/DevelpoerPage";
+import { PageNotFound } from "./components/PageNotFound";
 
 import Navigation from "./components/Navigation";
 import { Route, Switch } from "react-router-dom";
@@ -56,7 +57,7 @@ function App() {
           <Route path='/spots/create'>
             <NewSpotFormPage />
           </Route>
-          <Route path='/spots/:spotId'>
+          <Route path='/spots/:spotId' exact={true}>
             <GetSpotDetails />
           </Route>
           <Route path="/signup">
@@ -64,6 +65,9 @@ function App() {
           </Route>
           <Route exact path='/'>
             <GetAllSpots />
+          </Route>
+          <Route>
+            <PageNotFound />
           </Route>
         </Switch>
       )}

@@ -40,9 +40,9 @@ const GetAllSpots = () => {
         dispatch(thunkGetAllSpots()).then(setIsLoaded(true));
     }, [dispatch])
 
-    if (!allSpotsArr.length) {
-        return null
-    }
+    // if (!allSpotsArr.length) {
+    //     return null
+    // }
 
     return (
         isLoaded && (

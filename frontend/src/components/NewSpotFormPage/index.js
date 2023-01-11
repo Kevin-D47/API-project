@@ -95,116 +95,116 @@ const NewSpotFormPage = () => {
                 <div className="host-page-left-conatiner">
                     <h1 className="welcome-message">What kind of place will you host?</h1>
                 </div>
-            </div>
-            <div className="host-page-right-container">
-                <div className="form-el-container">
-                    <div className="create-spot-title-container">
-                        <h3 className="create-spot-title">Host your Stay!</h3>
-                    </div>
-                    <div className="create-errors-container">
-                        {isSubmitted && errorList}
-                    </div>
-                    <form className="new-spot-form" onSubmit={onSubmit}>
-                        <div className="create-spot-input-wrapper">
-                            <input
-                                className="form-input first create"
-                                type="text"
-                                placeholder="Name of Stay"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                            <input
-                                className="form-input middle create"
-                                type="text"
-                                placeholder="Address"
-                                value={address}
-                                onChange={(e) => setAddress(e.target.value)}
-                            />
-                            <input
-                                className="form-input middle create"
-                                type="text"
-                                placeholder="City"
-                                value={city}
-                                onChange={(e) => setCity(e.target.value)}
-                            />
-                            <input
-                                className="form-input middle create"
-                                type="text"
-                                placeholder="State"
-                                value={state}
-                                onChange={(e) => setState(e.target.value)}
-                            />
-                            <input
-                                className="form-input middle create"
-                                type="text"
-                                placeholder="Country"
-                                value={country}
-                                onChange={(e) => setCountry(e.target.value)}
-                            />
-                            <input
-                                className="form-input middle create"
-                                type="number"
-                                placeholder="Latitude"
-                                step="0.01"
-                                value={lat}
-                                onChange={(e) => setLat(e.target.value)}
-                            />
-                            <input
-                                className="form-input middle create"
-                                type="number"
-                                placeholder="Longitude"
-                                step="0.01"
-                                value={lng}
-                                onChange={(e) => setLng(e.target.value)}
-                            />
-                            <input
-                                className="form-input middle create"
-                                type="number"
-                                placeholder="Price"
-                                value={price}
-                                onChange={(e) => setPrice(e.target.value)}
-                            />
-                            <input
-                                className="form-input middle create"
-                                type="url"
-                                name="preview-image"
-                                placeholder="Image URL"
-                                value={url}
-                                onChange={(e) => setUrl(e.target.value)}
-                            />
-                            <select
-                                className="form-input middle create"
-                                value={type}
-                                onChange={(e) => setType(e.target.value)}
-                            >
-                                <option selected disabled value="">
-                                    Select a Property Type
-                                </option>
-                                {TYPES.map(type => (
-                                    <option
-                                        key={type}
-                                        value={type}
-                                    >
-                                        {type}
-                                    </option>
-                                ))}
-                            </select>
-                            <textarea
-                                className="form-input last desc create-description-input"
-                                type="text"
-                                placeholder="Description"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                            />
+                <div className="host-page-right-container">
+                    <div className="form-el-container">
+                        <div className="create-spot-title-container">
+                            <h3 className="create-spot-title">Host your Stay!</h3>
                         </div>
-                        <button
-                            className="create-submit-button"
-                            type="submit"
-                            disabled={isSubmitted && errors.length > 0}
-                        >
-                            Create Spot
-                        </button>
-                    </form>
+                        <div className="create-errors-container">
+                            {isSubmitted && errorList}
+                        </div>
+                        <form className="new-spot-form" onSubmit={onSubmit}>
+                            <div className="create-spot-input-wrapper">
+                                <input
+                                    className="form-input first create"
+                                    type="text"
+                                    placeholder="Name of Stay"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                                <input
+                                    className="form-input middle create"
+                                    type="text"
+                                    placeholder="Address"
+                                    value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
+                                />
+                                <input
+                                    className="form-input middle create"
+                                    type="text"
+                                    placeholder="City"
+                                    value={city}
+                                    onChange={(e) => setCity(e.target.value)}
+                                />
+                                <input
+                                    className="form-input middle create"
+                                    type="text"
+                                    placeholder="State"
+                                    value={state}
+                                    onChange={(e) => setState(e.target.value)}
+                                />
+                                <input
+                                    className="form-input middle create"
+                                    type="text"
+                                    placeholder="Country"
+                                    value={country}
+                                    onChange={(e) => setCountry(e.target.value)}
+                                />
+                                <input
+                                    className="form-input middle create"
+                                    type="number"
+                                    placeholder="Latitude"
+                                    step="0.01"
+                                    value={lat}
+                                    onChange={(e) => setLat(e.target.value)}
+                                />
+                                <input
+                                    className="form-input middle create"
+                                    type="number"
+                                    placeholder="Longitude"
+                                    step="0.01"
+                                    value={lng}
+                                    onChange={(e) => setLng(e.target.value)}
+                                />
+                                <input
+                                    className="form-input middle create"
+                                    type="number"
+                                    placeholder="Price"
+                                    value={price}
+                                    onChange={(e) => setPrice(e.target.value)}
+                                />
+                                <input
+                                    className="form-input middle create"
+                                    type="url"
+                                    name="preview-image"
+                                    placeholder="Image URL"
+                                    value={url}
+                                    onChange={(e) => setUrl(e.target.value)}
+                                />
+                                <select
+                                    className="form-input middle create"
+                                    value={type}
+                                    onChange={(e) => setType(e.target.value)}
+                                >
+                                    <option selected disabled value="">
+                                        Select a Property Type
+                                    </option>
+                                    {TYPES.map(type => (
+                                        <option
+                                            key={type}
+                                            value={type}
+                                        >
+                                            {type}
+                                        </option>
+                                    ))}
+                                </select>
+                                <textarea
+                                    className="form-input last desc create-description-input"
+                                    type="text"
+                                    placeholder="Description"
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                />
+                            </div>
+                            <button
+                                className="create-submit-button"
+                                type="submit"
+                                disabled={isSubmitted && errors.length > 0}
+                            >
+                                Create Spot
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

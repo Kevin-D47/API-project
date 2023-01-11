@@ -46,7 +46,7 @@ router.get("/current", requireAuth, restoreUser, async (req, res) => {
 
 // Edit a Booking
 router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
-  const { startDate, endDate } = req.body
+  const { userId, startDate, endDate } = req.body
 
   const bookingId = req.params.bookingId
   const editBooking = await Booking.findByPk(bookingId)
@@ -73,8 +73,8 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
   }
 
   // Error response: Can't edit a booking that's past the end date
-  let now = Date.now()
-  let bookingDate = new Date(editBooking.endDate)
+  let now = new Date().getTime()
+  let bookingDate = new Date(editBooking.endDate).getTime()
 
   if (now > bookingDate) {
     res.status(403)
@@ -89,7 +89,7 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
 
   const currentBookings = await Booking.findAll({
     where: {
-      spotId: spotId,
+      spotId: !spotId,
       [Op.and]: [
         { endDate: { [Op.gte]: startDate } },
         { startDate: { [Op.lte]: endDate } },
@@ -100,7 +100,7 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
   if (currentBookings.length) {
     res.status(403)
     res.json({
-      message: "Sorry, this spot is already booked for the specified dates",
+      message: "Sorry, the specified date is already booked on another spot",
       statusCode: 403,
       errors: {
         startDate: "Start date conflicts with an existing booking",
@@ -110,7 +110,7 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
   }
 
   // Return edit booking
-  if (editBooking.userId === req.user.id) {
+  if (userId == req.user.id) {
     editBooking.startDate = startDate,
     editBooking.endDate = endDate,
 
@@ -119,6 +119,14 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
     // Successful Response
     res.status(200)
     res.json(editBooking)
+  } else {
+    res.status(403)
+    res.json({
+      message: "Sorry, you do not own this booking",
+      statusCode: 403,
+      editBooking,
+      userId
+    })
   }
 })
 

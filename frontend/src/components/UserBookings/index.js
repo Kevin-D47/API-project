@@ -8,6 +8,8 @@ import { thunkGetAllSpots } from "../../store/spots";
 
 import BookingDelete from "../DeleteBooking";
 
+import UpdateBookingForm from "../UpdateBooking"
+
 import staybnbLogo from './icons/staybnbLogo.png'
 
 import "./UserBookings.css";
@@ -26,6 +28,7 @@ function UserBookingsPage() {
 
 
     const [isLoaded, setIsLoaded] = useState(false);
+    const [showUpdateBooking, setShowUpdateBooking] = useState(false)
     const [showDeleteBooking, setShowDeleteBooking] = useState(false)
     const [currBooking, setCurrBooking] = useState(false)
 
@@ -37,7 +40,7 @@ function UserBookingsPage() {
     useEffect(() => {
         dispatch(getBookingsByUserthunk()).then(setIsLoaded(true));
         dispatch(thunkGetAllSpots());
-    }, [dispatch]);
+    }, [dispatch, showUpdateBooking]);
 
     if (!isLoaded) {
         return null;
@@ -79,6 +82,14 @@ function UserBookingsPage() {
                                 <NavLink className="booking-view-spot-bttn" to={`/spots/${booking.Spot?.id}`} >
                                     View Stay
                                 </NavLink>
+                                <button className="host-option-buttons" onClick={() => { setShowUpdateBooking(true); setCurrBooking(booking) }}>
+                                    Update Booking
+                                </button>
+                                {showUpdateBooking && (
+                                    <Modal onClose={() => setShowUpdateBooking(false)}>
+                                        <UpdateBookingForm currBooking={currBooking} setShowUpdateBooking={setShowUpdateBooking} />
+                                    </Modal>
+                                )}
                                 <button className="host-option-buttons" onClick={() => { setShowDeleteBooking(true); setCurrBooking(booking) }}>
                                     Cancel Booking
                                 </button>

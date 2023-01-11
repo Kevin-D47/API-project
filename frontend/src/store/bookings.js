@@ -1,52 +1,64 @@
 import { csrfFetch } from "./csrf";
 
-const GET_CURRENT = "/bookings/current";
-const GET_SPOT_ID = "/bookings/get";
-const CREATE = "/bookings/create";
-const UPDATE = "/bookings/update";
-const DELETE = "/bookings/delete";
+const GET_CUR_BOOKING = "/bookings/current";
+const GET_BOOKINGS = "/bookings/get";
+const CREATE_BOOKING = "/bookings/create";
+const UPDATE_BOOKING = "/bookings/update";
+const DELETE_BOOKING = "/bookings/delete";
 
+
+// actions
 export const getCurrentBookingsThunk = (bookings) => {
   return {
-    type: GET_CURRENT,
+    type: GET_CUR_BOOKING,
     bookings,
   };
 };
 
 export const getBookings = (bookings) => {
   return {
-    type: GET_SPOT_ID,
+    type: GET_BOOKINGS,
     bookings,
   };
 };
 
 export const createBookings = (booking) => {
   return {
-    type: CREATE,
+    type: CREATE_BOOKING,
     booking,
   };
 };
 
-export const updateBooking = (reviewId) => {
+export const editBooking = (booking) => {
   return {
-    type: UPDATE,
-    reviewId,
+    type: UPDATE_BOOKING,
+    booking,
   };
 };
 export const deleteBooking = (bookingId) => {
   return {
-    type: DELETE,
+    type: DELETE_BOOKING,
     bookingId,
   };
 };
 
+
+// thunks
 export const getBookingsByUserthunk = () => async (dispatch) => {
-  const res = await csrfFetch(`/api/bookings/current`, {
+  const response = await csrfFetch(`/api/bookings/current`, {
     method: "GET",
   });
-  if (res.ok) {
-    const data = await res.json();
+  if (response.ok) {
+    const data = await response.json();
     dispatch(getCurrentBookingsThunk(data.Bookings));
+  }
+};
+
+export const getBookingsById = (spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/bookings`);
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getBookings(data.Bookings));
   }
 };
 
@@ -57,72 +69,74 @@ export const createNewUserBookingThunk = (spotId, bookingData) => async (dispatc
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(bookingData),
   };
-  const res = await csrfFetch(`/api/spots/${spotId}/bookings`, reqData);
-  if (res.ok) {
-    const data = await res.json();
+  const response = await csrfFetch(`/api/spots/${spotId}/bookings`, reqData);
+  if (response.ok) {
+    const data = await response.json();
     dispatch(createBookings(data));
     return data;
   }
 };
 
-
-
-export const getBookingsById = (spotId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/spots/${spotId}/bookings`);
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(getBookings(data.Bookings));
+export const editBookingThunk = (payload, bookingId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/${bookingId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    const updateBooking = await response.json();
+    dispatch(editBooking(updateBooking));
   }
 };
-
-
 
 export const deleteBookingId = (bookingId) => async (dispatch) => {
   const reqData = {
     method: "DELETE",
   };
-  const res = await csrfFetch(`api/bookings/${bookingId}`, reqData);
-  if (res.ok) {
+  const response = await csrfFetch(`api/bookings/${bookingId}`, reqData);
+  if (response.ok) {
     dispatch(deleteBooking(bookingId));
   }
-  return res;
+  return response;
 };
 
 
-export const editBooking = (payload, reviewId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/reviews/${reviewId}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(updateBooking(data.Bookings));
-    return res;
-  }
-};
+// reducer
+const intialState = {}
 
-export default function bookingsReducer(state = {}, action) {
+const bookingsReducer = (state = intialState, action) => {
   let newState;
+
   switch (action.type) {
-    case GET_SPOT_ID:
+    case GET_BOOKINGS:
       newState = { ...action.bookings };
       return newState;
-    case GET_CURRENT:
+
+    case GET_CUR_BOOKING:
       newState = {};
       action.bookings.forEach((booking) => {
         newState[booking.id] = booking;
       });
       return newState;
-    case CREATE:
+
+    case CREATE_BOOKING:
       newState = { ...state };
       newState[action.booking.id] = action.booking;
       return newState;
-    case DELETE:
+
+    case UPDATE_BOOKING:
+      newState = { ...state }
+      newState[action.booking.id] = action.booking
+      return newState
+
+    case DELETE_BOOKING:
       newState = { ...state };
       delete newState[action.bookingId];
       return newState;
+
     default:
       return state;
   }
 }
+
+export default bookingsReducer

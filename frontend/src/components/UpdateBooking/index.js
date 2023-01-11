@@ -1,30 +1,37 @@
-import { useParams, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory, useParams } from "react-router-dom";
+import { editBookingThunk } from "../../store/bookings";
+import { getBookingsByUserthunk } from "../../store/bookings";
 
-import { createNewUserBookingThunk, getBookingsByUserthunk } from "../../store/bookings";
-
-import './CreateBooking.css'
+import "./updateBooking.css"
 
 
-const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDate }) => {
+function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
 
-    const dispatch = useDispatch();
     const history = useHistory();
 
-    const { spotId } = useParams();
-
-    const [errors, setErrors] = useState([]);
-    const [isSubmitted, setIsSubmitted] = useState(false)
-
-    const spots = useSelector((state) => state.spots);
-    const spot = spots[spotId];
-
     const sessionUser = useSelector((state) => state.session.user);
+    const userId = currBooking.userId
     const bookings = useSelector((state) => Object.values(state.bookings));
 
-    const startDateNum = new Date(startDate)- 0;
+    const otherBookings = bookings.filter(booking => booking.id != currBooking.id)
+
+
+    const todayDate = new Date().toISOString().slice(0, 10);
+    const [startDate, setStartDate] = useState(currBooking.startDate);
+    const [endDate, setEndDate] = useState(currBooking.endDate);
+    const [isSubmitted, setIsSubmitted] = useState(false)
+    const [errors, setErrors] = useState([]);
+
+    const dispatch = useDispatch();
+
+    const startDateNum = new Date(startDate) - 0;
     const endDateNum = new Date(endDate) - 0;
+
+    console.log("TEST today----", todayDate)
+    console.log("TEST start----", startDateNum)
+    console.log("TEST end----", endDateNum)
 
     const errorValidations = () => {
         const errors = [];
@@ -37,13 +44,13 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
             errors.push("Checkout Date cannot be the same or before CheckIn Date");
         }
 
-        bookings?.map((booking) => {
+        otherBookings.map((booking) => {
             let bookedStartDate = new Date(booking?.startDate) - 0;
             let bookedEndDate = new Date(booking?.endDate) - 0;
 
-            if (booking.spotId === spot.id) {
-                errors.push("Cannot have more than one booking per spot at a time");
-            }
+            // if (currBooking.spotId === spot.id) {
+            //     errors.push("Cannot have more than one booking per spot at a time");
+            // }
 
             if (
                 startDateNum === bookedStartDate ||
@@ -72,9 +79,10 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
 
 
     useEffect(() => {
-        dispatch(getBookingsByUserthunk(spotId));
+        dispatch(getBookingsByUserthunk(currBooking.spotId));
         errorValidations();
     }, [startDateNum, endDateNum]);
+
 
 
     const handleSubmit = async (e) => {
@@ -82,29 +90,15 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
 
         setIsSubmitted(true)
 
-        if (!sessionUser) {
-            return alert('Must be login to make a booking')
-        }
-
-        // if (errors.length > 0) {
-        //     return alert("invalid submission");
-        // }
-
-        if (spot?.ownerId === sessionUser.id) {
-            let errors = [];
-            errors.push("User cannot book their own listing");
-            setErrors(errors);
-        }
-
         let data = {
+            userId,
             startDate,
             endDate,
         };
 
-        if (errors.length === 0 && spot?.ownerId !== sessionUser.id) {
-            dispatch(createNewUserBookingThunk(spotId, data))
-                .then(() => getBookingsByUserthunk())
-                .then((res) => history.push(`/myBookings`));
+        if (errors.length === 0) {
+            dispatch(editBookingThunk(data, currBooking.id))
+            .then(() => setShowUpdateBooking(false))
         }
     };
 
@@ -120,6 +114,7 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
                     <div className="check-in-label">
                         <label >CHECK-IN</label>
                         <input
+                            placeholder={startDate}
                             className="check-input"
                             type="date"
                             min={todayDate}
@@ -131,6 +126,7 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
                     <div className="check-out-label">
                         <label>CHECKOUT</label>
                         <input
+                            placeholder={endDate}
                             className="check-input"
                             type="date"
                             min={todayDate}
@@ -157,6 +153,7 @@ const CreateBookings = ({ setStartDate, setEndDate, todayDate, startDate, endDat
             </form>
         </div>
     );
-};
+}
 
-export default CreateBookings;
+
+export default UpdateBookingForm;

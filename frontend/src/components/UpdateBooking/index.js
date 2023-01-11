@@ -29,10 +29,6 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
     const startDateNum = new Date(startDate) - 0;
     const endDateNum = new Date(endDate) - 0;
 
-    // console.log("TEST today----", todayDate)
-    // console.log("TEST start----", startDateNum)
-    // console.log("TEST end----", endDateNum)
-
     const errorValidations = () => {
         const errors = [];
 
@@ -139,11 +135,6 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
                     </button>
                     <div className="edit-booking-cancel-bttn" onClick={() => setShowUpdateBooking(false)}>Cancel</div>
                 </div>
-                {!sessionUser && (
-                    <div className="booking-login-message">
-                        Please login to make a booking
-                    </div>
-                )}
             </form>
         </div>
     );

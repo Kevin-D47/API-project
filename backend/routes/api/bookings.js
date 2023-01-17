@@ -48,6 +48,8 @@ router.get("/current", requireAuth, restoreUser, async (req, res) => {
 router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
   const { userId, startDate, endDate } = req.body
 
+  // console.log(req)
+
   const bookingId = req.params.bookingId
   const editBooking = await Booking.findByPk(bookingId)
 
@@ -89,7 +91,7 @@ router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
 
   const currentBookings = await Booking.findAll({
     where: {
-      spotId: !spotId,
+      spotId: spotId,
       [Op.and]: [
         { endDate: { [Op.gte]: startDate } },
         { startDate: { [Op.lte]: endDate } },

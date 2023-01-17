@@ -36,6 +36,10 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
             errors.push("Checkout Date cannot be the same or before CheckIn Date");
         }
 
+        if (todayDate > startDate) {
+            errors.push("Past Bookings cannot be modified");
+        }
+
         otherBookings.map((booking) => {
             let bookedStartDate = new Date(booking.startDate) - 0;
             let bookedEndDate = new Date(booking.endDate) - 0;
@@ -93,6 +97,7 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
     const errorsList = errors.map((error) => (
         <p key={error}>{error}</p>
     ))
+
 
     return (
         <div className="edit-booking-container">

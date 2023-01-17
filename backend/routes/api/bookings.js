@@ -48,8 +48,6 @@ router.get("/current", requireAuth, restoreUser, async (req, res) => {
 router.put('/:bookingId', requireAuth, restoreUser, async (req, res) => {
   const { userId, startDate, endDate } = req.body
 
-  // console.log(req)
-
   const bookingId = req.params.bookingId
   const editBooking = await Booking.findByPk(bookingId)
 

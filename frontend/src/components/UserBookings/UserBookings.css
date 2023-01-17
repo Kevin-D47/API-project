@@ -5,7 +5,7 @@
 }
 
 .my-booking-header {
-    margin-right: 42rem;
+    margin-right: 48rem;
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 1rem;
@@ -92,6 +92,28 @@
 }
 
 .listing-become-host-link:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.past-booking-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.past-booking-alert{
+    font-size: 20px;
+    color: gray;
+
+}
+
+.past-booking-review{
+    color:#E61E4D ;
+    text-decoration: none;
+}
+
+.past-booking-review:hover{
     cursor: pointer;
     text-decoration: underline;
 }

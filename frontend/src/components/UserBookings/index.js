@@ -85,15 +85,21 @@ function UserBookingsPage() {
                                 {/* <NavLink className="booking-view-spot-bttn" to={`/spots/${booking.Spot?.id}`} >
                                     View Stay
                                 </NavLink> */}
-                                {(todayDate > booking.startDate && todayDate > booking.endDate) &&
+                                {(todayDate > booking.endDate) &&
                                     <div className="past-booking-container">
                                         <div className="past-booking-alert">This is a past booking </div>
-                                        <NavLink className="past-booking-review" to={`/spots/${booking.Spot?.id}`}>
-                                            Click here to review your stay
-                                        </NavLink>
+                                        <div className="past-booking-options">
+                                            <NavLink className="past-booking-review" to={`/spots/${booking.Spot?.id}`}>
+                                                Review your stay
+                                            </NavLink>
+                                            <div>or</div>
+                                            <div className="remove-past-booking" onClick={() => { setShowDeleteBooking(true); setCurrBooking(booking) }}>
+                                                Remove this booking
+                                            </div>
+                                        </div>
                                     </div>
                                 }
-                                {(todayDate <= booking.startDate || todayDate <= booking.endDate) &&
+                                {(todayDate <= booking.startDate || todayDate < booking.endDate) &&
                                     <button className="host-option-buttons" onClick={() => { setShowUpdateBooking(true); setCurrBooking(booking) }}>
                                         Update Booking
                                     </button>
@@ -103,7 +109,7 @@ function UserBookingsPage() {
                                         <UpdateBookingForm currBooking={currBooking} setShowUpdateBooking={setShowUpdateBooking} />
                                     </Modal>
                                 )}
-                                {(todayDate <= booking.startDate || todayDate <= booking.endDate) &&
+                                {(todayDate <= booking.startDate || todayDate < booking.endDate) &&
                                     <button className="host-option-buttons" onClick={() => { setShowDeleteBooking(true); setCurrBooking(booking) }}>
                                         Cancel Booking
                                     </button>

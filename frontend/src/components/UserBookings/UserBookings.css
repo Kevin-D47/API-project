@@ -102,6 +102,12 @@
     gap: 10px;
 }
 
+.past-booking-options{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .past-booking-alert{
     font-size: 20px;
     color: gray;
@@ -114,6 +120,15 @@
 }
 
 .past-booking-review:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.remove-past-booking{
+    color:#E61E4D ;
+}
+
+.remove-past-booking:hover{
     cursor: pointer;
     text-decoration: underline;
 }

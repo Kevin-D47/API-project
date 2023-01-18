@@ -90,7 +90,7 @@ function UserBookingsPage() {
                                         <div className="past-booking-alert">This is a past booking </div>
                                         <div className="past-booking-options">
                                             <NavLink className="past-booking-review" to={`/spots/${booking.Spot?.id}`}>
-                                                Review your stay
+                                                Click here to review your stay
                                             </NavLink>
                                             <div>or</div>
                                             <div className="remove-past-booking" onClick={() => { setShowDeleteBooking(true); setCurrBooking(booking) }}>

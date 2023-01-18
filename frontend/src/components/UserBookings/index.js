@@ -85,7 +85,7 @@ function UserBookingsPage() {
                                 {/* <NavLink className="booking-view-spot-bttn" to={`/spots/${booking.Spot?.id}`} >
                                     View Stay
                                 </NavLink> */}
-                                {todayDate > booking.startDate &&
+                                {(todayDate > booking.startDate && todayDate > booking.endDate) &&
                                     <div className="past-booking-container">
                                         <div className="past-booking-alert">This is a past booking </div>
                                         <NavLink className="past-booking-review" to={`/spots/${booking.Spot?.id}`}>
@@ -93,7 +93,7 @@ function UserBookingsPage() {
                                         </NavLink>
                                     </div>
                                 }
-                                {todayDate < booking.startDate &&
+                                {(todayDate <= booking.startDate || todayDate <= booking.endDate) &&
                                     <button className="host-option-buttons" onClick={() => { setShowUpdateBooking(true); setCurrBooking(booking) }}>
                                         Update Booking
                                     </button>
@@ -103,7 +103,7 @@ function UserBookingsPage() {
                                         <UpdateBookingForm currBooking={currBooking} setShowUpdateBooking={setShowUpdateBooking} />
                                     </Modal>
                                 )}
-                                {todayDate < booking.startDate &&
+                                {(todayDate <= booking.startDate || todayDate <= booking.endDate) &&
                                     <button className="host-option-buttons" onClick={() => { setShowDeleteBooking(true); setCurrBooking(booking) }}>
                                         Cancel Booking
                                     </button>

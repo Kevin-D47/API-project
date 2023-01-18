@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     width: 30rem;
-    height: 23rem;
+    height: 25rem;
 }
 
 .edit-booking-title{
@@ -62,4 +62,27 @@
 
 .edit-booking-cancel-bttn:active {
     transform: scale(.97);
+}
+
+.curr-booking-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.curr-booking-date-title{
+    font-size: 18px;
+}
+
+.curr-booking-date-container{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.curr-booking-date-info{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
 }

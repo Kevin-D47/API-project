@@ -7,7 +7,7 @@ import { getBookingsByUserthunk } from "../../store/bookings";
 import "./updateBooking.css"
 
 
-function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
+function UpdateBookingForm({ setShowUpdateBooking, currBooking }) {
 
     const history = useHistory();
 
@@ -15,8 +15,9 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
     const userId = currBooking.userId
     const bookings = useSelector((state) => Object.values(state.bookings));
 
-    const otherBookings = bookings.filter(booking => booking.id != currBooking.id)
-
+    // // used for when update booking date conflicts with the current booking date
+    // //  not in use b/c conflicts with backend
+    // const otherBookings = bookings.filter(booking => booking.id != currBooking.id)
 
     const todayDate = new Date().toISOString().slice(0, 10);
     const [startDate, setStartDate] = useState(currBooking.startDate);
@@ -36,11 +37,9 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
             errors.push("Checkout Date cannot be the same or before CheckIn Date");
         }
 
-        if (todayDate > startDate) {
-            errors.push("Past Bookings cannot be modified");
-        }
 
-        otherBookings.map((booking) => {
+
+        bookings?.map((booking) => {
             let bookedStartDate = new Date(booking.startDate) - 0;
             let bookedEndDate = new Date(booking.endDate) - 0;
 
@@ -50,19 +49,19 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
                 endDateNum === bookedStartDate ||
                 endDateNum === bookedEndDate
             ) {
-                errors.push("Chosen dates conflicts with an existing booking");
+                errors.push("Chosen dates conflicts with an current/existing booking");
             }
 
             if (startDateNum > bookedStartDate && startDateNum < bookedEndDate) {
-                errors.push("Chosen dates conflicts with an existing booking");
+                errors.push("Chosen dates conflicts with an current/existing booking");
             }
 
             if (startDateNum < bookedStartDate && endDateNum > bookedStartDate && endDateNum < bookedEndDate) {
-                errors.push("Chosen dates conflicts with an existing booking");
+                errors.push("Chosen dates conflicts with an current/existing booking");
             }
 
             if (startDateNum < bookedStartDate && endDateNum > bookedEndDate) {
-                errors.push("Chosen dates conflicts with an existing booking");
+                errors.push("Chosen dates conflicts with an current/existing booking");
             }
 
             return setErrors(errors);
@@ -90,7 +89,7 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
 
         if (errors.length === 0) {
             dispatch(editBookingThunk(data, currBooking.id))
-            .then(() => setShowUpdateBooking(false))
+                .then(() => setShowUpdateBooking(false))
         }
     };
 
@@ -102,7 +101,20 @@ function UpdateBookingForm({ setShowUpdateBooking, currBooking}) {
     return (
         <div className="edit-booking-container">
             <div className="edit-booking-title">Update Booking</div>
-            <form className="CreateBookingForm" onSubmit={handleSubmit}>
+            <div className="curr-booking-container">
+                <div className="curr-booking-date-title">Current Booking Date:</div>
+                <div className="curr-booking-date-container">
+                    <div className="curr-booking-date-info">
+                        <div>CHECK-IN:</div>
+                        <div style={{ fontWeight: 'bold' }}>{currBooking.startDate.slice(5, 7)}-{currBooking.startDate.slice(8, 10)}-{currBooking.startDate.slice(0, 4)}</div>
+                    </div>
+                    <div className="curr-booking-date-info">
+                        <div>CHECKOUT:</div>
+                        <div style={{ fontWeight: 'bold' }}>{currBooking.endDate.slice(5, 7)}-{currBooking.endDate.slice(8, 10)}-{currBooking.endDate.slice(0, 4)}</div>
+                    </div>
+                </div>
+            </div>
+            <form className="EditBookingForm" onSubmit={handleSubmit}>
                 <div className="create-booking-error">{isSubmitted && errorsList}</div>
                 <div className="create-booking-input-container">
                     <div className="check-in-label">
